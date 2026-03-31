@@ -135,7 +135,19 @@ When multiple robots are in the same map, paths cross. Two robots heading toward
 **Chain Push:**
 Robot A yields to King B, but A's retreat direction is blocked by Robot C. A pushes C to also move aside. If C has lower priority than A, C also flees. Chain reaction: B pushes A, A pushes C.
 
+**Three movement layers (decoupled):**
+1. **RRT* tree path** (global): agent follows waypoint sequence via pure pursuit. Sampling-based.
+2. **SMART incremental repair** (reactive): new wall or OHZ prunes edges, tree reconnects, path auto-updates. ~5ms.
+3. **King/flee/push** (immediate): direct position vector math per frame. No tree involvement. This is why pushed agents move smoothly (continuous coordinate updates at 30fps), not in discrete grid jumps. After displacement, SMART replans in ~5ms to give the agent a new global path.
+
 **Key property:** King logic operates at the execution layer (direct position adjustment per frame). It never modifies the SMART tree or the planned path. SMART handles long-term planning, King handles immediate collision avoidance. Two completely decoupled layers.
+
+**Per-frame complexity:**
+- O(1): path following (pure pursuit per agent)
+- O(N): king selection scan
+- O(N²): pairwise distance checks (N=4 → 6 pairs, N=8 → 28 pairs)
+- O(N × W): LiDAR simulation (each agent ray-casts against W walls)
+- O(N × E): shared wall repair (new wall triggers edge scan on all N agents' trees with E edges). This is the dominant cost. Spatial index reduces to O(N × k) where k << E.
 
 ### 1.6 Shared Wall Discovery
 
@@ -197,7 +209,7 @@ Note: this was tested with cross mode (diagonal paths covering entire map). With
 | office | 32m | 42 | 5000 | 30 | 10m | Open office with partitions |
 | warehouse | 32m | 28 | 5000 | 30 | 10m | Warehouse with shelving aisles |
 | bottleneck | 32m | ~20 | 5000 | 30 | 10m | 2m-wide corridor, stress test for king/flee |
-| mega_hospital | 96m | ~200 | 30000 | 60 | 12m | Large hospital floor plan |
+| mega_hospital | 96m | ~200 | 30000 | 80 | 12m | Large hospital floor plan |
 | mega_airport | 160m | ~250 | 50000 | 80 | 12m | Airport terminal with gates and corridors |
 | megacampus | 128m | ~300 | 80000 | 80 | 15m | University campus with multiple buildings |
 | mega_university | 192m | ~400 | 160000 | 80 | 15m | Largest scenario, extensive campus |
@@ -250,7 +262,7 @@ cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
 cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
   --scenario mega_hospital --num-agents 4 --agent-mode cross \
   -n 200 -o 1.5 --playback-speed 3 --sensor-range 12 \
-  --rrt-iterations 30000 --lsr-max 60 \
+  --rrt-iterations 30000 --lsr-max 80 \
   | python3 ~/smart_rviz_bridge/smart_multi_agent_bridge.py
 
 # mega_airport 160m
@@ -282,7 +294,7 @@ cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
 cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
   --scenario mega_hospital --num-agents 4 --agent-mode cross \
   -n 200 -o 1.5 --playback-speed 3 --sensor-range 12 \
-  --rrt-iterations 30000 --lsr-max 60 --no-wall-sharing \
+  --rrt-iterations 30000 --lsr-max 80 --no-wall-sharing \
   | python3 ~/smart_rviz_bridge/smart_multi_agent_bridge.py
 ```
 
@@ -293,7 +305,7 @@ cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
 cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
   --scenario mega_hospital --num-agents 4 --agent-mode cross \
   -n 0 -o 1.5 --playback-speed 3 --sensor-range 12 \
-  --rrt-iterations 30000 --lsr-max 60 --senior-mode \
+  --rrt-iterations 30000 --lsr-max 80 --senior-mode \
   | python3 ~/smart_rviz_bridge/smart_multi_agent_bridge.py
 ```
 
@@ -338,7 +350,7 @@ cd ~/SMART3D && cargo run --release --example smart_rviz_json -- \
 # mega_hospital
 cd ~/SMART3D && cargo run --release --example smart_rviz_json -- \
   --scenario mega_hospital -n 15 -o 2.0 --sensor-range 12 \
-  --rrt-iterations 30000 --playback-speed 3 --lsr-max 60 \
+  --rrt-iterations 30000 --playback-speed 3 --lsr-max 80 \
   | python3 ~/smart_rviz_bridge/smart_rviz_bridge.py
 
 # mega_airport
@@ -411,6 +423,8 @@ cd ~/SMART3D && python3 bench_sharing_ablation.py --trials 10 --scenarios mega_h
 | mega_hospital | 91.9s | 119.3s | 34.0 | 102.7 |
 | mega_airport | 116.2s | 151.7s | 30.9 | 91.8 |
 | megacampus | 117.7s | 121.8s | 54.9 | 121.3 |
+
+**Wall-clock (CPU) time tradeoff:** E3 scans all edges per repair, so CPU cost per trial is higher. Megacampus: E3 wall_time = 66.1s vs Senior wall_time = 39.5s. E3 makes the CPU work harder but the robot finishes faster (sim_time 117.7s vs 121.8s). Spatial Index v2 closes this gap.
 
 ### Shared vs Independent (4 agents, 1000 trials each)
 
@@ -550,16 +564,18 @@ https://github.com/LinksLabUConn/SMART3D.git             ← Original SMART-3D c
 
 | Contribution | Type |
 |-------------|------|
-| `update_static_obstacles()` | **Novel extension**: incremental repair for permanent walls |
+| `update_static_obstacles()` | **Novel extension**: incremental repair for permanent walls. Key difference from paper's `update()`: uses `form_single_tree_after_static_update()` which permanently discards pruned nodes (walls never disappear), whereas the paper's `form_single_tree()` restores pruned nodes when dynamic obstacles leave. |
 | Lazy + Eager adaptive architecture | **Novel architecture**: decision based on path affected or not |
-| Global King + flee + chain push | **Novel system**: multi-robot coordination in continuous space |
+| Global King + flee + chain push | **Novel system**: multi-robot coordination in continuous space, analogous to PIBT priority inheritance but in continuous coordinates |
 | Shared wall discovery | **Novel mechanism**: cooperative map sharing via shared Vec |
 | `--no-wall-sharing` ablation mode | **Experiment infrastructure**: proves sharing value |
 | `--local-horizon` deferred Eager | **Experiment**: tested and found current system optimal |
+| `update_static_obstacles_path_only()` | **Baseline implementation**: replicates original author's path-only repair approach for fair comparison (Senior mode) |
 | Spatial index v2 | **Engineering optimization**: -26% CPU on mega maps |
 | LSR = 80m tuning | **Parameter tuning**: repair success 70% → 92% |
 | Shortcut / Detour | **Standard technique**: ~0% benefit in multi-agent |
 | 8 simulation scenarios | **System integration**: building through mega_university |
+| 3D RViz v3 (unknown-map LiDAR) | **System integration**: walls start unknown, discovered via sensor range, triggers SMART rebuild. Backup: `~/Desktop/SMART3D_backup_complete/backup_3d_twolayer/` |
 | Real robot deployment | **System integration**: i9 + Pi5 + CycloneDDS |
 | 50,000+ trial benchmarks | **Validation**: comprehensive statistical evidence |
 
@@ -644,6 +660,66 @@ CycloneDDS config: /tmp/cyclone.xml (recreate after every reboot)
 
 ---
 
+## 9.5. Real Robot Deployment Procedure
+
+### Why centralized planning
+
+Cartographer SLAM on Pi5 already consumes ~1.5 CPU cores. RRT* 15000 iters: i9 ~40ms, Pi5 ~300ms (7.5x slower). Running SMART-3D on-board leaves no headroom for SLAM.
+
+### Startup sequence (single car)
+
+```bash
+# === Pi5 (SSH into 10.42.0.1) ===
+# 1. Start sensors + SLAM
+bash start_full.sh
+# Launches: Cartographer, LiDAR driver, camera (if needed)
+
+# 2. Start thin client
+python3 pi5_client.py
+# Subscribes to /smart/path from i9, publishes /robot/pose
+# Pure pursuit path follower + local emergency stop
+
+# === i9 (10.42.0.160) ===
+# 3. Recreate CycloneDDS config (lost after reboot)
+cat > /tmp/cyclone.xml << 'EOF'
+<CycloneDDS>
+  <Domain><General><NetworkInterfaceAddress>10.42.0.160</NetworkInterfaceAddress></General>
+  <Discovery><Peers><Peer address="10.42.0.1"/></Peers></Discovery></Domain>
+</CycloneDDS>
+EOF
+export CYCLONEDDS_URI=file:///tmp/cyclone.xml
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export ROS_DOMAIN_ID=42
+
+# 4. Start planner
+source /opt/ros/humble/setup.bash
+cd ~/SMART3D && python3 i9_planner.py
+# Receives /scan + /tf from Pi5, runs SMART-3D in Rust subprocess,
+# publishes /smart/path back to Pi5
+
+# 5. (Optional) RViz on i9
+rviz2 -d ~/smart_rviz_bridge/smart_rviz.rviz
+```
+
+### Multi-car startup
+
+```bash
+# i9 planner supports multiple cars:
+python3 i9_planner.py --ros-args -p car_names:="car1,m3pro"
+# Each car spawns its own Rust smart_planner_server with per-agent robot_radius
+# Other cars are encoded as dynamic obstacles with OHZ
+```
+
+### Sensing pipeline on i9
+
+LiDAR scan + SLAM pose arrive from Pi5 → i9 extracts walls from occupancy grid → compares each LiDAR point against known walls → points not near any wall = dynamic obstacle → cluster (min 8 points) → frame-to-frame tracking for velocity estimation → feed (x, y, radius, speed) to Rust SMART planner.
+
+### Dynamic obstacle detection tuning
+
+Cluster minimum: 8 LiDAR points. Update interval: 1.0s. Temporal persistence filter active. Robot marker: CUBE 0.40x0.35x0.15m matching physical chassis.
+
+---
+
 ## 10. Known Issues and Gotchas
 
 1. **CycloneDDS config must be recreated after every reboot** (lives in /tmp)
@@ -654,6 +730,8 @@ CycloneDDS config: /tmp/cyclone.xml (recreate after every reboot)
 6. **Building scenario only has 2 agents** (map too small for 4). Benchmark scripts handle this via `all_time is not None` success detection.
 7. **Rust compiler warning about unused AnalyticValidityChecker import** in deferred binary. Harmless, ignore.
 8. **`bench_parallel.py`** uses different config naming than other benchmarks. Use the newer `bench_single_agent.py` instead.
+9. **Two non-King agents can deadlock in narrow corridors.** King push and flee only involve the King. If two non-King agents face each other in a corridor too narrow for flee (e.g., mega_hospital OR wing, 5m wide), neither yields. This accounts for mega_hospital's ~96% success rate (vs 100% on other mega maps). Fix would require extending priority inheritance to non-King pairs.
+10. **CycloneDDS WiFi lockup on Pi5.** After WiFi reconnect, DDS hangs. Fix: `killall python3; killall rviz2` before reconnecting WiFi, then restart all ROS2 nodes.
 
 ---
 
