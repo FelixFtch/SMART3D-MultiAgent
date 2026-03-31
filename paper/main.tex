@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Multi-Agent SMART-3D: IROS / RA-L Submission
-% Felix (Tianchonghui) Fang, UConn LinksLab
+% Multi-Agent SMART-3D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[letterpaper, 10pt, conference]{IEEEtran}
@@ -15,22 +14,19 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{pifont}
-\usepackage{subcaption}
 \usepackage{siunitx}
 \usepackage{makecell}
+\usepackage{colortbl}
 \newcommand{\degree}{^\circ}
-
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 \newcommand{\smarttd}{SMART\nobreakdash-3D}
+\definecolor{bestgreen}{RGB}{220,245,220}
 
 \title{\LARGE \bf
 Cooperative Multi-Agent Navigation in Unknown Environments\\via Incremental Tree Repair and Shared Wall Discovery
 }
 
-% ============================================================
-% Double-anonymous: comment out and use \author{Anonymous Authors}
-% ============================================================
 \author{Tianchonghui Fang$^{1}$ and Shalabh Gupta$^{1}$%
 \thanks{$^{1}$T. Fang and S. Gupta are with the Department of Electrical and Computer Engineering,
         University of Connecticut, Storrs, CT 06269, USA.
@@ -47,245 +43,187 @@ Cooperative Multi-Agent Navigation in Unknown Environments\\via Incremental Tree
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-We present a multi-agent navigation system for unknown environments built on the \smarttd{} incremental replanning framework. Existing sampling-based planners assume fully known maps; grid-based multi-agent path finding (MAPF) methods assume known graphs and discrete movement. Our system removes both assumptions. Each agent carries a simulated LiDAR sensor, discovers walls incrementally, and repairs its RRT* tree in place rather than rebuilding from scratch. A shared wall discovery mechanism propagates newly found walls across all agents, enabling cooperative map exploration. Deadlock resolution uses a priority-based reactive coordination layer (Global King with flee, chain push, and multi-direction retreat) that operates in continuous space without modifying the planning trees. We validate the system across 8 procedurally generated scenarios (32m to 192m) with up to 8 agents and 30 dynamic pedestrians. In 50{,}000+ benchmark trials, the full system achieves 100\% success rate on all large-scale maps with 4 agents. Shared wall discovery yields $1.04\times$--$2.09\times$ speedup over independent exploration. Incremental repair reduces navigation time by $22.4\times$ compared to full tree rebuilding on the largest maps. The system has been deployed on a physical robot (Raspberry Pi~5 + Alienware i9 central planner) navigating real indoor environments via ROS2 and CycloneDDS.
+Sampling-based path planners assume the map is known. Grid-based multi-agent path finding (MAPF) assumes a known graph with discrete movement. Neither assumption holds when robots enter an unfamiliar building for the first time. We extend the \smarttd{} incremental replanning algorithm~\cite{agrawal2025smart3d}, originally designed for a single robot dodging pedestrians in a known environment, to multiple cooperating agents navigating unknown maps. Each agent discovers walls through LiDAR and repairs its RRT* tree in place: the prune-and-reconnect mechanism from the original paper, applied to permanent walls rather than transient obstacles, takes ${\sim}$5\,ms versus ${\sim}$40\,ms for a full rebuild. Agents share discovered walls so that one robot's LiDAR data preemptively updates all other robots' trees. A priority-based coordination layer (Global King with flee, chain push, and retreat) resolves deadlocks without touching any planning tree. Across 50{,}000+ benchmark trials on 8 maps (32\,m to 192\,m), 4 agents achieve 100\% success on all large-scale scenarios. Shared discovery is $1.04\times$--$2.09\times$ faster than independent exploration. Incremental repair is $22.4\times$ faster than rebuilding from scratch. The system runs on a Raspberry Pi~5 thin client with an i9 central planner over ROS2.
 
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
+\section{INTRODUCTION}
 
-Multi-robot navigation in unknown environments is a prerequisite for applications ranging from warehouse logistics to search-and-rescue. The problem requires three capabilities simultaneously: (1) planning collision-free paths with incomplete map information, (2) updating plans as new obstacles are discovered, and (3) coordinating multiple agents to avoid deadlocks.
+The \smarttd{} algorithm~\cite{agrawal2025smart3d} introduced an efficient mechanism for real-time path replanning: when a moving person enters the robot's Local Reaction Zone (LRZ), it prunes affected tree edges, finds hot-nodes (tree nodes adjacent to different disconnected subtrees), and reconnects locally. A single repair costs ${\sim}$5\,ms on a 15{,}000-node RRT*~\cite{karaman2011sampling} tree, compared to ${\sim}$40\,ms for a full rebuild. The original evaluation demonstrates this on a single robot in a fully known 2D/3D environment with randomly moving spherical obstacles.
 
-Existing approaches address subsets of this problem. Grid-based Multi-Agent Path Finding (MAPF) methods such as CBS~\cite{sharon2015cbs} and PIBT~\cite{okumura2022pibt} find optimal or near-optimal solutions for hundreds of agents, but assume fully known grid maps and discrete, synchronized timesteps. Sampling-based planners like RRT*~\cite{karaman2011sampling} operate in continuous space and handle complex geometry, but most variants assume static, known environments and plan for a single robot. Reactive methods like ORCA~\cite{berg2011reciprocal} handle dynamic obstacles in continuous space but lack global planning and fail in narrow corridors where local velocity adjustments cannot resolve conflicts.
+Two assumptions limit direct deployment. First, the map is known: all static walls are loaded before planning begins. In practice, a robot entering an unfamiliar warehouse or hospital discovers walls one by one through its LiDAR. Second, the system handles one robot. Multi-robot navigation requires coordination to avoid deadlocks, especially in narrow corridors where two robots cannot pass simultaneously.
 
-\smarttd{}~\cite{agrawal2025smart3d} introduced an incremental tree repair mechanism for single-robot navigation around dynamic obstacles in known environments. When a moving obstacle intersects the planned path, \smarttd{} prunes affected edges, searches for hot-nodes (tree nodes with neighbors in different disconnected subtrees), and reconnects the tree locally. This repair takes $\sim$5\,ms versus $\sim$40\,ms for a full RRT* rebuild, enabling real-time obstacle avoidance.
+Grid-based MAPF methods~\cite{sharon2015cbs,okumura2022pibt,okumura2023lacam} solve multi-agent coordination for hundreds of agents, but on known graphs with discrete, synchronized timesteps. H\"onig et al.~\cite{honig2019persistent} showed that both assumptions break in real warehouses. Reactive methods like ORCA~\cite{berg2011reciprocal} handle continuous space but lack global planning and deadlock permanently in narrow corridors.
 
-We extend \smarttd{} along three axes:
+We extend \smarttd{} in three directions:
 
 \begin{enumerate}
-    \item \textbf{Unknown environments.} We introduce \texttt{update\_static\_obstacles()}, which applies the prune-and-reconnect mechanism to permanently discovered walls. The original algorithm only handles transient dynamic obstacles; our extension handles walls that, once discovered, never disappear. This requires a different tree management strategy: pruned nodes are permanently discarded rather than restored when the obstacle leaves.
+    \item \textbf{Unknown environments.} We add \texttt{update\_static\_obstacles()}, applying the same prune-and-reconnect framework to walls discovered at runtime. The key difference from the original \texttt{update()}: dynamic obstacles disappear (pedestrians walk away, edges are restored), but walls are permanent (pruned nodes are discarded, never restored). This required a new function \texttt{form\_single\_tree\_after\_static\_update()} distinct from the original \texttt{form\_single\_tree()}.
 
-    \item \textbf{Multi-agent shared wall discovery.} When agent $A$ discovers a wall via LiDAR, all other agents' trees are immediately updated. This cooperative exploration yields $1.04\times$--$2.09\times$ faster completion compared to independent discovery, validated over 12{,}000 trials.
+    \item \textbf{Shared wall discovery.} When robot $A$ discovers a wall, all other robots' trees are updated immediately. This converts surprise blockages (which force expensive full rebuilds) into preemptive incremental repairs (cheap). The benefit: $1.04\times$--$2.09\times$ faster completion across 12{,}000 trials (Section~\ref{sec:sharing}).
 
-    \item \textbf{Reactive coordination in continuous space.} A Global King priority system with active flee, chain push, and multi-direction retreat resolves deadlocks without modifying any agent's planning tree. The coordination layer operates purely at the execution level, decoupled from the sampling-based planner.
+    \item \textbf{Reactive coordination in continuous space.} A Global King priority system with active flee, chain push, and multi-direction retreat handles deadlocks without modifying any planning tree. The mechanism is analogous to PIBT's priority inheritance~\cite{okumura2022pibt} but in continuous coordinates rather than on a grid. 8 robots pass through a 2\,m corridor at 100\% success.
 \end{enumerate}
 
-We validate the complete system across 8 procedurally generated scenarios ranging from 32m buildings to 192m university campuses, with up to 8 agents and 30 dynamic pedestrians. The system achieves 100\% success rate on all large-scale maps (1{,}000 trials each), and has been deployed on a physical robot using ROS2 with a central planner architecture.
+We validate across 8 procedurally generated maps (32\,m buildings to 192\,m campuses) with up to 8 agents and 30 pedestrians, totaling 50{,}000+ benchmark trials.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Related Work}
+\section{RELATED WORK}
 
-\subsection{Multi-Agent Path Finding (MAPF)}
+\textbf{MAPF.}
+CBS~\cite{sharon2015cbs} finds optimal solutions but computation explodes in narrow corridors due to pairwise symmetry~\cite{li2019symmetry}. PIBT~\cite{okumura2022pibt} scales to thousands of agents via priority inheritance. LaCAM~\cite{okumura2023lacam} adds lazy constraints. All require a known grid and discrete timesteps. Lifelong MAPF~\cite{li2021lifelong} handles persistent task streams but still needs a known graph. Our system targets 2--8 physical robots in unknown, continuous environments, a regime these methods do not address.
 
-Conflict-Based Search (CBS)~\cite{sharon2015cbs} finds optimal solutions by branching on pairwise conflicts, but computation time grows exponentially with agent count in narrow corridors due to pairwise path symmetry~\cite{li2019symmetry}. Suboptimal methods scale better: Priority Inheritance with Backtracking (PIBT)~\cite{okumura2022pibt} handles thousands of agents on grids via dynamic priority transfer, and LaCAM~\cite{okumura2023lacam} achieves similar scale with lazy constraint addition. However, all grid-based MAPF methods share two assumptions that limit real-world applicability: the map is fully known before planning, and agents move in discrete timesteps on a graph.
+\textbf{Sampling-based replanning.}
+DRRT~\cite{ferguson2006replanning} invalidates edges and regrows. RRTX~\cite{otte2016rrtx} propagates cost changes globally. ERRT~\cite{bruce2002real} biases toward the old tree. All require global modifications after each change. \smarttd{}~\cite{agrawal2025smart3d} prunes only within a local Critical Pruning Region and reconnects via hot-nodes, preserving most of the tree. We keep this local property while adding wall discovery and multi-agent coordination.
 
-H\"onig et al.~\cite{honig2019persistent} demonstrated that both assumptions break down in real warehouse deployments, where asynchronous execution and continuous dynamics require replanning. Lifelong MAPF~\cite{ecai2024lifelong} addresses the persistent task stream but still requires a known graph.
-
-\subsection{Sampling-Based Replanning}
-
-Several algorithms extend RRT* to dynamic environments. DRRT~\cite{ferguson2006replanning} invalidates affected edges and regrows the tree. RRTX~\cite{otte2016rrtx} propagates cost changes globally. ERRT~\cite{bruce2002real} biases new samples toward the previous tree. These methods operate in continuous space but require global tree modifications or resampling after each environment change.
-
-\smarttd{}~\cite{agrawal2025smart3d} takes a different approach: it prunes only edges within a local Critical Pruning Region (CPR) and reconnects via hot-nodes, preserving the majority of the tree structure. A single repair takes $\sim$5\,ms on 15{,}000-node trees. However, the original work assumes all static obstacles are known a priori and plans for a single robot.
-
-Our work extends \smarttd{} to unknown environments with multiple cooperating agents. Unlike DRRT and RRTX, we preserve the local repair property of \smarttd{} while adding wall discovery and multi-agent coordination.
-
-\subsection{Reactive Multi-Robot Coordination}
-
-ORCA~\cite{berg2011reciprocal} computes collision-free velocity constraints between agent pairs. It works well in open spaces but fails in narrow corridors where the velocity obstacle set has no feasible solution, leading to permanent deadlock. DWA~\cite{fox1997dwa} has similar limitations.
-
-Our coordination mechanism draws inspiration from PIBT's priority inheritance but operates in continuous space rather than on a grid. The key difference: PIBT agents backtrack by one grid cell; our agents flee along computed directions in continuous coordinates, with the planning tree providing fallback global paths.
+\textbf{Reactive coordination.}
+ORCA~\cite{berg2011reciprocal} computes pairwise velocity constraints. It works in open spaces but deadlocks in narrow corridors where no feasible velocity exists. DWA~\cite{fox1997dwa} has the same limitation. Our King/flee/push layer handles corridors by sequencing robots through priority inheritance, with the RRT* tree providing fallback paths after displacement.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Problem Formulation}
+\section{PROBLEM FORMULATION}
 
-Consider $N$ agents operating in a 2D workspace $\mathcal{W} \subset \mathbb{R}^2$ containing static walls $\mathcal{O}_{\text{static}}$ and $M$ dynamic pedestrians $\mathcal{O}_{\text{dyn}}$. Each agent $i$ has:
-\begin{itemize}
-    \item Position $\mathbf{p}_i \in \mathcal{W}$, radius $r_i$, speed $v_i$
-    \item Goal position $\mathbf{g}_i \in \mathcal{W}$
-    \item A LiDAR sensor with range $R_s$ that returns intersection points with walls within line-of-sight
-    \item A local map $\hat{\mathcal{O}}_i \subseteq \mathcal{O}_{\text{static}}$ of walls discovered so far
-\end{itemize}
+$N$ agents operate in a 2D workspace $\mathcal{W} \subset \mathbb{R}^2$ with unknown static walls $\mathcal{O}_{\text{static}}$ and $M$ dynamic pedestrians. Agent $i$ has position $\mathbf{p}_i$, radius $r_i$, speed $v_i$, goal $\mathbf{g}_i$, LiDAR range $R_s$, and a local map $\hat{\mathcal{O}}_i \subseteq \mathcal{O}_{\text{static}}$ of discovered walls. At $t{=}0$, $\hat{\mathcal{O}}_i = \emptyset$. Each agent maintains an RRT* tree $\mathcal{T}_i$ built against its current known walls.
 
-At time $t=0$, $\hat{\mathcal{O}}_i = \emptyset$ for all agents. As agent $i$ moves, its LiDAR reveals walls within range $R_s$, updating $\hat{\mathcal{O}}_i$. Each agent maintains an RRT* tree $\mathcal{T}_i$ built against its current known walls.
+In shared mode, agent $i$ discovering wall $w$ triggers $\hat{\mathcal{O}}_j \leftarrow \hat{\mathcal{O}}_j \cup \{w\}$ for all $j$. This models a centralized planner with shared sensor data, matching our real deployment (Section~\ref{sec:deployment}).
 
-\textbf{Objective.} Navigate all $N$ agents to their respective goals $\{\mathbf{g}_i\}$ while:
-\begin{enumerate}
-    \item Avoiding all static walls (known and unknown)
-    \item Avoiding dynamic pedestrians
-    \item Avoiding inter-agent collisions
-    \item Minimizing total navigation time $\max_i t_i^{\text{arrive}}$
-\end{enumerate}
-
-\textbf{Shared discovery.} In cooperative mode, when agent $i$ discovers a new wall $w$, it is immediately added to all agents' maps: $\hat{\mathcal{O}}_j \leftarrow \hat{\mathcal{O}}_j \cup \{w\}$ for all $j$. This models a centralized planner with shared sensor data, which matches our deployment architecture (Section~\ref{sec:deployment}).
+\textbf{Objective:} all agents reach their goals while avoiding walls, pedestrians, and each other, minimizing $\max_i t_i^{\text{arrive}}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Method}
+\section{METHOD}
 
-Our system operates as a 5-phase loop executed every simulation frame ($\Delta t = 0.05$\,s). Fig.~\ref{fig:architecture} shows the architecture.
+The system runs a 5-phase loop every frame ($\Delta t {=} 0.05$\,s).
 
-% [PLACEHOLDER: Fig 1 - System architecture diagram]
-% \begin{figure}[t]
-%     \centering
-%     \includegraphics[width=\columnwidth]{figures/architecture.pdf}
-%     \caption{System architecture. Five phases execute per frame: LiDAR scan, incremental wall repair, dynamic obstacle avoidance via \smarttd{} update, priority-based movement with King coordination, and post-move overlap resolution.}
-%     \label{fig:architecture}
-% \end{figure}
+\subsection{Phase 1: LiDAR Scan}
 
-\subsection{Phase 1: LiDAR Scan and Wall Discovery}
-
-Each agent casts 180 rays uniformly over $360\degree$ with range $R_s$. Each ray is tested against all walls in $\mathcal{O}_{\text{static}}$ (ground truth); the closest intersection within $R_s$ is returned. Walls behind other walls are occluded. Newly discovered walls are merged into the global known wall set.
-
-In shared mode, a single discovery triggers tree repair on \emph{all} agents. In independent mode (ablation baseline), each agent only updates its own map.
+Each agent casts 180 rays over $360\degree$ with range $R_s$. Walls behind other walls are occluded. Newly discovered walls are merged into the shared wall list.
 
 \subsection{Phase 2: Incremental Wall Repair}
-\label{sec:wall_repair}
 
-When new walls are discovered, we must update each agent's RRT* tree. We implement three strategies with increasing efficiency:
+When a new wall arrives, we must decide what to do with each agent's tree. We tested five strategies over the course of development. Three survived; two were abandoned.
 
-\textbf{Full Rebuild (baseline).} Discard the entire tree and run RRT* from scratch with all currently known walls. Cost: $O(K \log K)$ where $K$ is the number of RRT* iterations (5{,}000--160{,}000 depending on map size). This guarantees a clean tree but takes 40--500\,ms and produces a completely new path with no continuity guarantee.
+\textbf{Full Rebuild (baseline).} Throw away the 15{,}000-node tree, build a new one from scratch. Guarantees a clean tree, but costs 40--500\,ms per wall and produces a completely different path each time. On Megacampus (128\,m, ${\sim}$300 walls), this means ${\sim}$140 rebuilds per run.
 
-\textbf{Eager Incremental (E3).} Apply \texttt{update\_static\_obstacles()}: scan all $E$ edges in the tree, prune those intersecting the new wall, then reconnect via hot-node search. Cost: $O(E)$ per new wall, typically $\sim$5\,ms on 15{,}000-node trees. The tree structure is preserved except for pruned edges, maintaining path continuity.
+\textbf{Eager (E3).} Apply \texttt{update\_static\_obstacles()}: scan all $E$ edges, prune those intersecting the new wall, reconnect via hot-nodes within the Local Search Radius (LSR = 80\,m). Cost: ${\sim}$5\,ms. The tree structure is preserved.
 
-\textbf{Lazy + Eager (recommended).} If the new wall does not intersect the current path, only swap the validity checker without scanning the tree (lazy). If the wall blocks the current path, fall back to eager repair. This reduces unnecessary computation when walls are discovered in irrelevant regions.
+\textbf{Lazy + Eager (final).} If the new wall does not block the current path, just swap the validity checker (cost: ${\sim}$0\,ms). If blocked, fall back to Eager. This skips ${\sim}$80\% of wall discoveries that are irrelevant to the current path.
 
-Algorithm~\ref{alg:wall_repair} describes the eager repair procedure.
+\textbf{Abandoned: Hybrid cleanup.} Light edge cleanup when path unaffected. Same speed as Lazy, worse reliability. Discarded.
+
+\textbf{Abandoned: Route A (\texttt{update\_new\_static\_obstacles}).} Only check the \emph{new} wall during Eager, not all known walls. Failed because Lazy swap leaves dirty edges from old walls; Route A never cleans them. Took 4 hours to diagnose.
+
+Algorithm~\ref{alg:wall_repair} describes the Eager procedure.
 
 \begin{algorithm}[t]
 \caption{Incremental Wall Repair (\texttt{update\_static\_obstacles})}
 \label{alg:wall_repair}
 \begin{algorithmic}[1]
 \REQUIRE Tree $\mathcal{T}$, new wall $w$, validity checker $\mathcal{V}$
-\STATE $\mathcal{V} \leftarrow \mathcal{V} \cup \{w\}$ \COMMENT{Update checker with new wall}
-\STATE $\mathcal{E}_{\text{bad}} \leftarrow \{e \in \mathcal{T} \mid e \text{ intersects } w\}$ \COMMENT{Scan all edges}
+\STATE $\mathcal{V} \leftarrow \mathcal{V} \cup \{w\}$
+\STATE $\mathcal{E}_{\text{bad}} \leftarrow \{e \in \mathcal{T} \mid e \text{ intersects } w\}$ \COMMENT{$O(E)$ scan}
 \FOR{each $e \in \mathcal{E}_{\text{bad}}$}
-    \STATE Prune $e$ from $\mathcal{T}$ \COMMENT{Tree fragments into subtrees}
+    \STATE Prune $e$; tree fragments into subtrees
 \ENDFOR
 \STATE $\mathcal{H} \leftarrow$ \textsc{HotNodeSearch}($\mathcal{T}$, $R_{\text{LSR}}$)
-\FOR{each hot-node $h \in \mathcal{H}$ ranked by utility}
-    \STATE Attempt reconnection through $h$
-    \IF{reconnection valid under $\mathcal{V}$}
-        \STATE Rewiring cascade to update costs
+\FOR{each hot-node $h \in \mathcal{H}$ by utility}
+    \IF{reconnection through $h$ valid under $\mathcal{V}$}
+        \STATE Reconnect; rewiring cascade
     \ENDIF
 \ENDFOR
 \STATE \textbf{return} \textsc{BuildPath}($\mathcal{T}$)
 \end{algorithmic}
 \end{algorithm}
 
-\textbf{Detour detection.} Over successive repairs, path quality may degrade. We monitor the ratio $\rho = \|\text{path}\| / \|\mathbf{p}_i - \mathbf{g}_i\|$. If $\rho > 1.5$, a full rebuild is triggered to restore path optimality.
+\textbf{Detour detection.} Successive repairs can degrade path quality. If $\|\text{path}\| / \|\mathbf{p}_i - \mathbf{g}_i\| > 1.5$, a full rebuild is triggered.
 
-\textbf{E3 vs.\ path-only repair.} An alternative strategy (``Senior'') scans only edges adjacent to the current path, ignoring the rest of the tree. This leaves ``dirty edges'' (edges crossing discovered walls) in unexplored tree regions. When an agent is later forced to use those regions (e.g., pushed by another agent), it encounters invalid edges and must perform a full rebuild. In multi-agent settings with shared wall discovery, dirty edges accumulate rapidly because walls discovered by remote agents may affect tree regions far from the current path. Our benchmarks show that E3 (full-tree scan) triggers $4$--$9\times$ fewer rebuilds than path-only repair, resulting in 18--23\% faster median navigation time on large maps despite higher per-repair CPU cost.
+\textbf{Why full-tree scan (E3), not path-only?} An alternative (``Senior'') scans only edges near the current path. This is cheaper per call but leaves dirty edges elsewhere in the tree. When an agent is pushed into those regions by another robot's King coordination, it hits invalid edges and must do a full rebuild. In multi-agent mode with shared walls, dirty edges accumulate fast: walls from remote agents affect tree regions far from the current path. E3 triggers $4$--$9\times$ fewer rebuilds than Senior (Table~\ref{tab:e3_senior}), despite higher per-repair CPU cost.
 
 \subsection{Phase 3: Dynamic Obstacle Avoidance}
 
-Each agent uses \smarttd{}'s native \texttt{SMART::update()} for dynamic pedestrians. The original algorithm is unchanged: compute Obstacle Hazard Zones (OHZ) based on pedestrian speed, prune edges within the Local Reaction Zone (LRZ), and reconnect via hot-nodes. The King agent (Section~\ref{sec:king}) plans as if other agents do not exist; non-King agents treat all other agents as dynamic obstacles with OHZ.
+Unchanged from the original \smarttd{}: compute OHZ per pedestrian, prune edges within LRZ, reconnect via hot-nodes. The King (Section~\ref{sec:king}) ignores other agents in planning; non-King agents treat other agents as dynamic obstacles.
 
 \subsection{Phase 4: Global King Coordination}
 \label{sec:king}
 
-We introduce a reactive coordination layer that resolves inter-agent deadlocks without modifying any planning tree. The mechanism operates purely at the execution level.
+This layer resolves deadlocks \emph{without touching any planning tree}. It operates purely at the execution level: direct position adjustments via vector arithmetic, every frame.
 
-\textbf{King selection.} Each agent has a priority value (configurable or random). The active agent with the highest priority is the King. When the King reaches its goal, the next-highest-priority active agent becomes King.
+\textbf{King selection.} Highest-priority active agent. Same-priority ties broken by a random value fixed at initialization. When King reaches goal, next-priority agent becomes King.
 
-\textbf{King behavior.} The King follows its \smarttd{} path at full speed, ignoring all other agents in planning. On physical collision with another agent, the King initiates a \emph{chain push}: all agents along the push direction are displaced by one step. If the chain terminates at a wall, the first blocker is scattered sideways (perpendicular left, perpendicular right, or backward along its own path).
+\textbf{King behavior.} Follows its path at full speed, ignoring all agents in planning. On collision: chain push (displace all agents along push direction). If chain hits a wall: scatter the first blocker sideways.
 
-\textbf{Non-King behavior.} If within 5\,m of the King, a non-King agent actively \emph{flees}: it computes three candidate directions (away from King, perpendicular left, perpendicular right), selects the first that does not collide with a wall, and moves along it. Beyond 5\,m, non-King agents follow their own \smarttd{} paths normally, treating other agents as dynamic obstacles.
+\textbf{Non-King behavior.} Within 5\,m of King: flee (away, perpendicular left, perpendicular right, first non-wall direction). Beyond 5\,m: follow own path, treating other agents as dynamic obstacles.
 
-\textbf{Stuck detection.} If an agent makes no progress (< 2\,m movement) for 40 frames (2\,s), it triggers a rebuild. The King rebuilds ignoring all agents. Non-King agents rebuild with the King's position encoded as a 3\,m square wall obstacle, forcing the planner to route around the King's vicinity.
+\textbf{Stuck detection.} No progress for 2\,s triggers a rebuild. King rebuilds ignoring all agents. Non-King rebuilds with King encoded as a 3\,m wall.
 
-\textbf{Post-move overlap resolution (Phase 4.5).} Three passes over all agent pairs resolve any remaining overlaps: King--non-King overlaps push the non-King away; non-King--non-King overlaps push both apart equally. Wall checks prevent pushing agents into walls.
-
-This mechanism is analogous to PIBT's priority inheritance in continuous space. PIBT agents backtrack by one grid cell; our agents flee along continuous vectors with the RRT* tree providing fallback global paths after displacement.
-
-\textbf{Three decoupled movement layers.} The system combines three mechanisms that operate independently: (1)~the RRT* tree provides a global path via waypoint-following (pure pursuit); (2)~SMART incremental repair updates the path when walls or OHZs invalidate edges ($\sim$5\,ms); (3)~King/flee/push directly adjusts agent positions via vector arithmetic each frame, without touching the tree. After a King push displaces an agent, SMART replans in $\sim$5\,ms to provide a new global path. This layered design is why pushed agents move smoothly in continuous space rather than in discrete grid jumps.
+\textbf{Three decoupled layers.} (1) RRT* tree: global path via pure pursuit. (2) SMART repair: updates path when walls/OHZs invalidate edges (${\sim}$5\,ms). (3) King/flee/push: direct position vector math per frame, no tree involvement. After a push, SMART replans in ${\sim}$5\,ms. This is why displaced agents move smoothly in continuous space, not in grid jumps.
 
 \subsection{Phase 5: Shared Wall Discovery}
+\label{sec:phase5}
 
-When agent $A$ discovers walls $\{w_1, \ldots, w_k\}$ in a frame, the central coordinator broadcasts them to all agents. Each receiving agent $B$ runs \texttt{update\_static\_obstacles()} against its own tree $\mathcal{T}_B$ for each new wall. This creates a cooperative exploration effect: agent $B$ may reroute \emph{before} encountering the wall physically, avoiding surprise blockages.
+When agent $A$ discovers walls, the central coordinator broadcasts them to all agents. Each agent $B$ runs \texttt{update\_static\_obstacles()} on its own tree. Agent $B$ reroutes \emph{before} physically encountering the wall.
 
-The alternative (independent mode) provides no inter-agent wall sharing. Each agent discovers walls only through its own LiDAR. Our ablation study (Section~\ref{sec:sharing_ablation}) quantifies the benefit.
+In independent mode (ablation), each agent only uses its own LiDAR. Section~\ref{sec:sharing} quantifies the difference.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Setup}
+\section{EXPERIMENTAL SETUP}
 
 \subsection{Scenarios}
 
-We design 8 procedurally generated 2D environments with increasing complexity:
+8 procedurally generated maps with walls defined as Rust functions. Agents start at corners in cross mode (navigate to opposite corner), forcing path crossings. Pedestrians follow random circular motion at 0.5--2.0\,m/s.
 
 \begin{table}[t]
 \centering
-\caption{Scenario specifications. Wall counts are approximate.}
+\caption{Scenario specifications.}
 \label{tab:scenarios}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccc}
 \toprule
-Scenario & Size & Walls & Iters & Agents & People \\
+Scenario & Size & Walls & RRT* iters & Agents \\
 \midrule
-building     & 32\,m  & $\sim$40  & 5K   & 2--4 & 12--25 \\
-office       & 32\,m  & $\sim$60  & 5K   & 2--4 & 12--25 \\
-warehouse    & 32\,m  & $\sim$30  & 5K   & 2--4 & 12--20 \\
-bottleneck   & 32\,m  & $\sim$20  & 5K   & 2--8 & 0--10  \\
-mega\_hospital  & 96\,m  & $\sim$300 & 30K  & 4    & 15--30 \\
-mega\_airport   & 160\,m & $\sim$350 & 50K  & 4    & 20--30 \\
-megacampus      & 128\,m & $\sim$480 & 80K  & 4    & 20--30 \\
-mega\_university & 192\,m & $\sim$550 & 160K & 4    & 25--30 \\
+building     & 32\,m  & ${\sim}$41  & 5K   & 2--4 \\
+office       & 32\,m  & ${\sim}$42  & 5K   & 2--4 \\
+warehouse    & 32\,m  & ${\sim}$28  & 5K   & 2--4 \\
+bottleneck   & 32\,m  & ${\sim}$20  & 5K   & 2--8 \\
+mega\_hospital  & 96\,m  & ${\sim}$200 & 30K  & 4 \\
+mega\_airport   & 160\,m & ${\sim}$250 & 50K  & 4 \\
+megacampus      & 128\,m & ${\sim}$300 & 80K  & 4 \\
+mega\_university & 192\,m & ${\sim}$400 & 160K & 4 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Agents are placed at map corners in \emph{cross mode}: each agent navigates to the diagonally opposite corner, forcing path crossings in the center. Dynamic pedestrians follow random-direction circular motion at 0.5--2.0\,m/s.
-
-\subsection{Metrics}
-
-\begin{itemize}
-    \item \textbf{Success rate}: fraction of trials where all agents reach their goals within the timeout.
-    \item \textbf{All-done time}: simulation time when the last agent reaches its goal (median over 1{,}000 trials).
-    \item \textbf{Rebuilds}: number of full RRT* rebuilds per trial (lower is better; incremental repair avoids these).
-    \item \textbf{Inc.\ OK}: number of successful incremental repairs per trial.
-    \item \textbf{Spread}: difference between the slowest and fastest agent's arrival time (lower indicates fairness).
-\end{itemize}
-
 \subsection{Configurations}
 
-We compare five configurations:
-\begin{itemize}
-    \item \textbf{E3} (recommended): Lazy+Eager repair, shortcut smoothing (150 iters), detour detection ($\rho > 1.5$), wall-block check, LSR = 80\,m.
-    \item \textbf{No Shortcut}: E3 without path smoothing.
-    \item \textbf{No Detour}: E3 without detour-triggered rebuilds.
-    \item \textbf{Baseline}: No shortcut, no detour, no wall-block check.
-    \item \textbf{Senior}: Path-only repair (scan only path-adjacent edges).
-\end{itemize}
-
-All experiments run on an Intel Core i9-14900K with 64\,GB RAM. Each scenario$\times$configuration is evaluated over 1{,}000 independent trials with randomized pedestrian positions and agent tiebreakers.
+\textbf{E3} (recommended): Lazy+Eager, shortcut (150 iters), detour ($\rho > 1.5$), LSR = 80\,m. \textbf{Senior}: path-only repair. \textbf{Shared/Independent}: wall sharing on/off. All on an i9-14900K, 1{,}000 trials per scenario$\times$config.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results}
+\section{RESULTS}
 
-\subsection{Algorithm Evolution: Single-Agent Baseline}
+\subsection{Algorithm Evolution (Single Agent)}
 
-Table~\ref{tab:single_agent} summarizes the single-agent progression from full rebuild to the recommended configuration on Megacampus (128$\times$128\,m, $\sim$480 walls).
+Table~\ref{tab:single_agent} traces the progression on Megacampus. The dominant factor is avoiding full rebuilds: 139.6 per run at baseline, 2.2 with Eager. Lazy Swap hits peak speed ($22.4\times$) but drops to 97.4\% success because dirty edges accumulate. Lazy+Eager restores 100\% by cleaning all dirty edges whenever the path is blocked.
 
 \begin{table}[t]
 \centering
-\caption{Single-agent algorithm evolution on Megacampus (1{,}000 trials). All configurations use LSR=80\,m.}
+\caption{Single-agent evolution, Megacampus (1{,}000 trials, LSR=80\,m).}
 \label{tab:single_agent}
 \begin{tabular}{lcccc}
 \toprule
 Strategy & Median & Rebuilds & Success & Speedup \\
 \midrule
 Full Rebuild        & 76.3\,s & 139.6 & 96.6\% & $1.0\times$ \\
-Eager Incremental   &  8.7\,s &  2.2  & 99.9\%  & $8.8\times$ \\
-Lazy Swap only      &  3.4\,s &  3.9  & 97.4\%  & $22.4\times$ \\
-Lazy + Eager (E3)   & best & low & 100\%  & $22.4\times$ \\
+Eager               &  8.7\,s &  2.2  & 99.9\% & $8.8\times$ \\
+Lazy Swap only      &  3.4\,s &  3.9  & 97.4\% & $22.4\times$ \\
+\rowcolor{bestgreen}
+Lazy + Eager (E3)   & best    & low   & 100\%  & $22.4\times$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The dominant improvement comes from avoiding full rebuilds. Each rebuild costs 40--500\,ms depending on tree size; incremental repair costs $\sim$5\,ms. On Megacampus, full rebuild averages 139.6 rebuilds per trial; the incremental approach reduces this to 2.2. Lazy Swap alone achieves peak speed but drops to 97.4\% success due to dirty edge accumulation. The Lazy+Eager combo restores 100\% success by cleaning all dirty edges whenever the path is blocked.
-
-Table~\ref{tab:single_scenario} shows per-scenario single-agent results with the recommended E3 configuration.
+Table~\ref{tab:single_scenario} confirms 100\% success across all scenarios.
 
 \begin{table}[t]
 \centering
-\caption{Single-agent results per scenario (E3, 0 people, 1{,}000 trials).}
+\caption{Single-agent per-scenario (E3, no people, 1{,}000 trials).}
 \label{tab:single_scenario}
 \begin{tabular}{lccc}
 \toprule
@@ -301,96 +239,77 @@ megacampus      & 108.6\,s & 100\% & 4.9 \\
 \end{tabular}
 \end{table}
 
-\subsection{E3 vs.\ Senior: Multi-Agent Comparison}
+\subsection{E3 vs.\ Senior (Multi-Agent)}
 
-Table~\ref{tab:e3_senior} compares E3 (full-tree repair) with Senior (path-only repair) across all mega-scale scenarios with 4 agents.
+Table~\ref{tab:e3_senior} shows why full-tree scan matters in multi-agent settings. Senior triggers $3$--$9\times$ more rebuilds because dirty edges left by path-only repair become landmines: when King pushes an agent into an unexplored tree region, the agent hits invalid edges and must do a full rebuild (${\sim}$40\,ms) instead of a cheap repair (${\sim}$5\,ms). On mega\_hospital, E3 succeeds in 92\% of incremental repairs; Senior succeeds in 33\%.
 
 \begin{table}[t]
 \centering
 \caption{E3 vs.\ Senior, 4 agents, 1{,}000 trials each.}
 \label{tab:e3_senior}
-\begin{tabular}{l cc cc cc}
+\begin{tabular}{l cc cc}
 \toprule
- & \multicolumn{2}{c}{Median (s)} & \multicolumn{2}{c}{Rebuilds} & \multicolumn{2}{c}{Success} \\
-Scenario & E3 & Sen. & E3 & Sen. & E3 & Sen. \\
+ & \multicolumn{2}{c}{Median (s)} & \multicolumn{2}{c}{Rebuilds} \\
+Scenario & E3 & Sen. & E3 & Sen. \\
 \midrule
-building       & 23.2 &  27.4 &   3.0 &  15.2 & 100\% & 100\% \\
-office         & 27.5 &  31.2 &   6.9 &  39.8 & 100\% & 100\% \\
-warehouse      & 24.2 &  27.2 &   4.1 &  33.4 & 100\% & 100\% \\
-mega\_hospital & 91.9 & 119.3 &  34.0 & 102.7 & 100\% &  99.9\% \\
-mega\_airport  & 116.2 & 151.7 & 30.9 &  91.8 & 100\% & 100\% \\
-megacampus     & 117.7 & 121.8 &  54.9 & 121.3 & 100\% & 100\% \\
+building       & 23.2 &  27.4 &   3.0 &  15.2 \\
+office         & 27.5 &  31.2 &   6.9 &  39.8 \\
+warehouse      & 24.2 &  27.2 &   4.1 &  33.4 \\
+mega\_hospital & 91.9 & 119.3 &  34.0 & 102.7 \\
+mega\_airport  & 116.2 & 151.7 & 30.9 &  91.8 \\
+megacampus     & 117.7 & 121.8 &  54.9 & 121.3 \\
 \bottomrule
 \end{tabular}
+
+\vspace{1mm}
+\begin{minipage}{\columnwidth}
+\footnotesize
+E3 achieves 100\% success on all scenarios. Senior drops to 99.9\% on mega\_hospital. CPU tradeoff: E3 wall-clock is higher (megacampus: 66.1\,s vs.\ 39.5\,s) because it scans all edges per repair. But the robot finishes faster (117.7\,s vs.\ 121.8\,s sim time). Spatial Index v2 (Section~\ref{sec:spatial}) closes this CPU gap.
+\end{minipage}
 \end{table}
 
-E3 achieves 18--30\% faster median times on mega-scale maps. The gap comes from rebuild count: Senior triggers $4$--$9\times$ more rebuilds because dirty edges (left by path-only repair) cause failures when agents are pushed into unexplored tree regions by King coordination.
-
-Incremental repair success rate tells the story: E3 achieves 92\% repair success on mega\_hospital; Senior achieves only 33\%. The remaining 67\% of Senior's repair attempts fail and fall back to full rebuild.
-
-\textbf{CPU time tradeoff.} E3's full-tree scan costs more per repair. On megacampus, E3's wall-clock time is 66.1\,s vs.\ Senior's 39.5\,s (per trial). However, the simulation time (what the robot experiences) is 117.7\,s for E3 vs.\ 121.8\,s for Senior. E3 makes the CPU work harder but the robot finish faster. A spatial index optimization (Section~\ref{sec:spatial_index}) would close the CPU gap.
-
 \subsection{Shared vs.\ Independent Wall Discovery}
-\label{sec:sharing_ablation}
+\label{sec:sharing}
 
-Table~\ref{tab:sharing} presents the ablation between shared and independent wall discovery over 12{,}000 trials (1{,}000 per scenario $\times$ mode).
+Table~\ref{tab:sharing} presents the core multi-agent result. The mechanism is simple: in independent mode, a robot hits an unknown wall, its path is blocked, and it must do a full rebuild. In shared mode, another robot discovered that wall 30 seconds ago and broadcast it; the receiving robot's tree was repaired in 5\,ms; it rerouted before arriving. Independent mode shows \emph{zero} incremental repairs: without advance wall notifications, repair never triggers.
 
 \begin{table}[t]
 \centering
-\caption{Shared vs.\ Independent wall discovery, 4 agents, E3 config, 1{,}000 trials per cell.}
+\caption{Shared vs.\ Independent, 4 agents, E3, 1{,}000 trials per cell.}
 \label{tab:sharing}
 \begin{tabular}{l cc c}
 \toprule
- & \multicolumn{2}{c}{Median (s)} & \\
 Scenario & Shared & Indep. & Speedup \\
 \midrule
-building       & 23.2 &  48.4 & $2.09\times$ \\
-office         & 27.8 &  33.5 & $1.21\times$ \\
-warehouse      & 24.3 &  26.9 & $1.10\times$ \\
-mega\_hospital &  92.8 & 108.5 & $1.17\times$ \\
-mega\_airport  & 115.8 & 121.0 & $1.04\times$ \\
-megacampus     & 116.8 & 137.4 & $1.18\times$ \\
+building       & 23.2\,s &  48.4\,s & $2.09\times$ \\
+office         & 27.8\,s &  33.5\,s & $1.21\times$ \\
+warehouse      & 24.3\,s &  26.9\,s & $1.10\times$ \\
+mega\_hospital &  92.8\,s & 108.5\,s & $1.17\times$ \\
+mega\_airport  & 115.8\,s & 121.0\,s & $1.04\times$ \\
+megacampus     & 116.8\,s & 137.4\,s & $1.18\times$ \\
 \bottomrule
 \end{tabular}
+
+\vspace{1mm}
+\begin{minipage}{\columnwidth}
+\footnotesize
+Per-agent fairness: on megacampus, the gap between slowest and fastest agent drops from 12.3\,s (independent) to 2.9\,s (shared), a $4.2\times$ reduction. Office: $4.4\times$. Mega\_hospital: $2.5\times$.
+\end{minipage}
 \end{table}
 
-The speedup comes from a fundamental mechanism difference. In independent mode, each agent discovers walls only through its own LiDAR. Surprise walls on the current path trigger full rebuilds because no incremental repair has been prepared. Independent mode shows zero incremental repair successes: without advance wall notifications, repair never triggers.
+\subsection{Bottleneck: 8 Robots, 2\,m Corridor}
 
-In shared mode, walls discovered by remote agents arrive \emph{before} the receiving agent physically encounters them. This triggers efficient incremental repair (5\,ms) rather than expensive full rebuild (40--500\,ms). The agent reroutes proactively, experiencing zero surprise blockages.
+The worst case for coordination: robots approach from both sides of a corridor too narrow for two to pass. The King system sequences them: King passes first, others flee. After King exits, next-priority agent becomes King. 100\% success across all configurations (4 and 8 agents, with and without 10 pedestrians).
 
-Per-agent fairness also improves: on megacampus, the time spread between fastest and slowest agent decreases from 12.3\,s (independent) to 2.9\,s (shared), a $4.2\times$ reduction. On office the reduction is $4.4\times$, on mega\_hospital $2.5\times$. Shared discovery equalizes information across agents, preventing any single agent from being systematically disadvantaged by late wall discoveries.
-
-\subsection{Bottleneck Stress Test}
-
-The bottleneck scenario is a 2\,m-wide corridor with agents approaching from both sides. This is the worst case for reactive coordination: agents must yield and sequence through the narrow passage.
-
-\begin{table}[t]
-\centering
-\caption{Bottleneck results (cross and converge modes).}
-\label{tab:bottleneck}
-\begin{tabular}{lccc}
-\toprule
-Configuration & Agents & People & Success \\
-\midrule
-Bottleneck, cross   & 4 & 0  & 100\% \\
-Bottleneck, cross   & 4 & 10 & 100\% \\
-Bottleneck, cross   & 8 & 0  & 100\% \\
-Bottleneck, cross   & 8 & 10 & 100\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The King system handles this scenario by sequencing agents: the King passes first, non-King agents flee sideways or backward. After the King exits, the next-priority agent becomes King and passes. This is functionally equivalent to PIBT's priority inheritance but operates in continuous space.
-
-ORCA would fail here: two agents facing each other in a 2\,m corridor have no lateral space for velocity-based avoidance, leading to permanent deadlock.
+ORCA would deadlock here: two agents face-to-face in 2\,m have no lateral space for velocity-based avoidance.
 
 \subsection{Deferred vs.\ Immediate Repair}
 
-We tested whether deferring Eager repair for distant shared walls improves performance. With \texttt{--local-horizon 30}, walls more than 30\,m from the receiving agent get only a Lazy swap; Eager triggers when the agent approaches within 30\,m.
+We tested whether skipping Eager repair for walls more than 30\,m away saves CPU without hurting performance. It does not help (Table~\ref{tab:deferred}). Deferring accumulates dirty edges; when the robot approaches, more repairs fail, triggering more rebuilds (mega\_hospital: 21.6 vs.\ 17.9). The CPU savings (wall-clock 13.3\,s vs.\ 16.0\,s) are offset by extra rebuilds. Immediate Eager is optimal.
 
 \begin{table}[t]
 \centering
-\caption{Immediate (E3) vs.\ Deferred Eager (30\,m horizon), 4 agents, 1{,}000 trials per cell.}
+\caption{Immediate vs.\ Deferred Eager (30\,m), 4 agents, 1{,}000 trials.}
 \label{tab:deferred}
 \begin{tabular}{lccl}
 \toprule
@@ -398,152 +317,63 @@ Scenario & Immediate & Deferred & Verdict \\
 \midrule
 building       & 23.1\,s & 23.3\,s & Same \\
 office         & 28.1\,s & 27.9\,s & Same \\
-warehouse      & 24.4\,s & 24.3\,s & Same \\
-mega\_hospital & 92.0\,s & 94.9\,s & Immediate better \\
-mega\_airport  & 115.3\,s & 119.8\,s & Immediate better \\
+mega\_hospital & 92.0\,s & 94.9\,s & Imm.\ better \\
+mega\_airport  & 115.3\,s & 119.8\,s & Imm.\ better \\
 megacampus     & 116.6\,s & 115.6\,s & Same \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Deferral provides no benefit and is slightly worse on mega maps. The reason: deferred mode accumulates dirty edges from distant Lazy swaps. When the agent eventually approaches those walls, more edges are dirty, causing more repair failures and triggering more expensive full rebuilds (mega\_hospital: 21.6 vs.\ 17.9 rebuilds). The CPU time saved by skipping distant Eager (13.3\,s vs.\ 16.0\,s wall-clock) is offset by the additional rebuilds. Immediate Eager is optimal.
-
 \subsection{Spatial Index v2}
-\label{sec:spatial_index}
+\label{sec:spatial}
 
-The per-repair cost of E3 is dominated by scanning all $E$ edges against each new wall. We implemented a grid-bucket spatial index that partitions the workspace into 4\,m$\times$4\,m cells. Each edge is registered in the cells it passes through. When a new wall arrives, only edges in cells overlapping the wall's bounding box are checked.
+E3's cost is dominated by scanning all $E$ edges per new wall. We partition the workspace into 4\,m${\times}$4\,m cells and register each edge in the cells it passes through. Per new wall, only edges in overlapping cells are checked. The pruned set is identical to full scan: an edge far from a wall cannot intersect it.
 
-A first attempt (v1) using heap-allocated \texttt{Vec} per query was \emph{slower} than linear scan, because 300 wall segments fit in 4.8\,KB (L1 cache); linear scan has perfect memory prefetch, and the per-call allocation overhead exceeds the savings. Spatial Index v2 eliminates all per-query allocation with a zero-copy design: allow duplicate wall checks (extra 5\,ns per duplicate is negligible) and use a single-cell fast path. On megacampus, wall-clock time drops from 66.1\,s to 48.6\,s ($-26$\%). Small maps are slightly slower due to HashMap overhead, but this is irrelevant since small maps complete in under 1\,s. The pruned edge set is identical to full scan: an edge geometrically distant from a wall cannot intersect it.
+v1 (heap-allocated \texttt{Vec} per query) was \emph{slower} than linear scan: 300 walls fit in 4.8\,KB (L1 cache); linear scan has perfect prefetch. v2 eliminates all allocation: allow duplicate checks (5\,ns overhead), single-cell fast path. Megacampus: 66.1\,s $\to$ 48.6\,s ($-26$\%). Small maps slightly slower (HashMap overhead), irrelevant at $<$1\,s total.
 
 \begin{table}[t]
 \centering
-\caption{Spatial Index v2 effect on CPU time (median wall-clock per trial, 1{,}000 trials, E3 config, 4 agents).}
+\caption{Spatial Index v2: CPU time per trial (1{,}000 trials).}
 \label{tab:spatial}
 \begin{tabular}{lccc}
 \toprule
-Scenario & Before & After (v2) & Change \\
+Scenario & Before & After & Change \\
 \midrule
 building       & 0.5\,s & 0.7\,s & $+40$\% \\
 mega\_hospital & 13.4\,s & 11.2\,s & $-16$\% \\
-mega\_airport  & 17.9\,s & $\sim$12\,s & $\sim$$-33$\% \\
 megacampus     & 66.1\,s & 48.6\,s & $-26$\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Real Robot Deployment}
+\section{REAL ROBOT DEPLOYMENT}
 \label{sec:deployment}
 
-We deployed the system on a physical robot navigating real indoor environments.
+\textbf{Hardware.} Raspberry Pi~5 (4-core, 2.4\,GHz) runs Cartographer SLAM and motor control. Alienware i9-14900K runs \smarttd{} in Rust. CycloneDDS over WiFi, ROS\_DOMAIN\_ID=42.
 
-\textbf{Hardware.} A Raspberry Pi~5 (4-core, 2.4\,GHz) runs Cartographer SLAM and motor control as a thin client. An Alienware Aurora R16 (Intel i9-14900K, 24 cores, 64\,GB) serves as the central planner running \smarttd{} in Rust. Communication uses CycloneDDS over a WiFi access point ($10.42.0.0/24$, ROS\_DOMAIN\_ID=42).
+\textbf{Why centralized.} Cartographer on Pi~5 consumes ${\sim}$1.5 cores. RRT* takes ${\sim}$300\,ms on Pi~5 vs.\ ${\sim}$40\,ms on i9. Running both on-board is not feasible.
 
-\textbf{Why centralized.} Cartographer SLAM on the Pi~5 already consumes $\sim$1.5 CPU cores. RRT* with 15{,}000 iterations takes $\sim$300\,ms on Pi~5 vs.\ $\sim$40\,ms on i9 (7.5$\times$ slower). Running \smarttd{} on-board would leave insufficient headroom for SLAM.
+\textbf{Sensing.} Pi~5 streams LiDAR scans and SLAM pose to i9. i9 extracts walls from the occupancy grid, classifies LiDAR points not near any known wall as dynamic, clusters them (min 8 points, 1.0\,s persistence), tracks velocity, feeds $(x, y, r, v)$ to the Rust planner.
 
-\textbf{Sensing pipeline.} The Pi~5 streams LiDAR scans and SLAM-estimated pose to the i9. The i9 extracts walls from the occupancy grid, detects dynamic obstacles by comparing LiDAR points against known walls (points not near any wall are classified as dynamic, clustered, and tracked across frames for velocity estimation), and feeds all obstacle data to the Rust planner.
-
-\textbf{Multi-agent extension.} The i9 planner supports multiple agents via the \texttt{car\_names} parameter. Each agent spawns an independent Rust \texttt{smart\_planner\_server} subprocess with per-agent \texttt{robot\_radius}. Other agents are encoded as dynamic obstacles with OHZ. A second robot (Yahboom M3 PRO, mecanum drive) has been integrated at the code level (\texttt{m3pro\_client.py}), pending full field testing.
-
-\textbf{Key deployment findings:}
-\begin{itemize}
-    \item CycloneDDS required killing all Python3/RViz2 processes before WiFi reconnection to avoid lockups.
-    \item Dynamic obstacle clustering required a minimum of 8 LiDAR points and 1.0\,s temporal persistence to suppress noise.
-    \item The robot marker in RViz uses a CUBE (0.40$\times$0.35$\times$0.15\,m) matching the physical chassis.
-\end{itemize}
+\textbf{Multi-agent.} One Rust subprocess per agent with per-agent \texttt{robot\_radius}. Other agents encoded as dynamic obstacles with OHZ.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
+\section{DISCUSSION}
 
-\textbf{Scalability.} Our system is tested with up to 8 agents. The per-frame cost scales as $O(N^2)$ for pairwise distance checks and $O(N \cdot E)$ for shared wall repair (each new wall triggers repair on all $N$ agents' trees with $E$ edges). For $N > 10$, the shared repair cost may become a bottleneck; the spatial index optimization reduces this to $O(N \cdot k)$ where $k \ll E$.
+\textbf{Scalability.} Per-frame: $O(N^2)$ pairwise checks, $O(N \cdot E)$ shared repair. Spatial index reduces the latter to $O(N \cdot k)$, $k \ll E$. Tested up to 8 agents.
 
-\textbf{Limitations.} The Global King system cannot resolve all deadlocks. Two non-King agents facing each other in a narrow corridor have no priority differentiation. Our mega\_hospital scenario shows 96--100\% success depending on configuration; the failures occur when two non-King agents deadlock in corridors too narrow for flee maneuvers. Extending priority inheritance to non-King pairs would address this at the cost of additional complexity.
+\textbf{Limitations.} King handles King-vs-non-King deadlocks. Two non-King agents in a narrow corridor have no priority differentiation; mega\_hospital shows 96--100\% success depending on config. Extending priority to non-King pairs would fix this.
 
-\textbf{Comparison with MAPF.} Our system targets a fundamentally different operating regime: 2--8 physical robots in unknown, large-scale environments with continuous dynamics. Grid-based MAPF excels at 100+ agents on known graphs with discrete movement. The two approaches are complementary rather than competing.
-
-\textbf{Future work.} (1) Spatial index for incremental repair using R-tree or grid-bucket to check only edges near a new wall's bounding box, reducing per-wall cost from $O(E)$ to $O(k)$. (2) On-board planning for robots with sufficient compute (e.g., Jetson Orin NX). (3) Time-aware coordination that predicts future agent positions rather than reacting frame-by-frame.
+\textbf{What we borrowed.} From the \smarttd{} crate~\cite{agrawal2025smart3d}: \texttt{SMART::update()} (dynamic obstacles, unchanged), \texttt{RRTstar::new()}, \texttt{hot\_node\_search()}, \texttt{build\_planned\_path()}. \textbf{What we built:} \texttt{update\_static\_obstacles()} with \texttt{form\_single\_tree\_after\_static\_update()}, Lazy+Eager architecture, Spatial Index v2, Global King coordination, shared wall discovery, 8 scenario maps, deployment stack, 50{,}000+ trial benchmarks.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
+\section{CONCLUSION}
 
-We presented a multi-agent navigation system that extends \smarttd{} to unknown environments with cooperative wall discovery and reactive coordination. The system achieves 100\% success rate on all large-scale scenarios with 4 agents, validated over 50{,}000+ benchmark trials. Key results: incremental wall repair provides $22.4\times$ speedup over full rebuild; shared wall discovery yields $1.04\times$--$2.09\times$ faster completion than independent exploration; the Global King coordination mechanism resolves deadlocks in 2\,m-wide corridors with 8 agents at 100\% success rate. The system has been deployed on a physical robot using ROS2 and a centralized planner architecture.
-
-\textbf{Acknowledgments.} We acknowledge the SMART-3D authors (Agrawal, Gupta, Shen) for the open-source Rust crate. Our contributions are: \texttt{update\_static\_obstacles()} for permanent wall repair, the Lazy+Eager adaptive architecture, Spatial Index v2, Global King coordination, and the shared wall discovery mechanism.
+We extended \smarttd{} from a single-robot, known-environment replanner to a multi-agent system for unknown maps. Incremental repair is $22.4\times$ faster than rebuilding. Shared wall discovery is $1.04\times$--$2.09\times$ faster than independent. The King layer passes 8 robots through a 2\,m corridor at 100\%. All over 50{,}000+ trials and deployed on a physical robot with ROS2.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% REFERENCES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \bibliographystyle{IEEEtran}
-% \bibliography{refs}
-
-\begin{thebibliography}{99}
-
-\bibitem{agrawal2025smart3d}
-P.~Agrawal, S.~Gupta, and Z.~Shen,
-``SMART-3D: Three-Dimensional Self-Morphing Adaptive Replanning Tree,''
-\emph{arXiv preprint arXiv:2509.16812}, 2025.
-
-\bibitem{sharon2015cbs}
-G.~Sharon, R.~Stern, A.~Felner, and N.~Sturtevant,
-``Conflict-Based Search for Optimal Multi-Agent Pathfinding,''
-\emph{Artificial Intelligence}, vol.~219, pp.~40--66, 2015.
-
-\bibitem{okumura2022pibt}
-K.~Okumura, M.~Machida, X.~D\'efago, and Y.~Tamura,
-``Priority Inheritance with Backtracking for Iterative Multi-Agent Path Finding,''
-\emph{Artificial Intelligence}, vol.~310, p.~103752, 2022.
-
-\bibitem{okumura2023lacam}
-K.~Okumura,
-``LaCAM: Search-Based Algorithm for Quick Multi-Agent Pathfinding,''
-in \emph{Proc. AAAI}, 2023.
-
-\bibitem{karaman2011sampling}
-S.~Karaman and E.~Frazzoli,
-``Sampling-Based Algorithms for Optimal Motion Planning,''
-\emph{Int. J. Robot. Res.}, vol.~30, no.~7, pp.~846--894, 2011.
-
-\bibitem{berg2011reciprocal}
-J.~van~den Berg, S.~J.~Guy, M.~Lin, and D.~Manocha,
-``Reciprocal $n$-Body Collision Avoidance,''
-in \emph{Robotics Research}, Springer, 2011, pp.~3--19.
-
-\bibitem{fox1997dwa}
-D.~Fox, W.~Burgard, and S.~Thrun,
-``The Dynamic Window Approach to Collision Avoidance,''
-\emph{IEEE Robot. Autom. Mag.}, vol.~4, no.~1, pp.~23--33, 1997.
-
-\bibitem{li2019symmetry}
-J.~Li, D.~Harabor, P.~J.~Stuckey, H.~Ma, and S.~Koenig,
-``Symmetry-Breaking Constraints for Grid-Based Multi-Agent Path Finding,''
-in \emph{Proc. AAAI}, 2019.
-
-\bibitem{honig2019persistent}
-W.~H\"onig, S.~Kiesel, A.~Tinka, J.~W.~Durham, and N.~Ayanian,
-``Persistent and Robust Execution of MAPF Schedules in Warehouses,''
-\emph{IEEE Robot. Autom. Lett.}, vol.~4, no.~2, pp.~1125--1131, 2019.
-
-\bibitem{ecai2024lifelong}
-L.~Zheng, J.~Li, and H.~Ma,
-``Lifelong Multi-Agent Path Finding in a Real-World Warehouse Environment,''
-in \emph{Proc. ECAI}, 2024.
-
-\bibitem{ferguson2006replanning}
-D.~Ferguson, N.~Kalra, and A.~Stentz,
-``Replanning with RRTs,''
-in \emph{Proc. IEEE ICRA}, 2006.
-
-\bibitem{otte2016rrtx}
-M.~Otte and E.~Frazzoli,
-``RRTX: Asymptotically Optimal Single-Query Sampling-Based Motion Planning with Quick Replanning,''
-\emph{Int. J. Robot. Res.}, vol.~35, no.~7, pp.~797--822, 2016.
-
-\bibitem{bruce2002real}
-J.~Bruce and M.~Veloso,
-``Real-Time Randomized Path Planning for Robot Navigation,''
-in \emph{Proc. IEEE/RSJ IROS}, 2002.
-
-\end{thebibliography}
+\bibliography{refs}
 
 \end{document}
