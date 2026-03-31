@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART-3D Multi-Agent Navigation — Research Journey & Benchmark Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0b0f; --bg2: #12131a; --bg3: #1a1b26;
+  --border: rgba(255,255,255,0.06);
+  --text1: #e8e8f0; --text2: #8888a0; --text3: #555570;
+  --teal: #1de9b6; --purple: #b388ff; --coral: #ff6e40;
+  --amber: #ffc400; --blue: #448aff; --green: #69f0ae;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text1);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+.container{max-width:1400px;margin:0 auto;padding:0 32px;}
+.hero{padding:80px 0 48px;border-bottom:1px solid var(--border);}
+.hero h1{font-size:42px;font-weight:700;letter-spacing:-1.5px;line-height:1.1;}
+.hero h1 span{color:var(--teal);}
+.hero .sub{color:var(--text2);font-size:16px;margin-top:16px;max-width:800px;}
+.hero .tags{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;}
+.hero .tag{background:var(--bg3);color:var(--text2);padding:4px 14px;border-radius:20px;font-size:13px;font-family:'IBM Plex Mono',monospace;}
+.hero .tag.g{background:rgba(29,233,182,0.12);color:var(--teal);}
+section{padding:56px 0;border-bottom:1px solid var(--border);}
+.section-num{font-family:'IBM Plex Mono',monospace;color:var(--teal);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.section-title{font-size:28px;font-weight:600;margin-bottom:8px;letter-spacing:-0.5px;}
+.section-desc{color:var(--text2);font-size:14px;margin-bottom:28px;max-width:900px;}
+.grid{display:grid;gap:20px;}
+.g2{grid-template-columns:1fr 1fr;}.g3{grid-template-columns:1fr 1fr 1fr;}.g4{grid-template-columns:repeat(4,1fr);}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr;}}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;}
+.card.glow-teal{border-color:rgba(29,233,182,0.2);}
+.card.glow-purple{border-color:rgba(179,136,255,0.2);}
+.card.glow-coral{border-color:rgba(255,110,64,0.2);}
+.card.glow-amber{border-color:rgba(255,196,0,0.2);}
+.card.glow-green{border-color:rgba(105,240,174,0.2);}
+.stat-label{color:var(--text2);font-size:12px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px;}
+.stat-value{font-size:36px;font-weight:700;margin:4px 0;letter-spacing:-1px;}
+.stat-sub{color:var(--text3);font-size:12px;}
+.teal{color:var(--teal);}.purple{color:var(--purple);}.coral{color:var(--coral);}.amber{color:var(--amber);}.green{color:var(--green);}
+table{width:100%;border-collapse:collapse;font-size:13px;font-family:'IBM Plex Mono',monospace;}
+th{text-align:left;color:var(--text2);font-weight:500;padding:10px 12px;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+td{padding:10px 12px;border-bottom:1px solid var(--border);}
+tr:hover{background:rgba(255,255,255,0.02);}
+.best{color:var(--teal);font-weight:600;}.worst{color:var(--coral);}
+.timeline{position:relative;padding-left:40px;}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--teal),var(--purple),var(--coral));}
+.tl-item{position:relative;margin-bottom:32px;}
+.tl-item::before{content:'';position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--teal);background:var(--bg);}
+.tl-item.failed::before{border-color:var(--coral);}
+.tl-item.current::before{background:var(--teal);border-color:var(--teal);box-shadow:0 0 12px rgba(29,233,182,0.4);}
+.tl-title{font-weight:600;font-size:16px;}
+.tl-data{color:var(--text2);font-size:13px;font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.tl-desc{color:var(--text2);font-size:14px;margin-top:4px;}
+.chart-wrap{position:relative;height:320px;}
+.chart-wrap-tall{position:relative;height:420px;}
+.evo-flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0;}
+.evo-node{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:center;min-width:140px;}
+.evo-node.active{border-color:var(--teal);background:rgba(29,233,182,0.05);}
+.evo-node.dead{border-color:var(--coral);opacity:0.5;}
+.evo-node .en{font-weight:600;font-size:14px;}
+.evo-node .ed{font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace;margin-top:4px;}
+.evo-arrow{color:var(--text3);font-size:20px;}
+footer{padding:40px 0;text-align:center;color:var(--text3);font-size:13px;}
+footer a{color:var(--teal);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <h1>SMART-3D <span>Multi-Agent</span> Navigation</h1>
+  <h1 style="font-size:28px;color:var(--text2);font-weight:300;margin-top:8px">Research Journey & Benchmark Dashboard</h1>
+  <p class="sub">From single-robot full-rebuild to distributed multi-agent incremental repair with shared wall discovery. 9 development stages, 50,000+ benchmark trials, 8 map scenarios.</p>
+  <div class="tags">
+    <span class="tag g">Felix Fang — UConn LinksLab</span>
+    <span class="tag">SMART-3D (arXiv:2509.16812)</span>
+    <span class="tag">Rust + ROS2</span>
+    <span class="tag">March 2026</span>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<section>
+  <div class="section-num">Overview</div>
+  <div class="section-title">Key Results</div>
+  <div class="grid g4" style="margin-top:20px">
+    <div class="card glow-teal">
+      <div class="stat-label">Incremental speedup</div>
+      <div class="stat-value teal">22.4x</div>
+      <div class="stat-sub">Lazy+Eager vs Full Rebuild (Megacampus, single agent)</div>
+    </div>
+    <div class="card glow-purple">
+      <div class="stat-label">Wall sharing benefit</div>
+      <div class="stat-value purple">2.09x</div>
+      <div class="stat-sub">Shared vs Independent (Building, 4 agents)</div>
+    </div>
+    <div class="card glow-green">
+      <div class="stat-label">Spread reduction</div>
+      <div class="stat-value green">4.2x</div>
+      <div class="stat-sub">Per-agent time spread: 12.3s → 2.9s (Megacampus)</div>
+    </div>
+    <div class="card glow-amber">
+      <div class="stat-label">Success rate</div>
+      <div class="stat-value amber">100%</div>
+      <div class="stat-sub">4 agents, all mega maps (E3, 1000 trials each)</div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 1: ALGORITHM EVOLUTION -->
+<section>
+  <div class="section-num">Stage 1 — Algorithm Evolution</div>
+  <div class="section-title">From Full Rebuild to Lazy+Eager Combo</div>
+  <div class="section-desc">Single-agent 1000-trial benchmarks on Megacampus 128×128m. Each stage built on the previous, driven by profiling data.</div>
+  <div class="evo-flow">
+    <div class="evo-node"><div class="en">Full Rebuild</div><div class="ed">76.3s | 96.6%</div></div>
+    <div class="evo-arrow">→</div>
+    <div class="evo-node"><div class="en">Eager Inc.</div><div class="ed">8.71s | 99.9%</div></div>
+    <div class="evo-arrow">→</div>
+    <div class="evo-node"><div class="en">Lazy Swap</div><div class="ed">3.40s | 97.4%</div></div>
+    <div class="evo-arrow">→</div>
+    <div class="evo-node dead"><div class="en">Hybrid ✗</div><div class="ed">3.42s | 98.6%</div></div>
+    <div class="evo-arrow">→</div>
+    <div class="evo-node active"><div class="en">Lazy+Eager</div><div class="ed">★ Final</div></div>
+  </div>
+  <div class="card" style="margin-top:20px"><div class="chart-wrap"><canvas id="chartEvo"></canvas></div></div>
+  <div class="grid g2" style="margin-top:20px">
+    <div class="card"><div class="chart-wrap"><canvas id="chartEvoRebuilds"></canvas></div></div>
+    <div class="card"><div class="chart-wrap"><canvas id="chartEvoSuccess"></canvas></div></div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <table>
+      <tr><th>Version</th><th>Megacampus Median</th><th>Success</th><th>Rebuilds</th><th>Speedup</th><th>Key Innovation</th></tr>
+      <tr><td>Full Rebuild</td><td class="worst">76.27s</td><td>96.6%</td><td>139.6</td><td>1.0x</td><td>Baseline: discard tree, rebuild from scratch</td></tr>
+      <tr><td>Eager Incremental</td><td>8.71s</td><td class="best">99.9%</td><td>2.2</td><td>8.8x</td><td>Full-tree scan + hot-node reconnect</td></tr>
+      <tr><td>Lazy Swap</td><td class="best">3.40s</td><td>97.4%</td><td>3.9</td><td>22.4x</td><td>Skip tree scan when path unaffected</td></tr>
+      <tr><td class="worst">Hybrid (abandoned)</td><td>3.42s</td><td>98.6%</td><td>2.3</td><td>22.3x</td><td>Light edge cleanup — no gain over Lazy</td></tr>
+      <tr><td class="best">Lazy+Eager (final)</td><td colspan="4" style="color:var(--teal)">Path clear → Lazy | Path blocked → Eager full repair</td><td>Best of both: speed + reliability</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- STAGE 2: FAILED ATTEMPTS -->
+<section>
+  <div class="section-num">Stage 2 — Failed Optimization Attempts</div>
+  <div class="section-title">What Didn't Work (and Why)</div>
+  <div class="section-desc">Two optimization routes explored and abandoned. Both instructive for understanding design constraints.</div>
+  <div class="grid g2">
+    <div class="card" style="border-color:rgba(255,110,64,0.3)">
+      <div class="stat-label" style="color:var(--coral)">Route A: Only Check New Walls</div>
+      <div style="margin-top:12px;font-size:14px;color:var(--text2)">
+        <p><strong style="color:var(--text1)">Idea:</strong> <code>update_new_static_obstacles()</code> — only check new walls. O(N×w) instead of O(N×W).</p>
+        <p style="margin-top:8px"><strong style="color:var(--coral)">Failed:</strong> Lazy swap leaves dirty edges. Route A only checks new walls → old dirty edges persist forever → path crosses walls.</p>
+        <p style="margin-top:8px"><strong style="color:var(--text1)">Debug time:</strong> ~4 hours.</p>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(255,110,64,0.3)">
+      <div class="stat-label" style="color:var(--coral)">Spatial Index v1: HashMap + Vec Dedup</div>
+      <div style="margin-top:12px;font-size:14px;color:var(--text2)">
+        <p><strong style="color:var(--text1)">Idea:</strong> Grid-bucket for <code>is_edge_valid()</code>. Only check walls near the edge's AABB.</p>
+        <p style="margin-top:8px"><strong style="color:var(--coral)">Failed:</strong> Each call allocated <code>vec![false; 300]</code>. 15K calls/repair × heap alloc = slower than linear scan. 300 walls (4.8KB) fit in L1 cache.</p>
+        <p style="margin-top:8px"><strong style="color:var(--teal)">Fix (v2):</strong> Zero allocation, allow duplicate checks. Megacampus: 66.1s → 48.6s (−26%).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 3: E3 vs SENIOR -->
+<section>
+  <div class="section-num">Stage 3 — Multi-Agent: E3 vs Senior</div>
+  <div class="section-title">Full-Tree Repair vs Path-Only Repair</div>
+  <div class="section-desc">1000 trials, 4 agents. Senior only checks path edges → faster per-call but leaves dirty edges → 4–9x more rebuilds.</div>
+  <div class="card"><div class="chart-wrap-tall"><canvas id="chartE3Senior"></canvas></div></div>
+  <div class="card" style="margin-top:20px">
+    <table>
+      <tr><th>Scenario</th><th>E3 SimMed</th><th>Senior SimMed</th><th>E3 Rebuilds</th><th>Senior Rebuilds</th><th>E3 IncOK</th><th>Senior Dirty</th><th>E3 Rate</th><th>Senior Rate</th></tr>
+      <tr><td>building</td><td class="best">23.2s</td><td>27.4s</td><td class="best">3.0</td><td>15.2</td><td>13.7</td><td>0.4</td><td>100%</td><td>100%</td></tr>
+      <tr><td>office</td><td class="best">27.5s</td><td>31.2s</td><td class="best">6.8</td><td>30.2</td><td>20.4</td><td>2.3</td><td>99.6%</td><td>99.5%</td></tr>
+      <tr><td>warehouse</td><td class="best">24.2s</td><td>27.2s</td><td class="best">4.7</td><td>15.1</td><td>19.3</td><td>0.2</td><td>99.9%</td><td>99.8%</td></tr>
+      <tr><td>mega_hospital</td><td class="best">91.9s</td><td>119.3s</td><td class="best">34.0</td><td>102.7</td><td>116.2</td><td>11.1</td><td>100%</td><td>99.8%</td></tr>
+      <tr><td>mega_airport</td><td class="best">116.2s</td><td>151.7s</td><td class="best">30.9</td><td>91.8</td><td>96.6</td><td>6.0</td><td>100%</td><td>100%</td></tr>
+      <tr><td>megacampus</td><td class="best">117.7s</td><td>121.8s</td><td class="best">54.9</td><td>121.3</td><td>146.8</td><td>15.3</td><td>100%</td><td>99.9%</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- STAGE 4: SHARED vs INDEPENDENT -->
+<section>
+  <div class="section-num">Stage 4 — Ablation: Wall Sharing</div>
+  <div class="section-title">Shared vs Independent Wall Discovery</div>
+  <div class="section-desc">1000 trials per mode, 4 agents. Both modes have inter-agent avoidance. Only difference: whether agents share discovered walls.</div>
+  <div class="card"><div class="chart-wrap-tall"><canvas id="chartSharing"></canvas></div></div>
+  <div class="card" style="margin-top:20px">
+    <table>
+      <tr><th>Scenario</th><th>Shared</th><th>Independent</th><th>Speedup</th><th>Shared Spread</th><th>Indep. Spread</th><th>Spread Reduction</th></tr>
+      <tr><td>building</td><td class="best">23.2s</td><td>48.4s</td><td class="best">2.09x</td><td>1.2s</td><td>1.2s</td><td>1.0x</td></tr>
+      <tr><td>office</td><td class="best">27.8s</td><td>33.5s</td><td class="best">1.21x</td><td>1.4s</td><td>6.1s</td><td>4.4x</td></tr>
+      <tr><td>warehouse</td><td class="best">24.3s</td><td>26.9s</td><td>1.10x</td><td>1.8s</td><td>1.6s</td><td>0.9x</td></tr>
+      <tr><td>mega_hospital</td><td class="best">92.8s</td><td>108.5s</td><td class="best">1.17x</td><td>7.0s</td><td>17.7s</td><td class="best">2.5x</td></tr>
+      <tr><td>mega_airport</td><td class="best">115.8s</td><td>121.0s</td><td>1.04x</td><td>10.5s</td><td>14.7s</td><td>1.4x</td></tr>
+      <tr><td>megacampus</td><td class="best">116.8s</td><td>137.4s</td><td class="best">1.18x</td><td>2.9s</td><td>12.3s</td><td class="best">4.2x</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- STAGE 5: PER-AGENT -->
+<section>
+  <div class="section-num">Stage 5 — Per-Agent Fairness</div>
+  <div class="section-title">Individual Agent Completion Times</div>
+  <div class="section-desc">Shared wall discovery equalizes agent performance. Spread = slowest − fastest agent median time.</div>
+  <div class="card"><div class="chart-wrap-tall"><canvas id="chartPerAgent"></canvas></div></div>
+  <div class="card" style="margin-top:20px">
+    <table>
+      <tr><th>Scenario</th><th>Mode</th><th>A0</th><th>A1</th><th>A2</th><th>A3</th><th>Slowest</th><th>Fastest</th><th>Spread</th></tr>
+      <tr><td>building</td><td>shared</td><td>18.0s</td><td>n/a</td><td>n/a</td><td>19.2s</td><td>19.2s</td><td>18.0s</td><td class="best">1.2s</td></tr>
+      <tr><td>building</td><td>independent</td><td>23.2s</td><td>n/a</td><td>n/a</td><td>22.0s</td><td>23.2s</td><td>22.0s</td><td>1.2s</td></tr>
+      <tr><td>office</td><td>shared</td><td>20.1s</td><td>20.6s</td><td>19.2s</td><td>20.3s</td><td>20.6s</td><td>19.2s</td><td class="best">1.4s</td></tr>
+      <tr><td>office</td><td>independent</td><td>25.3s</td><td>26.5s</td><td>28.4s</td><td>22.3s</td><td>28.4s</td><td>22.3s</td><td class="worst">6.1s</td></tr>
+      <tr><td>mega_hospital</td><td>shared</td><td>71.7s</td><td>75.8s</td><td>78.7s</td><td>74.8s</td><td>78.7s</td><td>71.7s</td><td class="best">7.0s</td></tr>
+      <tr><td>mega_hospital</td><td>independent</td><td>79.0s</td><td>96.7s</td><td>93.3s</td><td>82.4s</td><td>96.7s</td><td>79.0s</td><td class="worst">17.7s</td></tr>
+      <tr><td>megacampus</td><td>shared</td><td>99.7s</td><td>102.6s</td><td>100.3s</td><td>100.4s</td><td>102.6s</td><td>99.7s</td><td class="best">2.9s</td></tr>
+      <tr><td>megacampus</td><td>independent</td><td>110.5s</td><td>122.8s</td><td>116.5s</td><td>122.0s</td><td>122.8s</td><td>110.5s</td><td class="worst">12.3s</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- STAGE 6: SPATIAL INDEX -->
+<section>
+  <div class="section-num">Stage 6 — Engineering Optimization</div>
+  <div class="section-title">Spatial Index for is_edge_valid()</div>
+  <div class="section-desc">Grid-bucket acceleration for wall collision queries. v1 failed (allocation overhead), v2 succeeded on mega maps.</div>
+  <div class="grid g3">
+    <div class="card">
+      <div class="stat-label">Original</div>
+      <div class="stat-value" style="font-size:28px">O(N × W)</div>
+      <div class="stat-sub">15K nodes × 300 walls = 4.5M tests/repair</div>
+    </div>
+    <div class="card" style="border-color:rgba(255,110,64,0.2)">
+      <div class="stat-label" style="color:var(--coral)">v1 (failed)</div>
+      <div class="stat-value coral" style="font-size:28px">Slower</div>
+      <div class="stat-sub">vec![false; W] alloc × 15K calls > linear scan</div>
+    </div>
+    <div class="card glow-teal">
+      <div class="stat-label">v2 (zero-alloc)</div>
+      <div class="stat-value teal" style="font-size:28px">O(N × k)</div>
+      <div class="stat-sub">k≈3 nearby walls, −26% wall-time on mega</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <table>
+      <tr><th>Scenario</th><th>Baseline WallMed</th><th>Spatial v2 WallMed</th><th>Change</th><th>Walls</th></tr>
+      <tr><td>building</td><td>0.5s</td><td>0.7s</td><td class="worst">+40%</td><td>41</td></tr>
+      <tr><td>office</td><td>0.4s</td><td>0.5s</td><td class="worst">+25%</td><td>42</td></tr>
+      <tr><td>warehouse</td><td>0.3s</td><td>0.4s</td><td class="worst">+33%</td><td>28</td></tr>
+      <tr><td>mega_hospital</td><td>13.4s</td><td class="best">11.2s</td><td class="best">−16%</td><td>~200</td></tr>
+      <tr><td>mega_airport</td><td>17.9s</td><td class="best">16.9s</td><td class="best">−6%</td><td>~250</td></tr>
+      <tr><td>megacampus</td><td>66.1s</td><td class="best">48.6s</td><td class="best">−26%</td><td>~300</td></tr>
+    </table>
+    <div style="margin-top:12px;font-size:13px;color:var(--text3)">Small maps: HashMap overhead > benefit (walls fit in L1 cache). Mega maps: spatial filtering dominates. Future: hybrid with wall-count threshold.</div>
+  </div>
+</section>
+
+<!-- DEVELOPMENT TIMELINE -->
+<section>
+  <div class="section-num">Development History</div>
+  <div class="section-title">Research Timeline</div>
+  <div class="timeline" style="margin-top:28px">
+    <div class="tl-item">
+      <div class="tl-title">Stage 1: Full Rebuild Baseline</div>
+      <div class="tl-data">Megacampus: 76.3s, 96.6%, 139.6 rebuilds</div>
+      <div class="tl-desc">Every new wall → discard entire RRT* tree → rebuild from scratch.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-title">Stage 2: Eager Incremental — <code>update_static_obstacles()</code></div>
+      <div class="tl-data">8.71s (8.8x faster), 99.9%, 2.2 rebuilds</div>
+      <div class="tl-desc">Core invention. Full-tree scan + hot-node reconnect for permanent walls.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-title">Stage 3: Lazy Swap — <code>set_static_validity_checker()</code></div>
+      <div class="tl-data">3.40s (22.4x faster), 97.4%, 3.9 rebuilds</div>
+      <div class="tl-desc">Path not affected → only swap checker, skip tree scan.</div>
+    </div>
+    <div class="tl-item failed">
+      <div class="tl-title">Stage 4: Hybrid ✗</div>
+      <div class="tl-data">3.42s, 98.6% — abandoned</div>
+      <div class="tl-desc">Light edge cleanup. No speed advantage over Lazy, worse than Eager.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-title">Stage 5: Lazy+Eager Combo + LSR=80</div>
+      <div class="tl-data">Final single-agent architecture</div>
+      <div class="tl-desc">Path clear → Lazy. Path blocked → Eager. LSR 10→80m. Detour + shortcut (marginal in multi-agent).</div>
+    </div>
+    <div class="tl-item failed">
+      <div class="tl-title">Stage 6: Route A ✗ — <code>update_new_static_obstacles()</code></div>
+      <div class="tl-data">Wall-crossing bug — abandoned after ~4h debug</div>
+      <div class="tl-desc">Only check new walls. Lazy swap interaction: old dirty edges never cleaned.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-title">Stage 7: Multi-Agent Development</div>
+      <div class="tl-data">4 agents, Global King + flee + chain push, shared wall discovery</div>
+      <div class="tl-desc">Reactive coordination in continuous space. Bottleneck 8-agent 100%. E3 confirmed over Senior.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-title">Stage 8: Spatial Index v2</div>
+      <div class="tl-data">Megacampus WallMed: 66.1s → 48.6s (−26%)</div>
+      <div class="tl-desc">Grid-bucket for is_edge_valid(). v1 failed. v2: zero-alloc, single-cell fast path.</div>
+    </div>
+    <div class="tl-item current">
+      <div class="tl-title">Stage 9: Sharing Ablation — Final Validation</div>
+      <div class="tl-data">Shared 1.04x–2.09x faster across all 6 scenarios</div>
+      <div class="tl-desc">Proved multi-agent value: cooperative exploration reduces per-agent spread by up to 4.4x.</div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  SMART-3D Multi-Agent Navigation Benchmark Dashboard · Felix Fang (Tianchonghui Fang) · <a href="#">LinksLab, University of Connecticut</a> · March 2026
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+Chart.defaults.color='#8888a0';
+Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'IBM Plex Mono',monospace";
+Chart.defaults.font.size=11;
+const T='#1de9b6',P='#b388ff',C='#ff6e40',A='#ffc400';
+const lo={position:'top',labels:{usePointStyle:true,pointStyle:'rectRounded',padding:16}};
+
+new Chart(document.getElementById('chartEvo'),{type:'bar',
+  data:{labels:['Forest 3D','City 3D','Ocean 3D','Skycity 3D','Building','Office','Warehouse','Megacampus 10p','Megacampus 200p'],
+  datasets:[
+    {label:'Lazy',data:[0.055,0.028,0.055,1.077,1.43,0.25,0.07,3.40,10.02],backgroundColor:A+'cc',borderRadius:4},
+    {label:'Hybrid',data:[0.055,0.028,0.055,1.077,1.43,0.25,0.07,3.42,10.83],backgroundColor:P+'cc',borderRadius:4},
+    {label:'Eager',data:[0.064,0.032,0.080,0.901,1.36,0.25,0.07,8.71,10.57],backgroundColor:T+'cc',borderRadius:4},
+    {label:'Full Rebuild',data:[0.347,0.133,0.399,0.268,1.93,0.34,0.16,76.27,80.18],backgroundColor:C+'cc',borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:lo,title:{display:true,text:'Single Agent: Wall-Clock Time (log scale)',color:'#8888a0'}},
+    scales:{y:{type:'logarithmic',ticks:{callback:v=>v>=1?Math.round(v)+'s':(v*1000).toFixed(0)+'ms'}},x:{ticks:{maxRotation:45,font:{size:10}}}}}
+});
+
+new Chart(document.getElementById('chartEvoRebuilds'),{type:'bar',
+  data:{labels:['Building','Megacampus'],datasets:[
+    {label:'Lazy',data:[0.5,3.9],backgroundColor:A+'cc',borderRadius:4},
+    {label:'Eager',data:[0.3,2.2],backgroundColor:T+'cc',borderRadius:4},
+    {label:'Full',data:[28.9,139.6],backgroundColor:C+'cc',borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:lo,title:{display:true,text:'Average Rebuilds per Run',color:'#8888a0'}},scales:{y:{beginAtZero:true}}}
+});
+
+new Chart(document.getElementById('chartEvoSuccess'),{type:'bar',
+  data:{labels:['Building','Megacampus 10p','Megacampus 200p'],datasets:[
+    {label:'Lazy',data:[100,97.4,100],backgroundColor:A+'cc',borderRadius:4},
+    {label:'Hybrid',data:[100,98.6,100],backgroundColor:P+'cc',borderRadius:4},
+    {label:'Eager',data:[100,99.9,100],backgroundColor:T+'cc',borderRadius:4},
+    {label:'Full',data:[99.9,96.6,99.0],backgroundColor:C+'cc',borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:lo,title:{display:true,text:'Success Rate (%)',color:'#8888a0'}},scales:{y:{min:94,max:100.5,ticks:{callback:v=>v+'%'}}}}
+});
+
+new Chart(document.getElementById('chartE3Senior'),{type:'bar',
+  data:{labels:['building','office','warehouse','mega_hospital','mega_airport','megacampus'],datasets:[
+    {label:'E3 (full-tree)',data:[23.2,27.5,24.2,91.9,116.2,117.7],backgroundColor:T+'cc',borderRadius:4},
+    {label:'Senior (path-only)',data:[27.4,31.2,27.2,119.3,151.7,121.8],backgroundColor:C+'cc',borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:lo,title:{display:true,text:'Multi-Agent SimMed: E3 vs Senior (4 agents, 1000 trials)',color:'#8888a0'}},
+    scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'s'}},x:{ticks:{font:{size:10}}}}}
+});
+
+new Chart(document.getElementById('chartSharing'),{type:'bar',
+  data:{labels:['building','office','warehouse','mega_hospital','mega_airport','megacampus'],datasets:[
+    {label:'Shared',data:[23.2,27.8,24.3,92.8,115.8,116.8],backgroundColor:T+'cc',borderRadius:4},
+    {label:'Independent',data:[48.4,33.5,26.9,108.5,121.0,137.4],backgroundColor:C+'cc',borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:lo,title:{display:true,text:'Shared vs Independent Wall Discovery — All-Done Time (1000 trials)',color:'#8888a0'}},
+    scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'s'}},x:{ticks:{font:{size:10}}}}}
+});
+
+new Chart(document.getElementById('chartPerAgent'),{type:'bar',
+  data:{labels:['building','office','warehouse','mega_hospital','mega_airport','megacampus'],datasets:[
+    {label:'Shared: Spread',data:[1.2,1.4,1.8,7.0,10.5,2.9],backgroundColor:T+'cc',borderRadius:4},
+    {label:'Independent: Spread',data:[1.2,6.1,1.6,17.7,14.7,12.3],backgroundColor:C+'cc',borderRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:lo,title:{display:true,text:'Per-Agent Completion Time Spread (seconds) — Lower = More Fair',color:'#8888a0'}},
+    scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'s'}},x:{ticks:{font:{size:10}}}}}
+});
+</script>
+</body>
+</html>
