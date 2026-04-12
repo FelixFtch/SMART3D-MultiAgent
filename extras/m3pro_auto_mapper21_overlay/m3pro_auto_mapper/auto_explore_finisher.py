@@ -52,6 +52,7 @@ class FinishCriteria:
 class AutoExploreFinisher(Node):
     def __init__(self):
         super().__init__('auto_explore_finisher')
+        home_map_prefix = os.path.expanduser('~/yahboom_map')
 
         # --- Topics / frames ---
         self.base_frame     = self.declare_parameter('base_frame', 'base_link').get_parameter_value().string_value
@@ -65,9 +66,9 @@ class AutoExploreFinisher(Node):
 
         # --- Save options ---
         self.save_pbstream  = self.declare_parameter('finish_save_pbstream', True).get_parameter_value().bool_value
-        self.pbstream_path  = self.declare_parameter('pbstream_path', '/home/jetson/yahboom_map.pbstream').get_parameter_value().string_value
+        self.pbstream_path  = self.declare_parameter('pbstream_path', f'{home_map_prefix}.pbstream').get_parameter_value().string_value
         self.save_pgm       = self.declare_parameter('finish_save_pgm', True).get_parameter_value().bool_value
-        self.pgm_prefix     = self.declare_parameter('pgm_map_path', '/home/jetson/yahboom_map').get_parameter_value().string_value
+        self.pgm_prefix     = self.declare_parameter('pgm_map_path', home_map_prefix).get_parameter_value().string_value
         self.exit_after_save= self.declare_parameter('exit_after_save', False).get_parameter_value().bool_value
 
         # --- Finish criteria ---

@@ -18,6 +18,7 @@ def generate_launch_description():
     slam_mapping_pkg     = get_package_share_directory('slam_mapping')
     my_pkg               = get_package_share_directory('m3pro_auto_mapper')
     rviz_cfg = os.path.join(my_pkg, 'rviz', 'explore.rviz')
+    home_map_prefix = os.path.expanduser('~/yahboom_map')
 
     declare = [
         DeclareLaunchArgument('use_rviz', default_value='true'),
@@ -116,9 +117,9 @@ def generate_launch_description():
 
         # save
         DeclareLaunchArgument('finish_save_pbstream', default_value='true'),
-        DeclareLaunchArgument('pbstream_path',        default_value='/home/jetson/yahboom_map.pbstream'),
+        DeclareLaunchArgument('pbstream_path',        default_value=f'{home_map_prefix}.pbstream'),
         DeclareLaunchArgument('finish_save_pgm',      default_value='true'),
-        DeclareLaunchArgument('pgm_map_path',         default_value='/home/jetson/yahboom_map'),
+        DeclareLaunchArgument('pgm_map_path',         default_value=home_map_prefix),
 
         # escape
         DeclareLaunchArgument('reverse_time_sec',   default_value='1.2'),

@@ -8,7 +8,7 @@ AutoExploreMapper v2.10.0-depth-crossbar
 - 依旧保留：宽通道A*、路径阻塞重规划、角度闸+恢复期短视距、taboo、全局前沿聚类与信息增益、/map_merged 融合输出
 """
 
-import math, time, heapq, json
+import os, math, time, heapq, json
 from typing import Optional, Tuple, List
 from collections import deque
 
@@ -1598,7 +1598,8 @@ class AutoExploreMapper(Node):
             if cli_finish.wait_for_service(timeout_sec=5.0) and cli_write.wait_for_service(timeout_sec=5.0):
                 fut1=cli_finish.call_async(FinishTrajectory.Request(trajectory_id=0))
                 rclpy.spin_until_future_complete(self, fut1, timeout_sec=10.0)
-                fut2=cli_write.call_async(WriteState.Request(filename='/home/jetson/yahboom_map.pbstream', include_unfinished_submaps=False))
+                pbstream_path = os.path.expanduser('~/yahboom_map.pbstream')
+                fut2=cli_write.call_async(WriteState.Request(filename=pbstream_path, include_unfinished_submaps=False))
                 rclpy.spin_until_future_complete(self, fut2, timeout_sec=10.0)
         except Exception as e:
             self.get_logger().error(f"[Save] exception: {e}")
