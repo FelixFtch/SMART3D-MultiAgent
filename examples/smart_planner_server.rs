@@ -6,7 +6,7 @@
 /// Protocol (JSON stdin/stdout):
 ///
 ///   BUILD — full RRT* rebuild with known walls:
-///   {"cmd":"build","from":[x,y],"goal":[x,y],"walls":[[x1,y1,x2,y2],...],"bounds":[-15,-15,15,15],"robot_speed":0.2,"rrt_iters":8000}
+///   {"cmd":"build","from":[x,y],"goal":[x,y],"walls":[[x1,y1,x2,y2],...],"bounds":[-15,-15,15,15],"robot_speed":0.2,"robot_radius":0.35,"rrt_iters":8000}
 ///
 ///   UPDATE — SMART prune/repair for dynamic obstacles (fast, ~5ms):
 ///   {"cmd":"update","robot":[x,y],"path_idx":0,"obstacles":[{"x":1,"y":2,"r":0.3,"speed":0.5},...]}
@@ -40,6 +40,7 @@ struct PlannerState {
     walls: Vec<StaticRectangularObstacle<f32, 2>>,
     bounds: [f32; 4], // [xmin, ymin, xmax, ymax]
     robot_speed: f32,
+    robot_radius: f32,
 }
 
 impl PlannerState {
@@ -50,6 +51,7 @@ impl PlannerState {
             walls: Vec::new(),
             bounds: [-15.0, -15.0, 15.0, 15.0],
             robot_speed: 0.2,
+            robot_radius: 0.40,
         }
     }
 
@@ -60,10 +62,12 @@ impl PlannerState {
         walls: Vec<StaticRectangularObstacle<f32, 2>>,
         bounds: [f32; 4],
         robot_speed: f32,
+        robot_radius: f32,
         rrt_iters: usize,
     ) -> Result<Vec<[f32; 2]>, String> {
         self.bounds = bounds;
         self.robot_speed = robot_speed;
+        self.robot_radius = robot_radius;
         self.walls = walls;
 
         // Clamp from/goal to bounds with margin
@@ -118,7 +122,7 @@ impl PlannerState {
             nn,
             start.clone(),
             goal_state.clone(),
-            0.40,       // robot_radius (your car is 400x350mm → ~0.27m)
+            robot_radius,
             svc,
             sd,
             lrz_radius,
@@ -294,13 +298,16 @@ fn main() {
                     [-ws / 2.0, -ws / 2.0, ws / 2.0, ws / 2.0]
                 };
                 let speed = data["robot_speed"].as_f32().unwrap_or(0.2);
+                let robot_radius = data["robot_radius"].as_f32().unwrap_or(0.40);
                 let iters = data["rrt_iters"].as_usize().unwrap_or(8000);
                 let walls = parse_walls(&data["walls"]);
 
-                eprintln!("[build] from={:?} goal={:?} walls={} bounds={:?}",
-                         from, goal, walls.len(), bounds);
+                eprintln!(
+                    "[build] from={:?} goal={:?} walls={} bounds={:?} speed={:.2} radius={:.2}",
+                    from, goal, walls.len(), bounds, speed, robot_radius
+                );
 
-                match state.build(from, goal, walls, bounds, speed, iters) {
+                match state.build(from, goal, walls, bounds, speed, robot_radius, iters) {
                     Ok(pts) => {
                         eprintln!("[build] OK — {} pts", pts.len());
                         object! {

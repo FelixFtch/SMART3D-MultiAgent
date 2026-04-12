@@ -481,6 +481,7 @@ class CentralPlanner(Node):
             'walls': clean,
             'bounds': bounds,
             'robot_speed': self.robot_speed,
+            'robot_radius': self.robot_radius,
             'rrt_iters': self.rrt_iters,
         })
 
@@ -511,6 +512,7 @@ class CentralPlanner(Node):
                     'goal': list(agent.goal),
                     'walls': big, 'bounds': bounds,
                     'robot_speed': self.robot_speed,
+                    'robot_radius': self.robot_radius,
                     'rrt_iters': self.rrt_iters,
                 })
                 if resp2.get('ok'):
@@ -549,6 +551,8 @@ class CentralPlanner(Node):
                 self.get_logger().warn(f'[{agent.name}] SMART panic → rebuild')
                 self.do_build(agent)
             return
+
+        agent.t_update = time.time()
 
         result = resp.get('result', '')
         if result == 'replanned':

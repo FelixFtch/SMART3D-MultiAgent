@@ -19,9 +19,9 @@ The main control chain is real and mostly complete:
 
 `IMU / LiDAR / wheel odom -> Cartographer -> /map,/tf,/pose -> i9_planner.py -> smart_planner_server.rs -> /path -> pi5_client.py -> /cmd_vel -> cmd_vel_driver.py -> DDSM115`
 
-However, the repo is not a single perfectly unified tree yet. The live Pi 5
-field snapshot contains upstream sensing/bring-up details that have not been
-fully promoted into `deploy/`.
+The remaining gaps are now much narrower than the raw import state. The live
+Pi 5 field snapshot still acts as provenance, but the core Cartographer and
+HiPNUC packages have been promoted into `deploy/`.
 
 ## Canonical Roles
 
@@ -31,6 +31,10 @@ fully promoted into `deploy/`.
 - `examples/smart_planner_server.rs`
 - `deploy/pi5_client.py`
 - `deploy/cmd_vel_driver.py`
+- `deploy/cartographer_config/`
+- `deploy/ros2_ws_src/hipnuc_imu/`
+- `deploy/ros2_ws_src/hipnuc_gnss/`
+- `deploy/ros2_ws_src/hipnuc_lib_package/`
 
 This is the i9-led architecture:
 
@@ -98,13 +102,18 @@ optionally odometry.
 
 ### 1. Not All Pi 5 Detail Has Been Promoted Into `deploy/`
 
-The live Pi 5 field snapshot is richer than the canonical `deploy/` tree.
-Missing-from-mainline examples include:
+This has improved materially. The canonical `deploy/` tree now contains:
 
-- Cartographer config files and bring-up scripts
-- HiPNUC ROS2 packages
+- `deploy/cartographer_config/`
+- `deploy/ros2_ws_src/hipnuc_imu/`
+- `deploy/ros2_ws_src/hipnuc_gnss/`
+- `deploy/ros2_ws_src/hipnuc_lib_package/`
+
+Still only present in the field snapshot:
+
 - serial inspection helpers
 - some bootstrap logic from `deploy_smart_nav.sh`
+- `robot_base.py` and `checkusb.py`
 
 ### 2. Centralized and Standalone Planning Branches Coexist
 
@@ -115,21 +124,27 @@ There are two valid but different planning paths:
 
 They should not be treated as one linear version chain.
 
-### 3. Parameter Penetration Is Not Fully Finished
+### 3. Main i9 Parameter Path Is Wired, Local Pi Branch Still Older
 
-The centralized chain still has a few hardcoded or partially wired values:
+The main i9 path is now wired through:
 
-- `robot_radius` is declared in `deploy/i9_planner.py` but not fully propagated
-  as a per-agent runtime parameter into `examples/smart_planner_server.rs`
+- `deploy/i9_planner.py` passes `robot_radius`
+- `examples/smart_planner_server.rs` now accepts and uses that runtime value
+
+Remaining split:
+
 - some Pi 5 local scripts still use older `world_size/speed/iters` style planner
   calls instead of the newer bounds-oriented interface
 
-### 4. Wheel-Odom Configuration Is Not Fully Consolidated
+### 4. Wheel-Odom Configuration Is Now Preserved
 
-`deploy_smart_nav.sh` references a wheel-odom Cartographer variant
-(`robotcar_2d_odom.lua`), but that exact file is not present in the imported
-field snapshot. This suggests the odom-enabled branch existed operationally,
-but is not fully preserved in the current repo tree.
+The repository now includes a canonical odom-enabled Cartographer variant:
+
+- `deploy/cartographer_config/robotcar_2d_odom.lua`
+
+This closes the previous gap where `deploy_smart_nav.sh` and
+`deploy/pi5_reference/start_full.sh` referenced an odom config name that was
+not yet preserved in the repo.
 
 ### 5. Some ROS2 Side Packages Look Experimental
 
@@ -152,17 +167,12 @@ They should eventually be collapsed to one canonical copy plus documentation.
 ## Recommended Next Steps
 
 1. Keep `field/robotcar_rpi5_live_2026-04-12/` as the immutable live snapshot.
-2. Promote selected Pi 5 files into canonical `deploy/` subfolders:
-   - `cartographer_config/`
-   - HiPNUC ROS2 packages
+2. Promote the remaining Pi 5 helpers into canonical `deploy/` subfolders:
    - `checkusb.py`
    - `robot_base.py`
 3. Mark `deploy/pi5_reference/` explicitly as archive/reference rather than
    pretending it is the only Pi 5 source of truth.
-4. Finish parameter plumbing for:
-   - `robot_radius`
-   - odom-enabled Cartographer config
-   - any per-car geometry values
+4. Finish any remaining per-car geometry cleanup in the local-on-Pi branch.
 
 ## Bottom Line
 
