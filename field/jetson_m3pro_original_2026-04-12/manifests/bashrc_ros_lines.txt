@@ -1,0 +1,5 @@
+124:source /home/jetson/yahboomcar_ws/install/setup.bash
+125:source /home/jetson/M3Pro_ws/install/setup.bash
+126:source /home/jetson/mircoROS_agent/install/setup.bash
+128:export ROS_DOMAIN_ID=30
+157:echo -e "MACHINE: \033[32m$MACHINE\033[0m             | ROS_DISTRO: \033[32m humble \033[0m    | ROS_DOMAIN_ID: \033[32m $ROS_DOMAIN_ID \033[0m " 

@@ -1,0 +1,4 @@
+99693937 /home/jetson/yahboomcar_ws/src/yahboomcar_mediapipe/yahboomcar_mediapipe/file/shape_predictor_68_face_landmarks.dat
+184002855 /home/jetson/yahboomcar_ws/src/yahboom_yolov8/yahboom_yolov8/yolov8/dependent/torch-1.11.0-cp38-cp38-linux_aarch64.whl
+396903730 /home/jetson/yahboomcar_ws/src/OrbbecSDK_ROS2/.git/objects/pack/pack-8d176bd5314e012352eab93cee6d8779e96b2e39.pack
+1029481238 /home/jetson/yahboomcar_ws/src/yahboom_yolov8/yahboom_yolov8/yolov8/torchvision/.git/objects/pack/pack-c4d013fa6116e7150266005fdcf18ab0cc256174.pack

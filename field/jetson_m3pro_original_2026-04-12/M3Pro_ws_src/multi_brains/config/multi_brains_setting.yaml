@@ -1,0 +1,65 @@
+####################
+#common setting
+#通用设置项
+####################
+ALIYUN_API_KEY: 'sk-82f1a8535fdd43bbaca913e97xxxxxx'                    #阿里云API_KEY
+LANGUAGE: 'en'                                                           #语言 zh:中文 en:英文
+DEBUG_MODE: False                                                         #调试模式
+
+####################
+#   dify setting
+#    dify配置选项
+####################
+DIFY_BASE_URL: "http://192.168.2.25/v1"                        #"http://localhost/v1"
+DIFY_API_KEY: "app-mhawRyoHteauIho7wvXhlhwR"                #dify决策大模型应用API_KEY
+
+####################
+#ASR function setting
+#语音识别功能设置
+####################
+USE_OLINE_ASR : True                                  #是否使用在线ASR
+ASR_SUPPLIER  : 'xunfei'                              #ASR供应商(仅当使用在线ASR时生效): 中国大陆地区：aliyun 国际地区：xunfei
+OLINE_ASR_MODEL : 'paraformer-realtime-v2'
+ASR_THREASHOLD : 3                                    #ASR识别结果阈值，低于该阈值则不进行后续处理，单位：字符
+WAKEUP_THREASHOLD : 5.0                               #唤醒时间阈值，防止WAKEUP_THREASHOLD时间内被多次唤醒，单位：秒 
+VAD_MODE: 2                                           #vad灵敏度，使用频率较少，可以先调整麦克风灵敏度硬件灵敏度# VAD sensitivity
+MAX_SILENCE_FRAMES: 90                                #尾音时长检测，单位：帧数，1帧=30毫秒           
+
+####################
+#TTS function setting
+#语音合成功能设置
+####################
+USE_OLINE_TTS : True                                                            #是否使用在线TTS
+TTS_SUPPLIER  : 'xunfei'                                                        #TTS供应商(仅当使用在线TTS时生效): 中国大陆地区：aliyun 国际地区：xunfei
+#----------------------------------------百度云语音合成设置---------------------------------------------------
+BAIDU_API_KEY : 'lQ3ybx9UsPMCvpqZKpgxxxxx'                                      #百度平台语音合成API_KEY
+BAIDU_SECRET_KEY : 'KBT3iWvMu1QXUVUL0CeNrKDhc1xxxx'                           #百度平台语音合成SECRET_KEY
+PER : 4                                                                         # 发音人选择, 基础音库：0为度小美，1为度小宇，3为度逍遥，4为度丫丫，精品音库：5为度小娇，103为度米朵，106为度博文，110为度小童，111为度小萌，默认为度小美
+SPD : 5                                                                         # 语速，取值0-15，默认为5中语速
+PIT : 5                                                                         # 音调，取值0-15，默认为5中语调
+VOL : 5                                                                         # 音量，取值0-9，默认为5中音量
+CUID : 'IN7dAbz1thDJKVhLdypkpB6sDVG86xeG'                                       # 设备标识，获取地址：https://console.bce.baidu.com/support/?u=aiconsole&timestamp=1749002896844#/api?product=AI&project=%E8%AF%AD%E9%9F%B3%E6%8A%80%E6%9C%AF&parent=%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90&api=text2audio&method=post
+
+#----------------------------------------通义语音合成设置---------------------------------------------------
+TONGYI_TTS_MODEL : "cosyvoice-v2"                                               #语音模型
+VOICE_TONE : "longwan_v2"                                                       #发音人, 具体可参考官网文档
+
+
+
+
+
+
+####################
+#system setting
+#系统配置项（谨慎修改）
+####################
+#----------------------------------------SYSTEMS------------------------------------------------------
+SAMPLE_RATE: 16000                            #asr录音音频采样率 # ASR recording audio sample rate
+FRAME_MS: 30                                  #vad帧大小单位ms # VAD frame size in milliseconds 
+MIC_SERIAL_PORT : "/dev/mic"                  #麦克风串口别名 # Microphone serial port alias
+MIC_INDEX: 0                                  #麦克风索引 # Microphone index
+
+XUNFEI_KEY: 'M3Pro_ws/multi_brains_file/KEY/.key/secret.key'
+XUNFEI_ENCRYPTED : 'M3Pro_ws/multi_brains_file/KEY/encrypted_config.bin'
+
+
