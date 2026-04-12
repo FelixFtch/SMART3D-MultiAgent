@@ -1,0 +1,19 @@
+
+
+sh start_agent.sh
+
+
+colcon build --packages-select m3pro_auto_mapper
+
+
+
+cd ~/M3Pro_ws
+source install/setup.bash
+ros2 launch m3pro_auto_mapper explore_stack_with_finisher.launch.py   use_rviz:=true   base_frame:=base_link   map_topic:=/map scan_topic:=/scan depth_topic:=/camera/depth/image_raw   publish_map_merged:=true   linear_speed:=0.30 angular_speed:=0.70 rotate_speed:=0.50   corridor_v:=0.22   lookahead_m:=0.28 long_lookahead_m:=1.10 replan_interval_sec:=1.5 commit_time_sec:=30.0   free_thresh:=25 occ_thresh:=65 robot_radius_m:=0.11 inflate_margin_m:=0.015   gap_fill_enable:=true gap_fill_max_m:=0.30   min_clearance_m:=0.16 frontier_min_dt_m:=0.22   depth_roi_px:=12 depth_stop_m:=0.33 depth_scale_m_per_unit:=0.001   hard_connect_enable:=true hard_connect_m:=0.30 hard_disk_scale:=0.30   hard_thin_enable:=true hard_thin_radius_m:=0.12   use_global_tour:=true dbscan_eps_m:=0.35 dbscan_min_samples:=6   info_gain_enable:=true info_gain_radius_m:=1.8 info_gain_beta:=1.0   taboo_radius_m:=1.0 taboo_ttl_sec:=40.0   replan_on_block_enable:=true block_check_ahead_m:=0.80 block_detect_min_frames:=1   finish_save_pbstream:=true pbstream_path:=${HOME}/yahboom_map.pbstream   finish_save_pgm:=true pgm_map_path:=${HOME}/yahboom_map   auto_finish_enable:=false   bottle_enable:=true   exit_after_save:=true
+
+
+ 另一个terminal关闭
+cd ~/M3Pro_ws
+source install/setup.bash
+ros2 topic pub --once /auto_explore/force_finish std_msgs/msg/Bool "{data: true}"
+
