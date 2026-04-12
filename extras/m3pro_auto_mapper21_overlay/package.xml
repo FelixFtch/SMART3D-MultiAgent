@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>m3pro_auto_mapper</name>
+  <version>0.4.0</version>
+  <description>Enhanced autonomous exploration and mapping for Yahboom M3Pro (Frontier+BFS, dynamic blocking, L/R counted rotation, dual-guard obstacle avoidance).</description>
+  <maintainer email="jetson@yahboom.com">jetson</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+  
+  <exec_depend>M3Pro_navigation</exec_depend>
+  <exec_depend>slam_mapping</exec_depend>
+  <exec_depend>nav2_msgs</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>tf_transformations</exec_depend>
+  <exec_depend>cartographer_ros_msgs</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

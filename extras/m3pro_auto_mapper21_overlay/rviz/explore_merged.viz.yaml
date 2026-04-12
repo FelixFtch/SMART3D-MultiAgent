@@ -1,0 +1,72 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Selection
+    Name: Selection
+  - Class: rviz_common/Tool Properties
+    Name: Tool Properties
+  - Class: rviz_common/Views
+    Name: Views
+  - Class: rviz_common/Time
+    Name: Time
+Visualization Manager:
+  Global Options:
+    Fixed Frame: map
+    Background Color: 48; 48; 48
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+    - Class: rviz_default_plugins/Map
+      Name: Map (Merged)
+      Enabled: true
+      Alpha: 0.7
+      Color Scheme: map
+      Topic:
+        Value: /map_merged
+      Update Topic:
+        Value: /map_merged_updates
+    - Class: rviz_default_plugins/LaserScan
+      Name: LaserScan
+      Enabled: true
+      Topic:
+        Value: /scan
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Frames:
+        map: {Value: true}
+        odom: {Value: true}
+        base_footprint: {Value: true}
+    - Class: rviz_default_plugins/Path
+      Name: PlannedPath
+      Enabled: true
+      Topic:
+        Value: /planned_path
+      Line Style: Lines
+      Line Width: 0.05
+      Color: 0; 200; 0
+    - Class: rviz_default_plugins/Marker
+      Name: PlanGoal
+      Enabled: true
+      Topic:
+        Value: /plan_goal
+    - Class: rviz_default_plugins/Marker
+      Name: TrackTarget
+      Enabled: true
+      Topic:
+        Value: /track_target
+  Enabled: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Target Frame: map
+      Distance: 8
