@@ -241,59 +241,59 @@ megacampus      & 108.6\,s & 100\% & 4.9 \\
 
 \subsection{E3 vs.\ Senior (Multi-Agent)}
 
-Table~\ref{tab:e3_senior} shows why full-tree scan matters in multi-agent settings. Senior triggers $3$--$9\times$ more rebuilds because dirty edges left by path-only repair become landmines: when King pushes an agent into an unexplored tree region, the agent hits invalid edges and must do a full rebuild (${\sim}$40\,ms) instead of a cheap repair (${\sim}$5\,ms). On mega\_hospital, E3 succeeds in 92\% of incremental repairs; Senior succeeds in 33\%.
+Table~\ref{tab:e3_senior} shows why full-tree scan matters in multi-agent settings. Senior triggers roughly $2$--$5\times$ more rebuilds because dirty edges left by path-only repair become landmines: when King pushes an agent into an unexplored tree region, the agent hits invalid edges and must do a full rebuild (${\sim}$40\,ms) instead of a cheap repair (${\sim}$5\,ms). The effect is clearest on the large maps, where rebuild counts jump from 34.0 to 102.7 on mega\_hospital and from 54.9 to 121.3 on megacampus.
 
 \begin{table}[t]
 \centering
 \caption{E3 vs.\ Senior, 4 agents, 1{,}000 trials each.}
 \label{tab:e3_senior}
-\begin{tabular}{l cc cc}
+\begin{tabular}{l cc cc cc}
 \toprule
- & \multicolumn{2}{c}{Median (s)} & \multicolumn{2}{c}{Rebuilds} \\
-Scenario & E3 & Sen. & E3 & Sen. \\
+ & \multicolumn{2}{c}{Median (s)} & \multicolumn{2}{c}{Success} & \multicolumn{2}{c}{Rebuilds} \\
+Scenario & E3 & Sen. & E3 & Sen. & E3 & Sen. \\
 \midrule
-building       & 23.2 &  27.4 &   3.0 &  15.2 \\
-office         & 27.5 &  31.2 &   6.9 &  39.8 \\
-warehouse      & 24.2 &  27.2 &   4.1 &  33.4 \\
-mega\_hospital & 91.9 & 119.3 &  34.0 & 102.7 \\
-mega\_airport  & 116.2 & 151.7 & 30.9 &  91.8 \\
-megacampus     & 117.7 & 121.8 &  54.9 & 121.3 \\
+building       & 23.2 &  27.4 & 100.0\% & 100.0\% &   3.0 &  15.2 \\
+office         & 27.5 &  31.2 &  99.6\% &  99.5\% &   6.8 &  30.2 \\
+warehouse      & 24.2 &  27.2 &  99.9\% &  99.8\% &   4.7 &  15.1 \\
+mega\_hospital & 91.9 & 119.3 & 100.0\% &  99.8\% &  34.0 & 102.7 \\
+mega\_airport  & 116.2 & 151.7 & 100.0\% & 100.0\% & 30.9 &  91.8 \\
+megacampus     & 117.7 & 121.8 & 100.0\% &  99.9\% &  54.9 & 121.3 \\
 \bottomrule
 \end{tabular}
 
 \vspace{1mm}
 \begin{minipage}{\columnwidth}
 \footnotesize
-E3 achieves 100\% success on all scenarios. Senior drops to 99.9\% on mega\_hospital. CPU tradeoff: E3 wall-clock is higher (megacampus: 66.1\,s vs.\ 39.5\,s) because it scans all edges per repair. But the robot finishes faster (117.7\,s vs.\ 121.8\,s sim time). Spatial Index v2 (Section~\ref{sec:spatial}) closes this CPU gap.
+E3 is effectively saturated but not literally perfect on every cell: office is 99.6\% and warehouse 99.9\%. Senior is slightly lower on office (99.5\%), warehouse (99.8\%), mega\_hospital (99.8\%), and megacampus (99.9\%). CPU tradeoff: E3 wall-clock is higher (megacampus: 66.1\,s vs.\ 39.5\,s) because it scans all edges per repair. But the robot finishes faster (117.7\,s vs.\ 121.8\,s sim time). Spatial Index v2 (Section~\ref{sec:spatial}) closes this CPU gap.
 \end{minipage}
 \end{table}
 
 \subsection{Shared vs.\ Independent Wall Discovery}
 \label{sec:sharing}
 
-Table~\ref{tab:sharing} presents the core multi-agent result. The mechanism is simple: in independent mode, a robot hits an unknown wall, its path is blocked, and it must do a full rebuild. In shared mode, another robot discovered that wall 30 seconds ago and broadcast it; the receiving robot's tree was repaired in 5\,ms; it rerouted before arriving. Independent mode shows \emph{zero} incremental repairs: without advance wall notifications, repair never triggers.
+Table~\ref{tab:sharing} presents the core multi-agent result. The mechanism is simple: in independent mode, a robot hits an unknown wall only when it physically reaches that frontier and then has to react late. In shared mode, another robot may have discovered that wall tens of seconds earlier and broadcast it, so the receiving robot repairs its tree before arriving. Success stays saturated in every shared cell and all but one independent cell (building reaches 99.9\%), but shared wall discovery still makes the team finish faster and more evenly.
 
 \begin{table}[t]
 \centering
 \caption{Shared vs.\ Independent, 4 agents, E3, 1{,}000 trials per cell.}
 \label{tab:sharing}
-\begin{tabular}{l cc c}
+\begin{tabular}{l cc c cc}
 \toprule
-Scenario & Shared & Indep. & Speedup \\
+Scenario & Shared & Indep. & Speedup & Gap$_S$ & Gap$_I$ \\
 \midrule
-building       & 23.2\,s &  48.4\,s & $2.09\times$ \\
-office         & 27.8\,s &  33.5\,s & $1.21\times$ \\
-warehouse      & 24.3\,s &  26.9\,s & $1.10\times$ \\
-mega\_hospital &  92.8\,s & 108.5\,s & $1.17\times$ \\
-mega\_airport  & 115.8\,s & 121.0\,s & $1.04\times$ \\
-megacampus     & 116.8\,s & 137.4\,s & $1.18\times$ \\
+building       & 23.2\,s &  48.4\,s & $2.09\times$ & 1.2\,s & 1.2\,s \\
+office         & 27.8\,s &  33.5\,s & $1.21\times$ & 1.4\,s & 6.1\,s \\
+warehouse      & 24.3\,s &  26.9\,s & $1.10\times$ & 1.8\,s & 1.7\,s \\
+mega\_hospital &  92.8\,s & 108.5\,s & $1.17\times$ & 7.1\,s & 17.7\,s \\
+mega\_airport  & 115.8\,s & 121.0\,s & $1.04\times$ & 10.5\,s & 14.7\,s \\
+megacampus     & 116.8\,s & 137.4\,s & $1.18\times$ & 2.9\,s & 12.4\,s \\
 \bottomrule
 \end{tabular}
 
 \vspace{1mm}
 \begin{minipage}{\columnwidth}
 \footnotesize
-Per-agent fairness: on megacampus, the gap between slowest and fastest agent drops from 12.3\,s (independent) to 2.9\,s (shared), a $4.2\times$ reduction. Office: $4.4\times$. Mega\_hospital: $2.5\times$.
+Per-agent fairness improves most on the congested maps: office drops from 6.1\,s to 1.4\,s ($4.36\times$), mega\_hospital from 17.7\,s to 7.1\,s ($2.51\times$), and megacampus from 12.35\,s to 2.90\,s ($4.26\times$). Building is unchanged and warehouse is effectively neutral.
 \end{minipage}
 \end{table}
 
