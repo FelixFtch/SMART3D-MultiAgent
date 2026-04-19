@@ -1,0 +1,131 @@
+[cartographer_node-1] [WARN] [1776571769.348030412] [cartographer logger]: W0419 00:09:29.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571769.437900669] [cartographer logger]: W0419 00:09:29.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [INFO] [1776571769.567847997] [cartographer logger]: I0419 00:09:29.000000 84939 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 2.38e-04 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776571769.567984161] [cartographer logger]: I0419 00:09:29.000000 84939 collated_trajectory_builder.cc:81] scan rate: 12.00 Hz 8.34e-02 s +/- 1.01e-03 s (pulsed at 100.01% real time)
+[cartographer_node-1] [WARN] [1776571769.767848572] [cartographer logger]: W0419 00:09:29.000000 84939 range_data_collator.cc:82] Dropped 9 earlier points.
+[cartographer_node-1] [WARN] [1776571770.097978401] [cartographer logger]: W0419 00:09:30.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571770.598923341] [cartographer logger]: W0419 00:09:30.000000 84939 range_data_collator.cc:82] Dropped 11 earlier points.
+[cartographer_node-1] [WARN] [1776571770.768326312] [cartographer logger]: W0419 00:09:30.000000 84939 range_data_collator.cc:82] Dropped 47 earlier points.
+[cartographer_node-1] [INFO] [1776571770.830328779] [cartographer logger]: I0419 00:09:30.000000 84960 constraint_builder_2d.cc:275] Node (0, 513) with 209 points on submap (0, 1) differs by translation 0.00 rotation 0.000 with score 85.7%.
+[cartographer_node-1] [INFO] [1776571770.832237927] [cartographer logger]: I0419 00:09:30.000000 84961 constraint_builder_2d.cc:275] Node (0, 513) with 209 points on submap (0, 0) differs by translation 0.00 rotation 0.000 with score 84.9%.
+[cartographer_node-1] [INFO] [1776571770.832340746] [cartographer logger]: I0419 00:09:30.000000 84962 constraint_builder_2d.cc:275] Node (0, 513) with 209 points on submap (0, 3) differs by translation 0.00 rotation 0.000 with score 86.3%.
+[cartographer_node-1] [INFO] [1776571770.832424365] [cartographer logger]: I0419 00:09:30.000000 84959 constraint_builder_2d.cc:275] Node (0, 513) with 209 points on submap (0, 2) differs by translation 0.00 rotation 0.000 with score 84.9%.
+[cartographer_node-1] [INFO] [1776571770.844346468] [cartographer logger]: I0419 00:09:30.000000 84960 constraint_builder_2d.cc:275] Node (0, 513) with 209 points on submap (0, 4) differs by translation 0.00 rotation 0.000 with score 88.5%.
+[cartographer_node-1] [WARN] [1776571771.267598496] [cartographer logger]: W0419 00:09:31.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571771.597740740] [cartographer logger]: W0419 00:09:31.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571771.937399189] [cartographer logger]: W0419 00:09:31.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571772.267821346] [cartographer logger]: W0419 00:09:32.000000 84939 range_data_collator.cc:82] Dropped 56 earlier points.
+[cartographer_node-1] [WARN] [1776571772.597477302] [cartographer logger]: W0419 00:09:32.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571772.857446839] [cartographer logger]: W0419 00:09:32.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571773.017417768] [cartographer logger]: W0419 00:09:33.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571773.187349267] [cartographer logger]: W0419 00:09:33.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571773.347482698] [cartographer logger]: W0419 00:09:33.000000 84939 range_data_collator.cc:82] Dropped 5 earlier points.
+[cartographer_node-1] [WARN] [1776571773.517435925] [cartographer logger]: W0419 00:09:33.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571773.607393160] [cartographer logger]: W0419 00:09:33.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571773.768356665] [cartographer logger]: W0419 00:09:33.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571774.097579327] [cartographer logger]: W0419 00:09:34.000000 84939 range_data_collator.cc:82] Dropped 45 earlier points.
+[cartographer_node-1] [WARN] [1776571774.267420007] [cartographer logger]: W0419 00:09:34.000000 84939 range_data_collator.cc:82] Dropped 18 earlier points.
+[cartographer_node-1] [WARN] [1776571774.517844698] [cartographer logger]: W0419 00:09:34.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571774.767404114] [cartographer logger]: W0419 00:09:34.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571775.107299145] [cartographer logger]: W0419 00:09:35.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571775.267357692] [cartographer logger]: W0419 00:09:35.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571775.607395031] [cartographer logger]: W0419 00:09:35.000000 84939 range_data_collator.cc:82] Dropped 16 earlier points.
+[cartographer_node-1] [WARN] [1776571775.767350759] [cartographer logger]: W0419 00:09:35.000000 84939 range_data_collator.cc:82] Dropped 74 earlier points.
+[cartographer_node-1] [WARN] [1776571776.017321836] [cartographer logger]: W0419 00:09:36.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571776.607344298] [cartographer logger]: W0419 00:09:36.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571776.767394717] [cartographer logger]: W0419 00:09:36.000000 84939 range_data_collator.cc:82] Dropped 8 earlier points.
+[cartographer_node-1] [WARN] [1776571777.107336212] [cartographer logger]: W0419 00:09:37.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571777.357320889] [cartographer logger]: W0419 00:09:37.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571777.767349456] [cartographer logger]: W0419 00:09:37.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571777.937387005] [cartographer logger]: W0419 00:09:37.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571778.107177891] [cartographer logger]: W0419 00:09:38.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571778.767376483] [cartographer logger]: W0419 00:09:38.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571778.858785731] [cartographer logger]: W0419 00:09:38.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571779.017337830] [cartographer logger]: W0419 00:09:39.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571779.267481359] [cartographer logger]: W0419 00:09:39.000000 84939 range_data_collator.cc:82] Dropped 12 earlier points.
+[cartographer_node-1] [WARN] [1776571779.517339918] [cartographer logger]: W0419 00:09:39.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571779.607343330] [cartographer logger]: W0419 00:09:39.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [INFO] [1776571779.822581247] [cartographer logger]: I0419 00:09:39.000000 84959 constraint_builder_2d.cc:275] Node (0, 516) with 223 points on submap (0, 1) differs by translation 0.00 rotation 0.000 with score 87.4%.
+[cartographer_node-1] [INFO] [1776571779.823396857] [cartographer logger]: I0419 00:09:39.000000 84960 constraint_builder_2d.cc:275] Node (0, 516) with 223 points on submap (0, 2) differs by translation 0.00 rotation 0.000 with score 87.4%.
+[cartographer_node-1] [INFO] [1776571779.824569502] [cartographer logger]: I0419 00:09:39.000000 84961 constraint_builder_2d.cc:275] Node (0, 516) with 223 points on submap (0, 3) differs by translation 0.00 rotation 0.001 with score 88.0%.
+[cartographer_node-1] [INFO] [1776571779.825104495] [cartographer logger]: I0419 00:09:39.000000 84962 constraint_builder_2d.cc:275] Node (0, 516) with 223 points on submap (0, 0) differs by translation 0.00 rotation 0.000 with score 87.2%.
+[cartographer_node-1] [INFO] [1776571779.837463220] [cartographer logger]: I0419 00:09:39.000000 84959 constraint_builder_2d.cc:275] Node (0, 516) with 223 points on submap (0, 4) differs by translation 0.00 rotation 0.001 with score 89.3%.
+[cartographer_node-1] [WARN] [1776571780.017367928] [cartographer logger]: W0419 00:09:40.000000 84939 range_data_collator.cc:82] Dropped 18 earlier points.
+[cartographer_node-1] [WARN] [1776571780.437477483] [cartographer logger]: W0419 00:09:40.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571780.607347058] [cartographer logger]: W0419 00:09:40.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571780.767316834] [cartographer logger]: W0419 00:09:40.000000 84939 range_data_collator.cc:82] Dropped 13 earlier points.
+[cartographer_node-1] [WARN] [1776571781.017499723] [cartographer logger]: W0419 00:09:41.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571781.607257758] [cartographer logger]: W0419 00:09:41.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571781.767382194] [cartographer logger]: W0419 00:09:41.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571782.017515578] [cartographer logger]: W0419 00:09:42.000000 84939 range_data_collator.cc:82] Dropped 14 earlier points.
+[cartographer_node-1] [WARN] [1776571782.267439067] [cartographer logger]: W0419 00:09:42.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571782.937291623] [cartographer logger]: W0419 00:09:42.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571783.277215259] [cartographer logger]: W0419 00:09:43.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571783.527239230] [cartographer logger]: W0419 00:09:43.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571784.187310166] [cartographer logger]: W0419 00:09:44.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571784.357205693] [cartographer logger]: W0419 00:09:44.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571784.527670647] [cartographer logger]: W0419 00:09:44.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [INFO] [1776571784.577165422] [cartographer logger]: I0419 00:09:44.000000 84939 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 2.83e-04 s (pulsed at 100.01% real time)
+[cartographer_node-1] [INFO] [1776571784.577278481] [cartographer logger]: I0419 00:09:44.000000 84939 collated_trajectory_builder.cc:81] scan rate: 12.00 Hz 8.34e-02 s +/- 1.06e-03 s (pulsed at 99.95% real time)
+[cartographer_node-1] [WARN] [1776571784.938989874] [cartographer logger]: W0419 00:09:44.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571785.187196444] [cartographer logger]: W0419 00:09:45.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571785.607072645] [cartographer logger]: W0419 00:09:45.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571786.107148268] [cartographer logger]: W0419 00:09:46.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571786.187217637] [cartographer logger]: W0419 00:09:46.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571787.107048464] [cartographer logger]: W0419 00:09:47.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571787.277110172] [cartographer logger]: W0419 00:09:47.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571787.527099037] [cartographer logger]: W0419 00:09:47.000000 84939 range_data_collator.cc:82] Dropped 35 earlier points.
+[cartographer_node-1] [WARN] [1776571787.857332733] [cartographer logger]: W0419 00:09:47.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571788.187085102] [cartographer logger]: W0419 00:09:48.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571788.777446671] [cartographer logger]: W0419 00:09:48.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571789.277119846] [cartographer logger]: W0419 00:09:49.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571789.528874590] [cartographer logger]: W0419 00:09:49.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571790.197129011] [cartographer logger]: W0419 00:09:50.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571790.528816735] [cartographer logger]: W0419 00:09:50.000000 84939 range_data_collator.cc:82] Dropped 23 earlier points.
+[cartographer_node-1] [WARN] [1776571790.777169900] [cartographer logger]: W0419 00:09:50.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571790.947012977] [cartographer logger]: W0419 00:09:50.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571791.527029385] [cartographer logger]: W0419 00:09:51.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571791.606957342] [cartographer logger]: W0419 00:09:51.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571791.696908526] [cartographer logger]: W0419 00:09:51.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [INFO] [1776571791.829921066] [cartographer logger]: I0419 00:09:51.000000 84962 constraint_builder_2d.cc:275] Node (0, 520) with 216 points on submap (0, 0) differs by translation 0.00 rotation 0.000 with score 87.0%.
+[cartographer_node-1] [INFO] [1776571791.834281492] [cartographer logger]: I0419 00:09:51.000000 84960 constraint_builder_2d.cc:275] Node (0, 520) with 216 points on submap (0, 3) differs by translation 0.00 rotation 0.002 with score 86.9%.
+[cartographer_node-1] [INFO] [1776571791.837108589] [cartographer logger]: I0419 00:09:51.000000 84959 constraint_builder_2d.cc:275] Node (0, 520) with 216 points on submap (0, 2) differs by translation 0.00 rotation 0.001 with score 86.7%.
+[cartographer_node-1] [INFO] [1776571791.838060939] [cartographer logger]: I0419 00:09:51.000000 84961 constraint_builder_2d.cc:275] Node (0, 520) with 216 points on submap (0, 1) differs by translation 0.00 rotation 0.001 with score 86.5%.
+[cartographer_node-1] [INFO] [1776571791.843867394] [cartographer logger]: I0419 00:09:51.000000 84962 constraint_builder_2d.cc:275] Node (0, 520) with 216 points on submap (0, 4) differs by translation 0.00 rotation 0.001 with score 87.9%.
+[cartographer_node-1] [WARN] [1776571792.197556419] [cartographer logger]: W0419 00:09:52.000000 84939 range_data_collator.cc:82] Dropped 46 earlier points.
+[cartographer_node-1] [WARN] [1776571792.697089876] [cartographer logger]: W0419 00:09:52.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571792.857100290] [cartographer logger]: W0419 00:09:52.000000 84939 range_data_collator.cc:82] Dropped 16 earlier points.
+[cartographer_node-1] [WARN] [1776571793.197182902] [cartographer logger]: W0419 00:09:53.000000 84939 range_data_collator.cc:82] Dropped 27 earlier points.
+[cartographer_node-1] [WARN] [1776571793.606987325] [cartographer logger]: W0419 00:09:53.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571794.107062783] [cartographer logger]: W0419 00:09:54.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571794.367052601] [cartographer logger]: W0419 00:09:54.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571794.946977068] [cartographer logger]: W0419 00:09:54.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571795.117050710] [cartographer logger]: W0419 00:09:55.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571795.527186151] [cartographer logger]: W0419 00:09:55.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571796.116964879] [cartographer logger]: W0419 00:09:56.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571796.367003343] [cartographer logger]: W0419 00:09:56.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571796.527096799] [cartographer logger]: W0419 00:09:56.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571796.616911915] [cartographer logger]: W0419 00:09:56.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571796.697030149] [cartographer logger]: W0419 00:09:56.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571797.027664910] [cartographer logger]: W0419 00:09:57.000000 84939 range_data_collator.cc:82] Dropped 1 earlier points.
+[cartographer_node-1] [WARN] [1776571797.196963072] [cartographer logger]: W0419 00:09:57.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571797.527111225] [cartographer logger]: W0419 00:09:57.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571797.697104609] [cartographer logger]: W0419 00:09:57.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571797.947010492] [cartographer logger]: W0419 00:09:57.000000 84939 range_data_collator.cc:82] Dropped 2 earlier points.
+[cartographer_node-1] [WARN] [1776571798.196923288] [cartographer logger]: W0419 00:09:58.000000 84939 range_data_collator.cc:82] Dropped 6 earlier points.
+[cartographer_node-1] [WARN] [1776571798.367099397] [cartographer logger]: W0419 00:09:58.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571798.526885931] [cartographer logger]: W0419 00:09:58.000000 84939 range_data_collator.cc:82] Dropped 4 earlier points.
+[cartographer_node-1] [WARN] [1776571798.777217203] [cartographer logger]: W0419 00:09:58.000000 84939 range_data_collator.cc:82] Dropped 3 earlier points.
+[cartographer_node-1] [WARN] [1776571799.029314867] [cartographer logger]: W0419 00:09:59.000000 84939 range_data_collator.cc:82] Dropped 23 earlier points.
+[cartographer_node-1] [WARN] [1776571799.197003378] [cartographer logger]: W0419 00:09:59.000000 84939 range_data_collator.cc:82] Dropped 24 earlier points.
+__SEP__
+[INFO] [1776570221.576913403] [scan_metadata_normalizer]: Normalizing LaserScan metadata: /scan -> /scan_slam (adjust_angle_increment=False, prefer_stamp_delta_for_scan_time=True, derive_time_increment_from_scan_time=True)
+__SEP2__
+[INFO] [1776570214.539043018] [IMU_publisher]: serial_port: /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00
+
+[INFO] [1776570214.539310482] [IMU_publisher]: baud_rate: 115200
+
+[INFO] [1776570214.539341843] [IMU_publisher]: frame_id: base_link
+
+[INFO] [1776570214.539361235] [IMU_publisher]: imu_topic: /IMU_data
+

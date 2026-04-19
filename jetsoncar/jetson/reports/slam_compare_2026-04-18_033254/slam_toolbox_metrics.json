@@ -1,0 +1,147 @@
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+{
+  "backend": "slam_toolbox",
+  "duration_sec": 45.0,
+  "sample_count": 22,
+  "summary": {
+    "lidar": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 10.11,
+      "max_cpu_percent": 10.7,
+      "avg_rss_mb": 43.07,
+      "max_rss_mb": 43.07
+    },
+    "imu": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 4.81,
+      "max_cpu_percent": 5.6,
+      "avg_rss_mb": 40.72,
+      "max_rss_mb": 40.8
+    },
+    "stp23l": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 21.53,
+      "max_cpu_percent": 22.7,
+      "avg_rss_mb": 53.13,
+      "max_rss_mb": 53.21
+    },
+    "stp23l_guard": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 3.26,
+      "max_cpu_percent": 3.9,
+      "avg_rss_mb": 56.12,
+      "max_rss_mb": 56.2
+    },
+    "scan_normalizer": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 6.95,
+      "max_cpu_percent": 7.7,
+      "avg_rss_mb": 52.85,
+      "max_rss_mb": 52.85
+    },
+    "slam_toolbox": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 4.4,
+      "max_cpu_percent": 4.8,
+      "avg_rss_mb": 37.38,
+      "max_rss_mb": 37.46
+    },
+    "map_bridge": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 1.08,
+      "max_cpu_percent": 1.5,
+      "avg_rss_mb": 49.0,
+      "max_rss_mb": 49.56
+    },
+    "pi5_client": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 17.28,
+      "max_cpu_percent": 19.7,
+      "avg_rss_mb": 53.54,
+      "max_rss_mb": 53.7
+    },
+    "watchdog": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 20.74,
+      "max_cpu_percent": 22.5,
+      "avg_rss_mb": 50.98,
+      "max_rss_mb": 51.62
+    }
+  },
+  "logs": {
+    "lidar": [
+      "[INFO] [1776497723.620023744] [lslidar_driver_node]: Lidar is M10_P",
+      "[INFO] [1776497723.623253419] [lslidar_driver_node]: Initialised lslidar without error",
+      "[INFO] [1776497723.623365070] [lslidar_driver_node]: Successfully initialize driver...",
+      "port = /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00, baud_rate = 500000",
+      "open_port /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00 OK !",
+      "degree_compensation = -327.670000"
+    ],
+    "cartographer": [],
+    "slam_toolbox": [
+      "[async_slam_toolbox_node-1] [INFO] [1776497779.268040892] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497779.180 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497781.853231905] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497781.763 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497784.354197155] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497784.265 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497786.856934294] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497786.768 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497789.439165708] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497789.351 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497791.940912843] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497791.854 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497794.444967079] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497794.355 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497796.946554578] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497796.857 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497799.528646896] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497799.439 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497802.031417777] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497801.942 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497804.531494323] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497804.443 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497807.032999715] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497806.945 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497809.534582636] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497809.447 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497812.035161848] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497811.949 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497814.539458865] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497814.450 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497817.124117510] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497817.034 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497819.707402084] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497819.619 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497822.288755071] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497822.201 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497824.872357496] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497824.784 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497827.375183664] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497827.287 for reason 'discarding message because the queue is full'"
+    ],
+    "odom": [],
+    "pi5_client": [
+      "[INFO] [1776497770.867207122] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497773.929775367] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497776.961594901] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497779.984047469] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497782.971701193] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497785.992606270] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497789.055969927] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497792.104191942] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497795.109925732] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497798.145657997] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497801.145015037] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497804.143351278] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497807.190711642] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497810.219185591] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497813.234962218] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497816.204764974] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497819.255929073] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497822.244519273] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497825.260182796] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497828.298966175] [pi5_client]: Path received: 4 pts"
+    ]
+  }
+}

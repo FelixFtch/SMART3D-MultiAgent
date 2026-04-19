@@ -1,0 +1,171 @@
+[INFO] [1776588689.719430411] [smart_central_planner]: Central planner for 1 car(s): ['car1']
+[INFO] [1776588689.719633940] [smart_central_planner]: Campus mode enabled: map_topic=/map_campus, pose/path subscriptions use BEST_EFFORT
+[INFO] [1776588689.720187995] [smart_central_planner]: [car1] Planner started
+[INFO] [1776588689.724099465] [smart_central_planner]: [car1/rust] [smart_planner_server] v2 ready (arbitrary bounds)
+[INFO] [1776588728.557434440] [smart_central_planner]: [car1] Goal: (-2.75, 6.82)
+[INFO] [1776588728.559855342] [smart_central_planner]: [car1/rust] [build] from=[-0.008216393, 0.0011573754] goal=[-2.7468028, 6.821486] walls=163 bounds=[-6.55, -7.0, 9.75, 11.200001]
+[INFO] [1776588728.682331586] [smart_central_planner]: [car1/rust] [build] OK — 15 pts
+[INFO] [1776588728.682809985] [smart_central_planner]: [car1] Build OK: 15 pts, 163 walls (125ms)
+[INFO] [1776588728.692006360] [smart_central_planner]: [car1] Goal: (-2.75, 6.82)
+[INFO] [1776588728.694298402] [smart_central_planner]: [car1/rust] [build] from=[-0.009417786, 0.003849142] goal=[-2.7468028, 6.821486] walls=163 bounds=[-6.55, -7.0, 9.75, 11.200001]
+[INFO] [1776588728.810987647] [smart_central_planner]: [car1/rust] [build] OK — 16 pts
+[INFO] [1776588728.811360456] [smart_central_planner]: [car1] Build OK: 16 pts, 163 walls (119ms)
+[INFO] [1776588730.531325511] [smart_central_planner]: [car1] Map changed 12.6% (84 cells) → rebuild
+[INFO] [1776588730.533693117] [smart_central_planner]: [car1/rust] [build] from=[-0.050620608, 0.020538589] goal=[-2.7468028, 6.821486] walls=175 bounds=[-6.55, -7.0, 9.85, 11.200001]
+[INFO] [1776588730.656889642] [smart_central_planner]: [car1/rust] [build] OK — 13 pts
+[INFO] [1776588730.657522332] [smart_central_planner]: [car1] Build OK: 13 pts, 175 walls (126ms)
+[WARN] [1776588731.733257144] [smart_central_planner]: [car1] STUCK 3s → rebuild
+[INFO] [1776588731.736214245] [smart_central_planner]: [car1/rust] [build] from=[-0.06204834, 0.02286511] goal=[-2.7468028, 6.821486] walls=188 bounds=[-6.55, -7.0, 9.85, 11.200001]
+[INFO] [1776588731.869301531] [smart_central_planner]: [car1/rust] [build] OK — 13 pts
+[INFO] [1776588731.869628979] [smart_central_planner]: [car1] Build OK: 13 pts, 188 walls (136ms)
+[INFO] [1776588732.931199270] [smart_central_planner]: [car1] Map changed 20.6% (168 cells) → rebuild
+[INFO] [1776588732.933613412] [smart_central_planner]: [car1/rust] [build] from=[-0.05319861, 0.0069600223] goal=[-2.7468028, 6.821486] walls=208 bounds=[-6.55, -7.0, 9.85, 11.3]
+[INFO] [1776588733.075984131] [smart_central_planner]: [car1/rust] [build] OK — 11 pts
+[INFO] [1776588733.076322018] [smart_central_planner]: [car1] Build OK: 11 pts, 208 walls (145ms)
+[INFO] [1776588735.333300648] [smart_central_planner]: [car1] Map changed 6.7% (66 cells) → rebuild
+[INFO] [1776588735.335898148] [smart_central_planner]: [car1/rust] [build] from=[-0.023073995, 0.49997607] goal=[-2.7468028, 6.821486] walls=220 bounds=[-6.65, -7.3, 9.85, 11.3]
+[INFO] [1776588735.485729895] [smart_central_planner]: [car1/rust] [build] OK — 14 pts
+[INFO] [1776588735.486074855] [smart_central_planner]: [car1] Build OK: 14 pts, 220 walls (153ms)
+[INFO] [1776588736.532444330] [smart_central_planner]: [car1] Map changed 12.3% (129 cells) → rebuild
+[INFO] [1776588736.536169947] [smart_central_planner]: [car1/rust] [build] from=[-0.06134934, 0.80154383] goal=[-2.7468028, 6.821486] walls=245 bounds=[-6.75, -7.3, 10.15, 11.3]
+[INFO] [1776588736.702222134] [smart_central_planner]: [car1/rust] [build] OK — 15 pts
+[INFO] [1776588736.702705706] [smart_central_planner]: [car1] Build OK: 15 pts, 245 walls (170ms)
+[INFO] [1776588738.933944478] [smart_central_planner]: [car1] Map changed 28.7% (338 cells) → rebuild
+[INFO] [1776588738.937139739] [smart_central_planner]: [car1/rust] [build] from=[-0.19610974, 1.4060218] goal=[-2.7468028, 6.821486] walls=275 bounds=[-7.619466, -7.3, 10.080534, 11.3]
+[INFO] [1776588739.115639993] [smart_central_planner]: [car1/rust] [build] OK — 11 pts
+[INFO] [1776588739.115947422] [smart_central_planner]: [car1] Build OK: 11 pts, 275 walls (182ms)
+[INFO] [1776588740.133364506] [smart_central_planner]: [car1] Map changed 5.9% (90 cells) → rebuild
+[INFO] [1776588740.136222465] [smart_central_planner]: [car1/rust] [build] from=[-0.29957792, 1.6952779] goal=[-2.7468028, 6.821486] walls=299 bounds=[-7.6694665, -7.3, 10.130534, 11.3]
+[INFO] [1776588740.341992490] [smart_central_planner]: [car1/rust] [build] OK — 12 pts
+[INFO] [1776588740.342346575] [smart_central_planner]: [car1] Build OK: 12 pts, 299 walls (209ms)
+[INFO] [1776588742.537045473] [smart_central_planner]: [car1] Map changed 9.0% (144 cells) → rebuild
+[INFO] [1776588742.540217978] [smart_central_planner]: [car1/rust] [build] from=[-0.5719258, 2.110078] goal=[-2.7468028, 6.821486] walls=328 bounds=[-7.9500003, -7.3, 10.15, 11.3]
+[INFO] [1776588742.745598218] [smart_central_planner]: [car1/rust] [build] OK — 10 pts
+[INFO] [1776588742.745909347] [smart_central_planner]: [car1] Build OK: 10 pts, 328 walls (209ms)
+[INFO] [1776588744.938428876] [smart_central_planner]: [car1] Map changed 18.4% (321 cells) → rebuild
+[INFO] [1776588744.942097338] [smart_central_planner]: [car1/rust] [build] from=[-1.0443867, 2.494879] goal=[-2.7468028, 6.821486] walls=356 bounds=[-8.919466, -7.75, 10.080534, 11.35]
+[INFO] [1776588745.167289130] [smart_central_planner]: [car1/rust] [build] OK — 7 pts
+[INFO] [1776588745.167553963] [smart_central_planner]: [car1] Build OK: 7 pts, 356 walls (229ms)
+[INFO] [1776588746.134575936] [smart_central_planner]: [car1] Map changed 6.1% (127 cells) → rebuild
+[INFO] [1776588746.138552569] [smart_central_planner]: [car1/rust] [build] from=[-1.3241793, 2.6201994] goal=[-2.7468028, 6.821486] walls=367 bounds=[-8.919466, -7.932386, 10.080534, 14.767615]
+[INFO] [1776588746.364900542] [smart_central_planner]: [car1/rust] [build] OK — 4 pts
+[INFO] [1776588746.365142313] [smart_central_planner]: [car1] Build OK: 4 pts, 367 walls (230ms)
+[INFO] [1776588746.789300294] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588746.884258630] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588747.336109284] [smart_central_planner]: [car1] Map changed 20.7% (454 cells) → rebuild
+[INFO] [1776588747.341504026] [smart_central_planner]: [car1/rust] [build] from=[-1.3955201, 2.6575868] goal=[-2.7468028, 6.821486] walls=395 bounds=[-8.919466, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588747.581832962] [smart_central_planner]: [car1/rust] [build] OK — 6 pts
+[INFO] [1776588747.582221089] [smart_central_planner]: [car1] Build OK: 6 pts, 395 walls (246ms)
+[INFO] [1776588748.542725214] [smart_central_planner]: [car1] Map changed 8.8% (232 cells) → rebuild
+[INFO] [1776588748.550119255] [smart_central_planner]: [car1/rust] [build] from=[-1.4742864, 2.8666437] goal=[-2.7468028, 6.821486] walls=412 bounds=[-8.919466, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588748.861399900] [smart_central_planner]: [car1/rust] [build] OK — 6 pts
+[INFO] [1776588748.861690717] [smart_central_planner]: [car1] Build OK: 6 pts, 412 walls (319ms)
+[INFO] [1776588752.131333509] [smart_central_planner]: [car1] Map changed 5.4% (155 cells) → rebuild
+[INFO] [1776588752.135647719] [smart_central_planner]: [car1/rust] [build] from=[-1.8090428, 3.7172408] goal=[-2.7468028, 6.821486] walls=442 bounds=[-8.919466, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588752.393971716] [smart_central_planner]: [car1/rust] [build] OK — 5 pts
+[INFO] [1776588752.394236942] [smart_central_planner]: [car1] Build OK: 5 pts, 442 walls (263ms)
+[INFO] [1776588758.132884636] [smart_central_planner]: [car1] Map changed 5.1% (154 cells) → rebuild
+[INFO] [1776588758.137162603] [smart_central_planner]: [car1/rust] [build] from=[-2.195722, 5.214649] goal=[-2.7468028, 6.821486] walls=470 bounds=[-8.919466, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588758.419503613] [smart_central_planner]: [car1/rust] [build] OK — 2 pts
+[INFO] [1776588758.419940686] [smart_central_planner]: [car1] Build OK: 2 pts, 470 walls (287ms)
+[INFO] [1776588758.890678307] [smart_central_planner]: [car1] Goal: (-6.95, 11.72)
+[INFO] [1776588758.894991329] [smart_central_planner]: [car1/rust] [build] from=[-2.2421246, 5.3689346] goal=[-6.946102, 11.723834] walls=472 bounds=[-9.946102, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588759.173493564] [smart_central_planner]: [car1/rust] [build] OK — 12 pts
+[INFO] [1776588759.173811427] [smart_central_planner]: [car1] Build OK: 12 pts, 472 walls (283ms)
+[INFO] [1776588759.201150618] [smart_central_planner]: [car1] Goal: (-6.95, 11.72)
+[INFO] [1776588759.205499976] [smart_central_planner]: [car1/rust] [build] from=[-2.2425325, 5.389225] goal=[-6.946102, 11.723834] walls=472 bounds=[-9.946102, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588759.484347715] [smart_central_planner]: [car1/rust] [build] OK — 13 pts
+[INFO] [1776588759.484849000] [smart_central_planner]: [car1] Build OK: 13 pts, 472 walls (283ms)
+[INFO] [1776588768.942577420] [smart_central_planner]: [car1] Map changed 5.6% (179 cells) → rebuild
+[INFO] [1776588768.946938252] [smart_central_planner]: [car1/rust] [build] from=[-2.555505, 7.937555] goal=[-6.946102, 11.723834] walls=495 bounds=[-9.946102, -9.532386, 10.080534, 14.967614]
+[INFO] [1776588769.234703549] [smart_central_planner]: [car1/rust] [build] OK — 8 pts
+[INFO] [1776588769.235020749] [smart_central_planner]: [car1] Build OK: 8 pts, 495 walls (292ms)
+[INFO] [1776588770.640764116] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588770.695608295] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588770.841984683] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588770.890921192] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588770.945294095] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588770.990469134] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.043239510] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.091924545] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.141154904] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.191542259] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.240802085] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.290485808] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.341984373] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.390469771] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.440848394] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.490566210] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.541600794] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.594708381] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.642467268] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.690285177] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.744559246] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.790412240] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.839665179] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.895236183] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.942153658] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588771.989969408] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.045670738] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.091758450] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.142273817] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.190863779] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.242903810] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.289651893] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.340671872] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.391878587] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.439514897] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.489863349] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.542434860] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.594057936] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.638569775] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.688708262] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.738328510] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.790519348] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.840470056] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.892537281] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.939149682] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588772.989581450] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.037740137] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.086979566] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.138045384] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.187825290] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.239238628] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.291800373] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.336577172] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.388205353] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.438328346] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.490214050] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.539003144] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.586589162] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.637926612] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.687320361] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.736801243] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588773.738319914] [smart_central_planner]: [car1] Map changed 5.3% (181 cells) → rebuild
+[INFO] [1776588773.743157459] [smart_central_planner]: [car1/rust] [build] from=[-2.7155845, 9.16894] goal=[-6.946102, 11.723834] walls=487 bounds=[-9.946102, -9.606504, 10.130535, 14.8934965]
+[INFO] [1776588774.031721830] [smart_central_planner]: [car1/rust] [build] OK — 6 pts
+[INFO] [1776588774.032311613] [smart_central_planner]: [car1] Build OK: 6 pts, 487 walls (294ms)
+[INFO] [1776588774.236768023] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.285324057] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.335613519] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.385584076] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.437070838] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.486734684] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.538352312] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.587625908] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.635905619] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.690054353] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.736234364] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.789685722] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.838725940] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.889290258] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.935490720] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588774.985664306] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588775.035991130] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588775.088672670] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588775.139042075] [smart_central_planner]: [car1] dynamic: 1 obs
+[INFO] [1776588775.139527339] [smart_central_planner]: [car1] ★ SMART avoided 1 obstacle(s)
+[INFO] [1776588777.344832342] [smart_central_planner]: [car1] Map changed 9.7% (347 cells) → rebuild
+[INFO] [1776588777.350356615] [smart_central_planner]: [car1/rust] [build] from=[-2.812857, 9.33702] goal=[-6.946102, 11.723834] walls=514 bounds=[-13.287769, -9.532386, 10.112232, 15.567615]
+[INFO] [1776588777.644967500] [smart_central_planner]: [car1/rust] [build] OK — 5 pts
+[INFO] [1776588777.645234471] [smart_central_planner]: [car1] Build OK: 5 pts, 514 walls (300ms)

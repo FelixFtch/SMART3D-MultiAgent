@@ -1,0 +1,209 @@
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+{
+  "counts_6s": {
+    "scan": 72,
+    "imu": 602,
+    "front_range": 61,
+    "map": 7,
+    "map_campus": 6,
+    "pose": 60,
+    "image_raw": 180,
+    "camera_info": 180
+  },
+  "last": {
+    "map": [
+      181,
+      167,
+      0.05000000074505806
+    ],
+    "map_campus": [
+      181,
+      167,
+      0.05000000074505806
+    ],
+    "pose": [
+      0.0,
+      0.0
+    ],
+    "front_range": 3.571000099182129
+  },
+  "topics": {
+    "/IMU_data": {
+      "types": [
+        "sensor_msgs/msg/Imu"
+      ],
+      "publishers": 1,
+      "subscribers": 3
+    },
+    "/camera_info": {
+      "types": [
+        "sensor_msgs/msg/CameraInfo"
+      ],
+      "publishers": 1,
+      "subscribers": 1
+    },
+    "/car1/pose": {
+      "types": [
+        "geometry_msgs/msg/PoseStamped"
+      ],
+      "publishers": 1,
+      "subscribers": 5
+    },
+    "/front_range": {
+      "types": [
+        "sensor_msgs/msg/Range"
+      ],
+      "publishers": 1,
+      "subscribers": 2
+    },
+    "/image_raw": {
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "publishers": 1,
+      "subscribers": 1
+    },
+    "/map": {
+      "types": [
+        "nav_msgs/msg/OccupancyGrid"
+      ],
+      "publishers": 1,
+      "subscribers": 4
+    },
+    "/map_campus": {
+      "types": [
+        "nav_msgs/msg/OccupancyGrid"
+      ],
+      "publishers": 1,
+      "subscribers": 4
+    },
+    "/scan": {
+      "types": [
+        "sensor_msgs/msg/LaserScan"
+      ],
+      "publishers": 1,
+      "subscribers": 7
+    }
+  },
+  "video_devices": [
+    "/dev/video3",
+    "/dev/video2",
+    "/dev/video1",
+    "/dev/video0"
+  ],
+  "tty_usb0_owner": [],
+  "processes": [
+    "jetson     39721       1  0 02:25 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p output_encoding:=rgb8",
+    "jetson     39728   39721 13 02:25 ?        00:09:21 /opt/ros/humble/lib/v4l2_camera/v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p output_encoding:=rgb8",
+    "jetson     59365       1  0 03:35 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 run lslidar_driver lslidar_driver_node --ros-args --params-file /home/jetson/SMART3D/jetson_runtime/m10p_uart.yaml",
+    "jetson     59367   59365  9 03:35 ?        00:00:05 /home/jetson/SMART3D/ws_lidar/install/lslidar_driver/lib/lslidar_driver/lslidar_driver_node --ros-args --params-file /home/jetson/SMART3D/jetson_runtime/m10p_uart.yaml",
+    "jetson     59379       1  0 03:35 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 run hipnuc_imu talker --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00 -p baud_rate:=115200 -p imu_topic:=/IMU_data -p frame_id:=base_link",
+    "jetson     59381   59379  3 03:35 ?        00:00:02 /home/jetson/SMART3D/ws_imu/install/hipnuc_imu/lib/hipnuc_imu/talker --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00 -p baud_rate:=115200 -p imu_topic:=/IMU_data -p frame_id:=base_link",
+    "jetson     59411       1 22 03:35 ?        00:00:11 python3 /home/jetson/SMART3D/jetson_runtime/stp23l_range.py --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6C069316-if00 -p baud_rate:=230400 -p frame_id:=stp23l_link -p min_range:=0.03 -p max_range:=7.5 -p emergency_stop_dist:=0.25",
+    "jetson     59430       1  5 03:35 ?        00:00:02 python3 /home/jetson/SMART3D/jetson_runtime/stp23l_hard_brake_guard.py --ros-args -p range_topic:=/front_range -p trigger_distance_m:=0.05 -p hold_time_sec:=10.0 -p clear_distance_m:=0.08 -p clear_time_sec:=1.0 -p serial_port:=/dev/ttyUSB0 -p baud_rate:=115200 -p publish_zero_cmd_vel:=true -p stop_rs485_owners_on_trigger:=true",
+    "jetson     59462       1  8 03:35 ?        00:00:04 python3 /home/jetson/SMART3D/jetson_runtime/scan_metadata_normalizer.py --ros-args -p input_topic:=/scan -p output_topic:=/scan_slam",
+    "jetson     59481       1  1 03:35 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 launch /home/jetson/SMART3D/jetson_runtime/slam_toolbox_launch.py params_file:=/home/jetson/SMART3D/jetson_runtime/mapper_params_online_async.yaml",
+    "jetson     59483   59481  5 03:35 ?        00:00:02 /opt/ros/humble/lib/slam_toolbox/async_slam_toolbox_node --ros-args -r __node:=slam_toolbox --params-file /home/jetson/SMART3D/jetson_runtime/mapper_params_online_async.yaml --params-file /tmp/launch_params_vawre79_",
+    "jetson     59513       1  3 03:35 ?        00:00:01 python3 /home/jetson/SMART3D/jetson_runtime/campus_map_bridge.py",
+    "jetson     59547       1 20 03:35 ?        00:00:06 python3 /home/jetson/SMART3D/jetson_runtime/pi5_client.py --ros-args -p car_ns:=car1 -p robot_speed:=0.24 -p campus_mode:=true",
+    "jetson     59566       1 24 03:35 ?        00:00:06 python3 /home/jetson/SMART3D/jetson_runtime/pi_ros_watchdog.py"
+  ],
+  "logs": {
+    "lidar": [
+      "[INFO] [1776497723.620023744] [lslidar_driver_node]: Lidar is M10_P",
+      "[INFO] [1776497723.623253419] [lslidar_driver_node]: Initialised lslidar without error",
+      "[INFO] [1776497723.623365070] [lslidar_driver_node]: Successfully initialize driver...",
+      "port = /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00, baud_rate = 500000",
+      "open_port /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00 OK !",
+      "degree_compensation = -327.670000"
+    ],
+    "imu": [
+      "[INFO] [1776497726.623485991] [IMU_publisher]: serial_port: /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00",
+      "",
+      "[INFO] [1776497726.623740304] [IMU_publisher]: baud_rate: 115200",
+      "",
+      "[INFO] [1776497726.623772753] [IMU_publisher]: frame_id: base_link",
+      "",
+      "[INFO] [1776497726.624093947] [IMU_publisher]: imu_topic: /IMU_data",
+      ""
+    ],
+    "odom": [],
+    "stp23l": [
+      "[INFO] [1776497730.889742649] [stp23l_range]: STP-23L connected: /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6C069316-if00 @ 230400"
+    ],
+    "stp23l_guard": [
+      "[INFO] [1776497732.881031889] [stp23l_hard_brake_guard]: STP23L hard-brake guard ready: topic=/front_range trigger=0.050m hold=10.0s port=/dev/ttyUSB0"
+    ],
+    "cartographer": [],
+    "slam_toolbox": [
+      "[async_slam_toolbox_node-1] [INFO] [1776497751.346471673] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497751.257 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497753.931013045] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497753.841 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497756.431724892] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497756.343 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497758.932641053] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497758.843 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497761.516938215] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497761.427 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497764.017608347] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497763.928 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497766.599682703] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497766.511 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497769.100141433] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497769.011 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497771.600475279] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497771.512 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497774.102528721] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497774.015 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497776.685669852] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497776.598 for reason 'discarding message because the queue is full'",
+      "[async_slam_toolbox_node-1] [INFO] [1776497779.268040892] [slam_toolbox]: Message Filter dropping message: frame 'laser_link' at time 1776497779.180 for reason 'discarding message because the queue is full'"
+    ],
+    "pi5_client": [
+      "[INFO] [1776497750.975877634] [pi5_client]: Pi5 client [car1] | speed=0.24 | lookahead=0.35 | waypoint=0.20 | waiting for path...",
+      "[INFO] [1776497750.976544952] [pi5_client]: Campus mode enabled: path subscription uses BEST_EFFORT",
+      "[INFO] [1776497752.647383426] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497755.711288576] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497758.784465871] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497761.806257581] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497764.787924815] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497767.855655150] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497770.867207122] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497773.929775367] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497776.961594901] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497779.984047469] [pi5_client]: Path received: 3 pts"
+    ],
+    "camera": []
+  }
+}

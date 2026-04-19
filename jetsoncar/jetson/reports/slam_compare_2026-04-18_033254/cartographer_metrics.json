@@ -1,0 +1,140 @@
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+{
+  "backend": "cartographer",
+  "duration_sec": 45.0,
+  "sample_count": 22,
+  "summary": {
+    "lidar": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 10.72,
+      "max_cpu_percent": 11.6,
+      "avg_rss_mb": 43.04,
+      "max_rss_mb": 43.04
+    },
+    "imu": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 5.05,
+      "max_cpu_percent": 5.3,
+      "avg_rss_mb": 40.56,
+      "max_rss_mb": 40.79
+    },
+    "stp23l": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 21.8,
+      "max_cpu_percent": 22.7,
+      "avg_rss_mb": 53.03,
+      "max_rss_mb": 53.23
+    },
+    "stp23l_guard": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 3.19,
+      "max_cpu_percent": 3.4,
+      "avg_rss_mb": 52.0,
+      "max_rss_mb": 52.21
+    },
+    "cartographer": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 53.84,
+      "max_cpu_percent": 57.4,
+      "avg_rss_mb": 62.05,
+      "max_rss_mb": 62.78
+    },
+    "map_bridge": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 1.15,
+      "max_cpu_percent": 1.5,
+      "avg_rss_mb": 52.8,
+      "max_rss_mb": 53.26
+    },
+    "pi5_client": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 31.9,
+      "max_cpu_percent": 33.4,
+      "avg_rss_mb": 51.56,
+      "max_rss_mb": 51.68
+    },
+    "watchdog": {
+      "alive_samples": 22,
+      "avg_cpu_percent": 21.22,
+      "max_cpu_percent": 22.7,
+      "avg_rss_mb": 53.22,
+      "max_rss_mb": 53.86
+    }
+  },
+  "logs": {
+    "lidar": [
+      "[INFO] [1776497602.167399097] [lslidar_driver_node]: Lidar is M10_P",
+      "[INFO] [1776497602.170525931] [lslidar_driver_node]: Initialised lslidar without error",
+      "[INFO] [1776497602.170769140] [lslidar_driver_node]: Successfully initialize driver...",
+      "port = /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00, baud_rate = 500000",
+      "open_port /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00 OK !",
+      "degree_compensation = -327.670000"
+    ],
+    "cartographer": [
+      "[cartographer_node-1] [WARN] [1776497699.907484269] [cartographer logger]: W0418 03:34:59.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497700.068340379] [cartographer logger]: W0418 03:35:00.000000 58681 range_data_collator.cc:82] Dropped 19 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497700.237551361] [cartographer logger]: W0418 03:35:00.000000 58681 range_data_collator.cc:82] Dropped 4 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497700.317866579] [cartographer logger]: W0418 03:35:00.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497700.567729047] [cartographer logger]: W0418 03:35:00.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497700.907522545] [cartographer logger]: W0418 03:35:00.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497701.157497204] [cartographer logger]: W0418 03:35:01.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497701.318178198] [cartographer logger]: W0418 03:35:01.000000 58681 range_data_collator.cc:82] Dropped 5 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497701.487309237] [cartographer logger]: W0418 03:35:01.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497701.657464406] [cartographer logger]: W0418 03:35:01.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497702.317769703] [cartographer logger]: W0418 03:35:02.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497702.737632373] [cartographer logger]: W0418 03:35:02.000000 58681 range_data_collator.cc:82] Dropped 4 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497702.827724908] [cartographer logger]: W0418 03:35:02.000000 58681 range_data_collator.cc:82] Dropped 2 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497702.987597583] [cartographer logger]: W0418 03:35:02.000000 58681 range_data_collator.cc:82] Dropped 2 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497703.237538402] [cartographer logger]: W0418 03:35:03.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497703.318556774] [cartographer logger]: W0418 03:35:03.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497703.487740414] [cartographer logger]: W0418 03:35:03.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [INFO] [1776497703.609906473] [cartographer logger]: I0418 03:35:03.000000 58681 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 7.16e-05 s (pulsed at 99.94% real time)",
+      "[cartographer_node-1] [INFO] [1776497703.610019117] [cartographer logger]: I0418 03:35:03.000000 58681 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 6.19e-03 s (pulsed at 100.05% real time)",
+      "[cartographer_node-1] [WARN] [1776497703.827700707] [cartographer logger]: W0418 03:35:03.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points."
+    ],
+    "slam_toolbox": [],
+    "odom": [],
+    "pi5_client": [
+      "[INFO] [1776497653.941381427] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497655.766283160] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497658.779495064] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497661.828044134] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497662.978043969] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497664.865464365] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497667.876844656] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497670.869191497] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497671.945994441] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497673.963302009] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497676.959926129] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497679.969855582] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497680.910660166] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497683.071384879] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497686.025295064] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497689.068762716] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497692.106203391] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497695.086041778] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497698.154547853] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497701.175422576] [pi5_client]: Path received: 3 pts"
+    ]
+  }
+}

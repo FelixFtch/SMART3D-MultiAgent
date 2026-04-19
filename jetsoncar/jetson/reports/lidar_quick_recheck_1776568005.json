@@ -1,0 +1,32 @@
+{
+  "ts": 1776568005.433682,
+  "cycles": [
+    {
+      "cycle": 1,
+      "topic_probe_ok": true,
+      "tf_count": 247,
+      "x_span_m": 0.0053654371027343686,
+      "y_span_m": 0.007148614809066324,
+      "yaw_span_deg": 0.0838057303011017,
+      "bad_log": false
+    },
+    {
+      "cycle": 2,
+      "topic_probe_ok": true,
+      "tf_count": 257,
+      "x_span_m": 0.0055397029737260794,
+      "y_span_m": 0.004958769419036446,
+      "yaw_span_deg": 0.09374682855419555,
+      "bad_log": false
+    },
+    {
+      "cycle": 3,
+      "topic_probe_ok": true,
+      "tf_count": 257,
+      "x_span_m": 0.06242243376098084,
+      "y_span_m": 0.0440406721556469,
+      "yaw_span_deg": 0.6318519549796592,
+      "bad_log": false
+    }
+  ]
+}

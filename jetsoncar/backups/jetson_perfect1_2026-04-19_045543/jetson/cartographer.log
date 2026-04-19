@@ -1,0 +1,253 @@
+[INFO] [launch]: All log files can be found below /home/jetson/.ros/log/2026-04-19-04-50-17-571905-jetson-desktop-82509
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [cartographer_node-1]: process started with pid [82511]
+[cartographer_node-1] [INFO] [1776588617.720863890] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/home/jetson/SMART3D/jetson_runtime/robotcar_2d.lua' for 'robotcar_2d.lua'.
+[cartographer_node-1] [INFO] [1776588617.721439586] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/map_builder.lua' for 'map_builder.lua'.
+[cartographer_node-1] [INFO] [1776588617.721479747] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/map_builder.lua' for 'map_builder.lua'.
+[cartographer_node-1] [INFO] [1776588617.721540997] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/pose_graph.lua' for 'pose_graph.lua'.
+[cartographer_node-1] [INFO] [1776588617.721571526] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/pose_graph.lua' for 'pose_graph.lua'.
+[cartographer_node-1] [INFO] [1776588617.721736042] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/trajectory_builder.lua' for 'trajectory_builder.lua'.
+[cartographer_node-1] [INFO] [1776588617.721764491] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/trajectory_builder.lua' for 'trajectory_builder.lua'.
+[cartographer_node-1] [INFO] [1776588617.721817932] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/trajectory_builder_2d.lua' for 'trajectory_builder_2d.lua'.
+[cartographer_node-1] [INFO] [1776588617.721842189] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/trajectory_builder_2d.lua' for 'trajectory_builder_2d.lua'.
+[cartographer_node-1] [INFO] [1776588617.721993265] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/trajectory_builder_3d.lua' for 'trajectory_builder_3d.lua'.
+[cartographer_node-1] [INFO] [1776588617.722020434] [cartographer logger]: I0419 04:50:17.000000 82511 configuration_file_resolver.cc:41] Found '/opt/ros/humble/share/cartographer/configuration_files/trajectory_builder_3d.lua' for 'trajectory_builder_3d.lua'.
+[cartographer_node-1] [INFO] [1776588617.731055625] [cartographer logger]: I0419 04:50:17.000000 82511 map_builder_bridge.cpp:136] Added trajectory with ID '0'.
+[cartographer_node-1] [INFO] [1776588617.785468859] [cartographer logger]: I0419 04:50:17.000000 82511 ordered_multi_queue.cc:172] All sensor data for trajectory 0 is available starting at '639121854178684461'.
+[cartographer_node-1] [INFO] [1776588617.876379348] [cartographer logger]: I0419 04:50:17.000000 82511 local_trajectory_builder_2d.cc:135] Extrapolator is still initializing.
+[cartographer_node-1] [INFO] [1776588617.963733579] [cartographer logger]: I0419 04:50:17.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 0).
+[INFO] [cartographer_occupancy_grid_node-2]: process started with pid [82535]
+[cartographer_node-1] [INFO] [1776588632.758001385] [cartographer logger]: I0419 04:50:32.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 6.02e-05 s (pulsed at 99.78% real time)
+[cartographer_node-1] [INFO] [1776588632.758113805] [cartographer logger]: I0419 04:50:32.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.92 Hz 8.39e-02 s +/- 5.14e-03 s (pulsed at 100.02% real time)
+[cartographer_node-1] [INFO] [1776588647.766268172] [cartographer logger]: I0419 04:50:47.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 1.32e-04 s (pulsed at 99.73% real time)
+[cartographer_node-1] [INFO] [1776588647.766369903] [cartographer logger]: I0419 04:50:47.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.92 Hz 8.39e-02 s +/- 5.13e-03 s (pulsed at 99.99% real time)
+[cartographer_node-1] [INFO] [1776588659.942302251] [cartographer logger]: I0419 04:50:59.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 2.8%.
+[cartographer_node-1] [INFO] [1776588662.778207782] [cartographer logger]: I0419 04:51:02.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 6.98e-05 s (pulsed at 99.71% real time)
+[cartographer_node-1] [INFO] [1776588662.778310409] [cartographer logger]: I0419 04:51:02.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.92 Hz 8.39e-02 s +/- 5.11e-03 s (pulsed at 100.05% real time)
+[cartographer_node-1] [INFO] [1776588677.782842876] [cartographer logger]: I0419 04:51:17.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 9.24e-05 s (pulsed at 99.75% real time)
+[cartographer_node-1] [INFO] [1776588677.782954207] [cartographer logger]: I0419 04:51:17.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.10e-03 s (pulsed at 100.01% real time)
+[cartographer_node-1] [INFO] [1776588692.784866688] [cartographer logger]: I0419 04:51:32.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 3.82e-04 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588692.784956355] [cartographer logger]: I0419 04:51:32.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.87 Hz 8.43e-02 s +/- 7.24e-03 s (pulsed at 99.98% real time)
+[cartographer_node-1] [INFO] [1776588701.937729343] [cartographer logger]: I0419 04:51:41.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 2.8%.
+[cartographer_node-1] [INFO] [1776588707.798196389] [cartographer logger]: I0419 04:51:47.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 2.56e-04 s (pulsed at 99.71% real time)
+[cartographer_node-1] [INFO] [1776588707.798300296] [cartographer logger]: I0419 04:51:47.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.39e-02 s +/- 5.07e-03 s (pulsed at 99.98% real time)
+[cartographer_node-1] [INFO] [1776588722.804167354] [cartographer logger]: I0419 04:52:02.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 1.18e-04 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588722.804287901] [cartographer logger]: I0419 04:52:02.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.09e-03 s (pulsed at 100.04% real time)
+[cartographer_node-1] [INFO] [1776588731.136471404] [cartographer logger]: I0419 04:52:11.000000 82532 pose_graph_2d.cc:538] Remaining work items in queue: 0
+[cartographer_node-1] [INFO] [1776588731.136616560] [cartographer logger]: I0419 04:52:11.000000 82532 constraint_builder_2d.cc:290] 0 computations resulted in 0 additional constraints.
+[cartographer_node-1] [INFO] [1776588731.136653681] [cartographer logger]: I0419 04:52:11.000000 82532 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 0
+[cartographer_node-1] [INFO] [1776588737.647853690] [cartographer logger]: I0419 04:52:17.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 1).
+[cartographer_node-1] [INFO] [1776588737.812078835] [cartographer logger]: I0419 04:52:17.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 7.61e-05 s (pulsed at 99.75% real time)
+[cartographer_node-1] [INFO] [1776588737.812180822] [cartographer logger]: I0419 04:52:17.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.92 Hz 8.39e-02 s +/- 5.13e-03 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588743.479431282] [cartographer logger]: I0419 04:52:23.000000 82534 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588743.479588438] [cartographer logger]: I0419 04:52:23.000000 82534 constraint_builder_2d.cc:290] 0 computations resulted in 0 additional constraints.
+[cartographer_node-1] [INFO] [1776588743.479630551] [cartographer logger]: I0419 04:52:23.000000 82534 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 0
+[cartographer_node-1] [INFO] [1776588743.885113950] [cartographer logger]: I0419 04:52:23.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 6.86667%.
+[cartographer_node-1] [INFO] [1776588752.813922055] [cartographer logger]: I0419 04:52:32.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 1.07e-04 s (pulsed at 99.73% real time)
+[cartographer_node-1] [INFO] [1776588752.814032714] [cartographer logger]: I0419 04:52:32.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.87 Hz 8.42e-02 s +/- 7.19e-03 s (pulsed at 100.01% real time)
+[cartographer_node-1] [INFO] [1776588763.336116637] [cartographer logger]: I0419 04:52:43.000000 82532 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588763.336272385] [cartographer logger]: I0419 04:52:43.000000 82532 constraint_builder_2d.cc:290] 0 computations resulted in 0 additional constraints.
+[cartographer_node-1] [INFO] [1776588763.336331907] [cartographer logger]: I0419 04:52:43.000000 82532 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 0
+[cartographer_node-1] [INFO] [1776588767.823336930] [cartographer logger]: I0419 04:52:47.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 7.87e-05 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588767.823455397] [cartographer logger]: I0419 04:52:47.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.92 Hz 8.39e-02 s +/- 5.11e-03 s (pulsed at 99.99% real time)
+[cartographer_node-1] [INFO] [1776588768.418287480] [cartographer logger]: I0419 04:52:48.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 2).
+[cartographer_node-1] [INFO] [1776588768.487077320] [cartographer logger]: I0419 04:52:48.000000 82532 constraint_builder_2d.cc:275] Node (0, 160) with 213 points on submap (0, 0) differs by translation 0.00 rotation 0.002 with score 81.9%.
+[cartographer_node-1] [INFO] [1776588770.276447562] [cartographer logger]: I0419 04:52:50.000000 82534 constraint_builder_2d.cc:275] Node (0, 163) with 207 points on submap (0, 0) differs by translation 0.00 rotation 0.002 with score 76.5%.
+[cartographer_node-1] [INFO] [1776588772.118435683] [cartographer logger]: I0419 04:52:52.000000 82533 constraint_builder_2d.cc:275] Node (0, 166) with 207 points on submap (0, 0) differs by translation 0.00 rotation 0.002 with score 69.9%.
+[cartographer_node-1] [INFO] [1776588773.942507761] [cartographer logger]: I0419 04:52:53.000000 82531 constraint_builder_2d.cc:275] Node (0, 170) with 208 points on submap (0, 0) differs by translation 0.01 rotation 0.002 with score 60.4%.
+[cartographer_node-1] [INFO] [1776588774.282862915] [cartographer logger]: I0419 04:52:54.000000 82532 constraint_builder_2d.cc:275] Node (0, 173) with 200 points on submap (0, 0) differs by translation 0.01 rotation 0.003 with score 60.9%.
+[cartographer_node-1] [INFO] [1776588775.112998065] [cartographer logger]: I0419 04:52:55.000000 82534 constraint_builder_2d.cc:275] Node (0, 183) with 212 points on submap (0, 0) differs by translation 0.01 rotation 0.000 with score 62.5%.
+[cartographer_node-1] [INFO] [1776588778.246067434] [cartographer logger]: I0419 04:52:58.000000 82534 pose_graph_2d.cc:538] Remaining work items in queue: 0
+[cartographer_node-1] [INFO] [1776588778.266692646] [cartographer logger]: I0419 04:52:58.000000 82531 constraint_builder_2d.cc:290] 14 computations resulted in 6 additional constraints.
+[cartographer_node-1] [INFO] [1776588778.266867083] [cartographer logger]: I0419 04:52:58.000000 82531 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 6  Min: 0.603846  Max: 0.818844  Mean: 0.686955
+[cartographer_node-1] [0.603846, 0.625346)	          ##########	Count: 3 (50%)	Total: 3 (50%)
+[cartographer_node-1] [0.625346, 0.646846)	                    	Count: 0 (0%)	Total: 3 (50%)
+[cartographer_node-1] [0.646846, 0.668345)	                    	Count: 0 (0%)	Total: 3 (50%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 3 (50%)
+[cartographer_node-1] [0.689845, 0.711345)	                 ###	Count: 1 (16.6667%)	Total: 4 (66.6667%)
+[cartographer_node-1] [0.711345, 0.732845)	                    	Count: 0 (0%)	Total: 4 (66.6667%)
+[cartographer_node-1] [0.732845, 0.754344)	                    	Count: 0 (0%)	Total: 4 (66.6667%)
+[cartographer_node-1] [0.754344, 0.775844)	                 ###	Count: 1 (16.6667%)	Total: 5 (83.3333%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 5 (83.3333%)
+[cartographer_node-1] [0.797344, 0.818844]	                 ###	Count: 1 (16.6667%)	Total: 6 (100%)
+[cartographer_node-1] [INFO] [1776588782.833009679] [cartographer logger]: I0419 04:53:02.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 6.97e-05 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588782.833133778] [cartographer logger]: I0419 04:53:02.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.11e-03 s (pulsed at 100.02% real time)
+[cartographer_node-1] [INFO] [1776588785.821223364] [cartographer logger]: I0419 04:53:05.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 11.7%.
+[cartographer_node-1] [INFO] [1776588790.247120979] [cartographer logger]: I0419 04:53:10.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 3).
+[cartographer_node-1] [INFO] [1776588790.273368587] [cartographer logger]: I0419 04:53:10.000000 82533 constraint_builder_2d.cc:275] Node (0, 240) with 209 points on submap (0, 1) differs by translation 0.00 rotation 0.001 with score 81.7%.
+[cartographer_node-1] [INFO] [1776588792.112687704] [cartographer logger]: I0419 04:53:12.000000 82531 constraint_builder_2d.cc:275] Node (0, 243) with 209 points on submap (0, 1) differs by translation 0.01 rotation 0.002 with score 79.8%.
+[cartographer_node-1] [INFO] [1776588793.291243451] [cartographer logger]: I0419 04:53:13.000000 82533 constraint_builder_2d.cc:275] Node (0, 246) with 209 points on submap (0, 1) differs by translation 0.05 rotation 0.015 with score 66.4%.
+[cartographer_node-1] [INFO] [1776588794.114804493] [cartographer logger]: I0419 04:53:14.000000 82534 constraint_builder_2d.cc:275] Node (0, 250) with 215 points on submap (0, 1) differs by translation 0.02 rotation 0.002 with score 77.2%.
+[cartographer_node-1] [INFO] [1776588795.104193591] [cartographer logger]: I0419 04:53:15.000000 82532 constraint_builder_2d.cc:275] Node (0, 253) with 213 points on submap (0, 1) differs by translation 0.01 rotation 0.000 with score 74.1%.
+[cartographer_node-1] [INFO] [1776588795.422540082] [cartographer logger]: I0419 04:53:15.000000 82532 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588795.422654485] [cartographer logger]: I0419 04:53:15.000000 82532 constraint_builder_2d.cc:290] 44 computations resulted in 5 additional constraints.
+[cartographer_node-1] [INFO] [1776588795.423008735] [cartographer logger]: I0419 04:53:15.000000 82532 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 11  Min: 0.603846  Max: 0.818844  Mean: 0.71941
+[cartographer_node-1] [0.603846, 0.625346)	               #####	Count: 3 (27.2727%)	Total: 3 (27.2727%)
+[cartographer_node-1] [0.625346, 0.646846)	                    	Count: 0 (0%)	Total: 3 (27.2727%)
+[cartographer_node-1] [0.646846, 0.668345)	                  ##	Count: 1 (9.09091%)	Total: 4 (36.3636%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 4 (36.3636%)
+[cartographer_node-1] [0.689845, 0.711345)	                  ##	Count: 1 (9.09091%)	Total: 5 (45.4545%)
+[cartographer_node-1] [0.711345, 0.732845)	                    	Count: 0 (0%)	Total: 5 (45.4545%)
+[cartographer_node-1] [0.732845, 0.754344)	                  ##	Count: 1 (9.09091%)	Total: 6 (54.5455%)
+[cartographer_node-1] [0.754344, 0.775844)	                ####	Count: 2 (18.1818%)	Total: 8 (72.7273%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 8 (72.7273%)
+[cartographer_node-1] [0.797344, 0.818844]	               #####	Count: 3 (27.2727%)	Total: 11 (100%)
+[cartographer_node-1] [INFO] [1776588796.538411537] [cartographer logger]: I0419 04:53:16.000000 82532 constraint_builder_2d.cc:275] Node (0, 256) with 218 points on submap (0, 1) differs by translation 0.02 rotation 0.001 with score 70.8%.
+[cartographer_node-1] [INFO] [1776588797.837846165] [cartographer logger]: I0419 04:53:17.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 1.04e-04 s (pulsed at 99.70% real time)
+[cartographer_node-1] [INFO] [1776588797.837940600] [cartographer logger]: I0419 04:53:17.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.11e-03 s (pulsed at 99.97% real time)
+[cartographer_node-1] [INFO] [1776588798.874137081] [cartographer logger]: I0419 04:53:18.000000 82534 constraint_builder_2d.cc:275] Node (0, 260) with 211 points on submap (0, 1) differs by translation 0.01 rotation 0.002 with score 69.6%.
+[cartographer_node-1] [INFO] [1776588800.560795863] [cartographer logger]: I0419 04:53:20.000000 82531 constraint_builder_2d.cc:275] Node (0, 263) with 200 points on submap (0, 1) differs by translation 0.01 rotation 0.004 with score 62.6%.
+[cartographer_node-1] [INFO] [1776588812.846560122] [cartographer logger]: I0419 04:53:32.000000 82511 collated_trajectory_builder.cc:81] imu rate: 100.00 Hz 1.00e-02 s +/- 1.19e-04 s (pulsed at 99.64% real time)
+[cartographer_node-1] [INFO] [1776588812.846665053] [cartographer logger]: I0419 04:53:32.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.11e-03 s (pulsed at 100.04% real time)
+[cartographer_node-1] [INFO] [1776588825.510881699] [cartographer logger]: I0419 04:53:45.000000 82531 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588825.511008839] [cartographer logger]: I0419 04:53:45.000000 82531 constraint_builder_2d.cc:290] 17 computations resulted in 3 additional constraints.
+[cartographer_node-1] [INFO] [1776588825.511092969] [cartographer logger]: I0419 04:53:45.000000 82531 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 14  Min: 0.603846  Max: 0.818844  Mean: 0.710209
+[cartographer_node-1] [0.603846, 0.625346)	                ####	Count: 3 (21.4286%)	Total: 3 (21.4286%)
+[cartographer_node-1] [0.625346, 0.646846)	                   #	Count: 1 (7.14286%)	Total: 4 (28.5714%)
+[cartographer_node-1] [0.646846, 0.668345)	                   #	Count: 1 (7.14286%)	Total: 5 (35.7143%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 5 (35.7143%)
+[cartographer_node-1] [0.689845, 0.711345)	                ####	Count: 3 (21.4286%)	Total: 8 (57.1429%)
+[cartographer_node-1] [0.711345, 0.732845)	                    	Count: 0 (0%)	Total: 8 (57.1429%)
+[cartographer_node-1] [0.732845, 0.754344)	                   #	Count: 1 (7.14286%)	Total: 9 (64.2857%)
+[cartographer_node-1] [0.754344, 0.775844)	                 ###	Count: 2 (14.2857%)	Total: 11 (78.5714%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 11 (78.5714%)
+[cartographer_node-1] [0.797344, 0.818844]	                ####	Count: 3 (21.4286%)	Total: 14 (100%)
+[cartographer_node-1] [INFO] [1776588827.841559180] [cartographer logger]: I0419 04:53:47.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 12.36%.
+[cartographer_node-1] [INFO] [1776588827.852033967] [cartographer logger]: I0419 04:53:47.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.93 Hz 1.00e-02 s +/- 2.82e-04 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588827.852132722] [cartographer logger]: I0419 04:53:47.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.87 Hz 8.42e-02 s +/- 7.21e-03 s (pulsed at 99.96% real time)
+[cartographer_node-1] [INFO] [1776588834.147914153] [cartographer logger]: I0419 04:53:54.000000 82534 constraint_builder_2d.cc:275] Node (0, 150) with 212 points on submap (0, 2) differs by translation 0.02 rotation 0.009 with score 63.3%.
+[cartographer_node-1] [INFO] [1776588834.148036556] [cartographer logger]: I0419 04:53:54.000000 82533 constraint_builder_2d.cc:275] Node (0, 153) with 211 points on submap (0, 2) differs by translation 0.01 rotation 0.003 with score 66.1%.
+[cartographer_node-1] [INFO] [1776588834.150354668] [cartographer logger]: I0419 04:53:54.000000 82532 constraint_builder_2d.cc:275] Node (0, 156) with 201 points on submap (0, 2) differs by translation 0.01 rotation 0.003 with score 69.7%.
+[cartographer_node-1] [INFO] [1776588834.506756061] [cartographer logger]: I0419 04:53:54.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 4).
+[cartographer_node-1] [INFO] [1776588834.529818750] [cartographer logger]: I0419 04:53:54.000000 82531 constraint_builder_2d.cc:275] Node (0, 320) with 211 points on submap (0, 2) differs by translation 0.01 rotation 0.001 with score 81.4%.
+[cartographer_node-1] [INFO] [1776588836.559698591] [cartographer logger]: I0419 04:53:56.000000 82533 constraint_builder_2d.cc:275] Node (0, 323) with 201 points on submap (0, 2) differs by translation 0.01 rotation 0.001 with score 75.0%.
+[cartographer_node-1] [INFO] [1776588842.862270183] [cartographer logger]: I0419 04:54:02.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.87 Hz 1.00e-02 s +/- 3.75e-04 s (pulsed at 100.00% real time)
+[cartographer_node-1] [INFO] [1776588842.862405546] [cartographer logger]: I0419 04:54:02.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.08e-03 s (pulsed at 100.01% real time)
+[cartographer_node-1] [INFO] [1776588856.595671114] [cartographer logger]: I0419 04:54:16.000000 82531 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588856.595839727] [cartographer logger]: I0419 04:54:16.000000 82531 constraint_builder_2d.cc:290] 50 computations resulted in 5 additional constraints.
+[cartographer_node-1] [INFO] [1776588856.595945458] [cartographer logger]: I0419 04:54:16.000000 82531 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 19  Min: 0.603846  Max: 0.818844  Mean: 0.710391
+[cartographer_node-1] [0.603846, 0.625346)	                 ###	Count: 3 (15.7895%)	Total: 3 (15.7895%)
+[cartographer_node-1] [0.625346, 0.646846)	                  ##	Count: 2 (10.5263%)	Total: 5 (26.3158%)
+[cartographer_node-1] [0.646846, 0.668345)	                  ##	Count: 2 (10.5263%)	Total: 7 (36.8421%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 7 (36.8421%)
+[cartographer_node-1] [0.689845, 0.711345)	                ####	Count: 4 (21.0526%)	Total: 11 (57.8947%)
+[cartographer_node-1] [0.711345, 0.732845)	                    	Count: 0 (0%)	Total: 11 (57.8947%)
+[cartographer_node-1] [0.732845, 0.754344)	                  ##	Count: 2 (10.5263%)	Total: 13 (68.4211%)
+[cartographer_node-1] [0.754344, 0.775844)	                  ##	Count: 2 (10.5263%)	Total: 15 (78.9474%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 15 (78.9474%)
+[cartographer_node-1] [0.797344, 0.818844]	                ####	Count: 4 (21.0526%)	Total: 19 (100%)
+[cartographer_node-1] [INFO] [1776588857.871522392] [cartographer logger]: I0419 04:54:17.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.94 Hz 1.00e-02 s +/- 2.70e-04 s (pulsed at 100.01% real time)
+[cartographer_node-1] [INFO] [1776588857.871642779] [cartographer logger]: I0419 04:54:17.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.11e-03 s (pulsed at 100.04% real time)
+[cartographer_node-1] [INFO] [1776588869.771888777] [cartographer logger]: I0419 04:54:29.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 12.8333%.
+[cartographer_node-1] [INFO] [1776588872.881151166] [cartographer logger]: I0419 04:54:32.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.94 Hz 1.00e-02 s +/- 3.40e-04 s (pulsed at 100.30% real time)
+[cartographer_node-1] [INFO] [1776588872.881257249] [cartographer logger]: I0419 04:54:32.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.12e-03 s (pulsed at 99.96% real time)
+[cartographer_node-1] [INFO] [1776588874.480780739] [cartographer logger]: I0419 04:54:34.000000 82533 constraint_builder_2d.cc:275] Node (0, 230) with 215 points on submap (0, 3) differs by translation 0.01 rotation 0.004 with score 71.5%.
+[cartographer_node-1] [INFO] [1776588874.486656102] [cartographer logger]: I0419 04:54:34.000000 82531 constraint_builder_2d.cc:275] Node (0, 236) with 210 points on submap (0, 3) differs by translation 0.01 rotation 0.001 with score 80.0%.
+[cartographer_node-1] [INFO] [1776588874.488339541] [cartographer logger]: I0419 04:54:34.000000 82532 constraint_builder_2d.cc:275] Node (0, 233) with 215 points on submap (0, 3) differs by translation 0.00 rotation 0.001 with score 75.9%.
+[cartographer_node-1] [INFO] [1776588874.612939716] [cartographer logger]: I0419 04:54:34.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 5).
+[cartographer_node-1] [INFO] [1776588877.858197306] [cartographer logger]: I0419 04:54:37.000000 82534 pose_graph_2d.cc:538] Remaining work items in queue: 0
+[cartographer_node-1] [INFO] [1776588877.858301821] [cartographer logger]: I0419 04:54:37.000000 82534 constraint_builder_2d.cc:290] 72 computations resulted in 3 additional constraints.
+[cartographer_node-1] [INFO] [1776588877.858359742] [cartographer logger]: I0419 04:54:37.000000 82534 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 22  Min: 0.603846  Max: 0.818844  Mean: 0.716897
+[cartographer_node-1] [0.603846, 0.625346)	                 ###	Count: 3 (13.6364%)	Total: 3 (13.6364%)
+[cartographer_node-1] [0.625346, 0.646846)	                  ##	Count: 2 (9.09091%)	Total: 5 (22.7273%)
+[cartographer_node-1] [0.646846, 0.668345)	                  ##	Count: 2 (9.09091%)	Total: 7 (31.8182%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 7 (31.8182%)
+[cartographer_node-1] [0.689845, 0.711345)	                ####	Count: 4 (18.1818%)	Total: 11 (50%)
+[cartographer_node-1] [0.711345, 0.732845)	                   #	Count: 1 (4.54545%)	Total: 12 (54.5455%)
+[cartographer_node-1] [0.732845, 0.754344)	                  ##	Count: 2 (9.09091%)	Total: 14 (63.6364%)
+[cartographer_node-1] [0.754344, 0.775844)	                 ###	Count: 3 (13.6364%)	Total: 17 (77.2727%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 17 (77.2727%)
+[cartographer_node-1] [0.797344, 0.818844]	               #####	Count: 5 (22.7273%)	Total: 22 (100%)
+[cartographer_node-1] [INFO] [1776588887.881631911] [cartographer logger]: I0419 04:54:47.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.47 Hz 1.01e-02 s +/- 7.33e-04 s (pulsed at 100.03% real time)
+[cartographer_node-1] [INFO] [1776588887.883254196] [cartographer logger]: I0419 04:54:47.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.15e-03 s (pulsed at 99.97% real time)
+[cartographer_node-1] [INFO] [1776588898.955841330] [cartographer logger]: I0419 04:54:58.000000 82532 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588898.955977622] [cartographer logger]: I0419 04:54:58.000000 82532 constraint_builder_2d.cc:290] 0 computations resulted in 0 additional constraints.
+[cartographer_node-1] [INFO] [1776588898.956095385] [cartographer logger]: I0419 04:54:58.000000 82532 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 22  Min: 0.603846  Max: 0.818844  Mean: 0.716897
+[cartographer_node-1] [0.603846, 0.625346)	                 ###	Count: 3 (13.6364%)	Total: 3 (13.6364%)
+[cartographer_node-1] [0.625346, 0.646846)	                  ##	Count: 2 (9.09091%)	Total: 5 (22.7273%)
+[cartographer_node-1] [0.646846, 0.668345)	                  ##	Count: 2 (9.09091%)	Total: 7 (31.8182%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 7 (31.8182%)
+[cartographer_node-1] [0.689845, 0.711345)	                ####	Count: 4 (18.1818%)	Total: 11 (50%)
+[cartographer_node-1] [0.711345, 0.732845)	                   #	Count: 1 (4.54545%)	Total: 12 (54.5455%)
+[cartographer_node-1] [0.732845, 0.754344)	                  ##	Count: 2 (9.09091%)	Total: 14 (63.6364%)
+[cartographer_node-1] [0.754344, 0.775844)	                 ###	Count: 3 (13.6364%)	Total: 17 (77.2727%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 17 (77.2727%)
+[cartographer_node-1] [0.797344, 0.818844]	               #####	Count: 5 (22.7273%)	Total: 22 (100%)
+[cartographer_node-1] [INFO] [1776588902.890369389] [cartographer logger]: I0419 04:55:02.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.47 Hz 1.01e-02 s +/- 8.22e-04 s (pulsed at 100.27% real time)
+[cartographer_node-1] [INFO] [1776588902.890471984] [cartographer logger]: I0419 04:55:02.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.87 Hz 8.42e-02 s +/- 6.29e-03 s (pulsed at 100.03% real time)
+[cartographer_node-1] [INFO] [1776588911.701308233] [cartographer logger]: I0419 04:55:11.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 13.7143%.
+[cartographer_node-1] [INFO] [1776588911.826130212] [cartographer logger]: I0419 04:55:11.000000 82532 constraint_builder_2d.cc:275] Node (0, 304) with 205 points on submap (0, 4) differs by translation 0.01 rotation 0.001 with score 63.1%.
+[cartographer_node-1] [INFO] [1776588911.830996683] [cartographer logger]: I0419 04:55:11.000000 82533 constraint_builder_2d.cc:275] Node (0, 311) with 215 points on submap (0, 4) differs by translation 0.00 rotation 0.001 with score 70.5%.
+[cartographer_node-1] [INFO] [1776588911.831707583] [cartographer logger]: I0419 04:55:11.000000 82531 constraint_builder_2d.cc:275] Node (0, 308) with 218 points on submap (0, 4) differs by translation 0.01 rotation 0.001 with score 63.3%.
+[cartographer_node-1] [INFO] [1776588911.841222025] [cartographer logger]: I0419 04:55:11.000000 82532 constraint_builder_2d.cc:275] Node (0, 318) with 206 points on submap (0, 4) differs by translation 0.01 rotation 0.003 with score 75.4%.
+[cartographer_node-1] [INFO] [1776588911.843192576] [cartographer logger]: I0419 04:55:11.000000 82534 constraint_builder_2d.cc:275] Node (0, 314) with 214 points on submap (0, 4) differs by translation 0.03 rotation 0.001 with score 71.2%.
+[cartographer_node-1] [INFO] [1776588912.215612919] [cartographer logger]: I0419 04:55:12.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 6).
+[cartographer_node-1] [INFO] [1776588912.913688141] [cartographer logger]: I0419 04:55:12.000000 82531 constraint_builder_2d.cc:275] Node (0, 481) with 209 points on submap (0, 4) differs by translation 0.01 rotation 0.001 with score 63.5%.
+[cartographer_node-1] [INFO] [1776588917.900549739] [cartographer logger]: I0419 04:55:17.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.47 Hz 1.01e-02 s +/- 7.39e-04 s (pulsed at 100.31% real time)
+[cartographer_node-1] [INFO] [1776588917.900668302] [cartographer logger]: I0419 04:55:17.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.92 Hz 8.39e-02 s +/- 5.10e-03 s (pulsed at 100.05% real time)
+[cartographer_node-1] [INFO] [1776588926.210991390] [cartographer logger]: I0419 04:55:26.000000 82532 pose_graph_2d.cc:538] Remaining work items in queue: 0
+[cartographer_node-1] [INFO] [1776588926.211152291] [cartographer logger]: I0419 04:55:26.000000 82532 constraint_builder_2d.cc:290] 57 computations resulted in 6 additional constraints.
+[cartographer_node-1] [INFO] [1776588926.211246437] [cartographer logger]: I0419 04:55:26.000000 82532 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 28  Min: 0.603846  Max: 0.818844  Mean: 0.708621
+[cartographer_node-1] [0.603846, 0.625346)	                  ##	Count: 3 (10.7143%)	Total: 3 (10.7143%)
+[cartographer_node-1] [0.625346, 0.646846)	                ####	Count: 5 (17.8571%)	Total: 8 (28.5714%)
+[cartographer_node-1] [0.646846, 0.668345)	                   #	Count: 2 (7.14286%)	Total: 10 (35.7143%)
+[cartographer_node-1] [0.668345, 0.689845)	                    	Count: 0 (0%)	Total: 10 (35.7143%)
+[cartographer_node-1] [0.689845, 0.711345)	                ####	Count: 5 (17.8571%)	Total: 15 (53.5714%)
+[cartographer_node-1] [0.711345, 0.732845)	                   #	Count: 2 (7.14286%)	Total: 17 (60.7143%)
+[cartographer_node-1] [0.732845, 0.754344)	                  ##	Count: 3 (10.7143%)	Total: 20 (71.4286%)
+[cartographer_node-1] [0.754344, 0.775844)	                  ##	Count: 3 (10.7143%)	Total: 23 (82.1429%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 23 (82.1429%)
+[cartographer_node-1] [0.797344, 0.818844]	                ####	Count: 5 (17.8571%)	Total: 28 (100%)
+[cartographer_node-1] [INFO] [1776588932.910089949] [cartographer logger]: I0419 04:55:32.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.80 Hz 1.00e-02 s +/- 4.65e-04 s (pulsed at 100.28% real time)
+[cartographer_node-1] [INFO] [1776588932.910223041] [cartographer logger]: I0419 04:55:32.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.39e-02 s +/- 5.15e-03 s (pulsed at 100.04% real time)
+[cartographer_node-1] [INFO] [1776588944.562061927] [cartographer logger]: I0419 04:55:44.000000 82533 constraint_builder_2d.cc:275] Node (0, 371) with 204 points on submap (0, 5) differs by translation 0.00 rotation 0.000 with score 66.0%.
+[cartographer_node-1] [INFO] [1776588944.566297022] [cartographer logger]: I0419 04:55:44.000000 82534 constraint_builder_2d.cc:275] Node (0, 368) with 225 points on submap (0, 5) differs by translation 0.01 rotation 0.000 with score 64.3%.
+[cartographer_node-1] [INFO] [1776588944.580223715] [cartographer logger]: I0419 04:55:44.000000 82533 constraint_builder_2d.cc:275] Node (0, 381) with 214 points on submap (0, 5) differs by translation 0.01 rotation 0.004 with score 68.6%.
+[cartographer_node-1] [INFO] [1776588944.585361266] [cartographer logger]: I0419 04:55:44.000000 82532 constraint_builder_2d.cc:275] Node (0, 374) with 211 points on submap (0, 5) differs by translation 0.01 rotation 0.004 with score 65.0%.
+[cartographer_node-1] [INFO] [1776588944.585427412] [cartographer logger]: I0419 04:55:44.000000 82534 constraint_builder_2d.cc:275] Node (0, 384) with 209 points on submap (0, 5) differs by translation 0.01 rotation 0.003 with score 71.4%.
+[cartographer_node-1] [INFO] [1776588944.591224406] [cartographer logger]: I0419 04:55:44.000000 82531 constraint_builder_2d.cc:275] Node (0, 378) with 204 points on submap (0, 5) differs by translation 0.01 rotation 0.004 with score 70.7%.
+[cartographer_node-1] [INFO] [1776588944.600677566] [cartographer logger]: I0419 04:55:44.000000 82533 constraint_builder_2d.cc:275] Node (0, 388) with 207 points on submap (0, 5) differs by translation 0.00 rotation 0.000 with score 71.7%.
+[cartographer_node-1] [INFO] [1776588944.602376910] [cartographer logger]: I0419 04:55:44.000000 82534 constraint_builder_2d.cc:275] Node (0, 394) with 203 points on submap (0, 5) differs by translation 0.03 rotation 0.005 with score 68.9%.
+[cartographer_node-1] [INFO] [1776588944.607590464] [cartographer logger]: I0419 04:55:44.000000 82532 constraint_builder_2d.cc:275] Node (0, 391) with 215 points on submap (0, 5) differs by translation 0.02 rotation 0.008 with score 65.6%.
+[cartographer_node-1] [INFO] [1776588944.620797073] [cartographer logger]: I0419 04:55:44.000000 82531 constraint_builder_2d.cc:275] Node (0, 398) with 206 points on submap (0, 5) differs by translation 0.01 rotation 0.003 with score 73.7%.
+[cartographer_node-1] [INFO] [1776588944.673995583] [cartographer logger]: I0419 04:55:44.000000 82534 constraint_builder_2d.cc:275] Node (0, 358) with 210 points on submap (0, 5) differs by translation 0.02 rotation 0.002 with score 63.7%.
+[cartographer_node-1] [INFO] [1776588944.679534522] [cartographer logger]: I0419 04:55:44.000000 82533 constraint_builder_2d.cc:275] Node (0, 361) with 204 points on submap (0, 5) differs by translation 0.01 rotation 0.000 with score 64.0%.
+[cartographer_node-1] [INFO] [1776588944.688309487] [cartographer logger]: I0419 04:55:44.000000 82531 constraint_builder_2d.cc:275] Node (0, 364) with 204 points on submap (0, 5) differs by translation 0.01 rotation 0.001 with score 60.7%.
+[cartographer_node-1] [INFO] [1776588944.795066518] [cartographer logger]: I0419 04:55:44.000000 82511 pose_graph_2d.cc:148] Inserted submap (0, 7).
+[cartographer_node-1] [INFO] [1776588944.795481922] [cartographer logger]: I0419 04:55:44.000000 82534 pose_graph_2d.cc:538] Remaining work items in queue: 1
+[cartographer_node-1] [INFO] [1776588944.795640582] [cartographer logger]: I0419 04:55:44.000000 82534 constraint_builder_2d.cc:290] 34 computations resulted in 13 additional constraints.
+[cartographer_node-1] [INFO] [1776588944.795839820] [cartographer logger]: I0419 04:55:44.000000 82534 constraint_builder_2d.cc:292] Score histogram:
+[cartographer_node-1] Count: 41  Min: 0.603846  Max: 0.818844  Mean: 0.697193
+[cartographer_node-1] [0.603846, 0.625346)	                  ##	Count: 4 (9.7561%)	Total: 4 (9.7561%)
+[cartographer_node-1] [0.625346, 0.646846)	                ####	Count: 8 (19.5122%)	Total: 12 (29.2683%)
+[cartographer_node-1] [0.646846, 0.668345)	                  ##	Count: 5 (12.1951%)	Total: 17 (41.4634%)
+[cartographer_node-1] [0.668345, 0.689845)	                   #	Count: 2 (4.87805%)	Total: 19 (46.3415%)
+[cartographer_node-1] [0.689845, 0.711345)	                 ###	Count: 6 (14.6341%)	Total: 25 (60.9756%)
+[cartographer_node-1] [0.711345, 0.732845)	                  ##	Count: 4 (9.7561%)	Total: 29 (70.7317%)
+[cartographer_node-1] [0.732845, 0.754344)	                  ##	Count: 4 (9.7561%)	Total: 33 (80.4878%)
+[cartographer_node-1] [0.754344, 0.775844)	                   #	Count: 3 (7.31707%)	Total: 36 (87.8049%)
+[cartographer_node-1] [0.775844, 0.797344)	                    	Count: 0 (0%)	Total: 36 (87.8049%)
+[cartographer_node-1] [0.797344, 0.818844]	                  ##	Count: 5 (12.1951%)	Total: 41 (100%)
+[cartographer_node-1] [INFO] [1776588945.158964495] [cartographer logger]: I0419 04:55:45.000000 82532 constraint_builder_2d.cc:275] Node (0, 561) with 202 points on submap (0, 5) differs by translation 0.00 rotation 0.002 with score 68.4%.
+[cartographer_node-1] [INFO] [1776588946.426540526] [cartographer logger]: I0419 04:55:46.000000 82531 constraint_builder_2d.cc:275] Node (0, 564) with 201 points on submap (0, 5) differs by translation 0.02 rotation 0.001 with score 72.4%.
+[cartographer_node-1] [INFO] [1776588947.910609905] [cartographer logger]: I0419 04:55:47.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.73 Hz 1.00e-02 s +/- 5.26e-04 s (pulsed at 100.30% real time)
+[cartographer_node-1] [INFO] [1776588947.910718996] [cartographer logger]: I0419 04:55:47.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.38e-02 s +/- 5.12e-03 s (pulsed at 99.95% real time)
+[cartographer_node-1] [INFO] [1776588948.933540190] [cartographer logger]: I0419 04:55:48.000000 82531 constraint_builder_2d.cc:275] Node (0, 568) with 206 points on submap (0, 5) differs by translation 0.01 rotation 0.001 with score 71.1%.
+[cartographer_node-1] [INFO] [1776588950.828940879] [cartographer logger]: I0419 04:55:50.000000 82532 constraint_builder_2d.cc:275] Node (0, 571) with 211 points on submap (0, 5) differs by translation 0.01 rotation 0.005 with score 69.5%.
+[cartographer_node-1] [INFO] [1776588951.831436165] [cartographer logger]: I0419 04:55:51.000000 82532 constraint_builder_2d.cc:275] Node (0, 574) with 205 points on submap (0, 5) differs by translation 0.01 rotation 0.002 with score 67.5%.
+[cartographer_node-1] [INFO] [1776588953.711427214] [cartographer logger]: I0419 04:55:53.000000 82511 motion_filter.cc:42] Motion filter reduced the number of nodes to 14.45%.
+[cartographer_node-1] [INFO] [1776588953.755950378] [cartographer logger]: I0419 04:55:53.000000 82532 constraint_builder_2d.cc:275] Node (0, 578) with 213 points on submap (0, 5) differs by translation 0.01 rotation 0.003 with score 69.2%.
+[cartographer_node-1] [INFO] [1776588955.513822658] [cartographer logger]: I0419 04:55:55.000000 82534 constraint_builder_2d.cc:275] Node (0, 581) with 211 points on submap (0, 5) differs by translation 0.01 rotation 0.004 with score 66.2%.
+[cartographer_node-1] [INFO] [1776588957.171333190] [cartographer logger]: I0419 04:55:57.000000 82533 constraint_builder_2d.cc:275] Node (0, 584) with 211 points on submap (0, 5) differs by translation 0.02 rotation 0.001 with score 60.5%.
+[cartographer_node-1] [INFO] [1776588962.919301566] [cartographer logger]: I0419 04:56:02.000000 82511 collated_trajectory_builder.cc:81] imu rate: 99.74 Hz 1.00e-02 s +/- 5.24e-04 s (pulsed at 100.31% real time)
+[cartographer_node-1] [INFO] [1776588962.919413761] [cartographer logger]: I0419 04:56:02.000000 82511 collated_trajectory_builder.cc:81] scan rate: 11.93 Hz 8.39e-02 s +/- 5.16e-03 s (pulsed at 99.98% real time)

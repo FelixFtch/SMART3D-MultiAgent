@@ -1,0 +1,60 @@
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+[1/12] Static TF...
+[2/12] LiDAR...
+[3/12] IMU...
+[4/12] IMU bridge...
+[5/12] STP23L range...
+[6/12] STP23L hard-brake guard...
+[7/12] Wheel odom skipped (START_ODOM=0)
+[8/12] Cartographer (robotcar_2d.lua)...
+[10/12] Campus map bridge...
+[11/12] Robot state publisher...
+[12/12] Pi5 client...
+[watchdog] Pi ROS watchdog...
+==== Topic Probe (5s) ====
+/scan msgs=60
+/IMU_data msgs=501
+/map msgs=15
+/car1/pose msgs=50
+Jetson full runtime started.

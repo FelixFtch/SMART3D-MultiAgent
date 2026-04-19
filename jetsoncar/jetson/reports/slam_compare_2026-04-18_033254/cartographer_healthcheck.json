@@ -1,0 +1,208 @@
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.136-tegra aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+3 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+122 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+*** System restart required ***
+{
+  "counts_6s": {
+    "scan": 72,
+    "imu": 601,
+    "front_range": 60,
+    "map": 10,
+    "map_campus": 6,
+    "pose": 60,
+    "image_raw": 180,
+    "camera_info": 180
+  },
+  "last": {
+    "map": [
+      194,
+      179,
+      0.05000000074505806
+    ],
+    "map_campus": [
+      194,
+      179,
+      0.05000000074505806
+    ],
+    "pose": [
+      -0.009803816178097516,
+      0.005410531564464395
+    ],
+    "front_range": 3.572999954223633
+  },
+  "topics": {
+    "/IMU_data": {
+      "types": [
+        "sensor_msgs/msg/Imu"
+      ],
+      "publishers": 1,
+      "subscribers": 4
+    },
+    "/camera_info": {
+      "types": [
+        "sensor_msgs/msg/CameraInfo"
+      ],
+      "publishers": 1,
+      "subscribers": 1
+    },
+    "/car1/pose": {
+      "types": [
+        "geometry_msgs/msg/PoseStamped"
+      ],
+      "publishers": 1,
+      "subscribers": 5
+    },
+    "/front_range": {
+      "types": [
+        "sensor_msgs/msg/Range"
+      ],
+      "publishers": 1,
+      "subscribers": 2
+    },
+    "/image_raw": {
+      "types": [
+        "sensor_msgs/msg/Image"
+      ],
+      "publishers": 1,
+      "subscribers": 1
+    },
+    "/map": {
+      "types": [
+        "nav_msgs/msg/OccupancyGrid"
+      ],
+      "publishers": 1,
+      "subscribers": 3
+    },
+    "/map_campus": {
+      "types": [
+        "nav_msgs/msg/OccupancyGrid"
+      ],
+      "publishers": 1,
+      "subscribers": 4
+    },
+    "/scan": {
+      "types": [
+        "sensor_msgs/msg/LaserScan"
+      ],
+      "publishers": 1,
+      "subscribers": 7
+    }
+  },
+  "video_devices": [
+    "/dev/video3",
+    "/dev/video2",
+    "/dev/video1",
+    "/dev/video0"
+  ],
+  "tty_usb0_owner": [],
+  "processes": [
+    "jetson     39721       1  0 02:25 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p output_encoding:=rgb8",
+    "jetson     39728   39721 13 02:25 ?        00:09:03 /opt/ros/humble/lib/v4l2_camera/v4l2_camera_node --ros-args -p video_device:=/dev/video0 -p output_encoding:=rgb8",
+    "jetson     58595       1  0 03:33 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 run lslidar_driver lslidar_driver_node --ros-args --params-file /home/jetson/SMART3D/jetson_runtime/m10p_uart.yaml",
+    "jetson     58597   58595 10 03:33 ?        00:00:05 /home/jetson/SMART3D/ws_lidar/install/lslidar_driver/lib/lslidar_driver/lslidar_driver_node --ros-args --params-file /home/jetson/SMART3D/jetson_runtime/m10p_uart.yaml",
+    "jetson     58609       1  0 03:33 ?        00:00:00 /usr/bin/python3 /opt/ros/humble/bin/ros2 run hipnuc_imu talker --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00 -p baud_rate:=115200 -p imu_topic:=/IMU_data -p frame_id:=base_link",
+    "jetson     58611   58609  4 03:33 ?        00:00:02 /home/jetson/SMART3D/ws_imu/install/hipnuc_imu/lib/hipnuc_imu/talker --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00 -p baud_rate:=115200 -p imu_topic:=/IMU_data -p frame_id:=base_link",
+    "jetson     58641       1 23 03:33 ?        00:00:10 python3 /home/jetson/SMART3D/jetson_runtime/stp23l_range.py --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6C069316-if00 -p baud_rate:=230400 -p frame_id:=stp23l_link -p min_range:=0.03 -p max_range:=7.5 -p emergency_stop_dist:=0.25",
+    "jetson     58660       1  5 03:33 ?        00:00:02 python3 /home/jetson/SMART3D/jetson_runtime/stp23l_hard_brake_guard.py --ros-args -p range_topic:=/front_range -p trigger_distance_m:=0.05 -p hold_time_sec:=10.0 -p clear_distance_m:=0.08 -p clear_time_sec:=1.0 -p serial_port:=/dev/ttyUSB0 -p baud_rate:=115200 -p publish_zero_cmd_vel:=true -p stop_rs485_owners_on_trigger:=true",
+    "jetson     58681   58679 53 03:33 ?        00:00:22 /opt/ros/humble/lib/cartographer_ros/cartographer_node -configuration_directory /home/jetson/SMART3D/jetson_runtime -configuration_basename robotcar_2d.lua --ros-args -r __node:=cartographer_node --params-file /tmp/launch_params_3bpfpv9d -r imu:=/IMU_data",
+    "jetson     58705   58679  1 03:33 ?        00:00:00 /opt/ros/humble/lib/cartographer_ros/cartographer_occupancy_grid_node --ros-args -r __node:=occupancy_grid_node --params-file /tmp/launch_params_60u6_wkf",
+    "jetson     58717       1  3 03:33 ?        00:00:01 python3 /home/jetson/SMART3D/jetson_runtime/campus_map_bridge.py",
+    "jetson     58751       1 35 03:33 ?        00:00:10 python3 /home/jetson/SMART3D/jetson_runtime/pi5_client.py --ros-args -p car_ns:=car1 -p robot_speed:=0.24 -p campus_mode:=true",
+    "jetson     58770       1 25 03:33 ?        00:00:06 python3 /home/jetson/SMART3D/jetson_runtime/pi_ros_watchdog.py"
+  ],
+  "logs": {
+    "lidar": [
+      "[INFO] [1776497602.167399097] [lslidar_driver_node]: Lidar is M10_P",
+      "[INFO] [1776497602.170525931] [lslidar_driver_node]: Initialised lslidar without error",
+      "[INFO] [1776497602.170769140] [lslidar_driver_node]: Successfully initialize driver...",
+      "port = /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00, baud_rate = 500000",
+      "open_port /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6D010263-if00 OK !",
+      "degree_compensation = -327.670000"
+    ],
+    "imu": [
+      "[INFO] [1776497605.170111227] [IMU_publisher]: serial_port: /dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00",
+      "",
+      "[INFO] [1776497605.170438311] [IMU_publisher]: baud_rate: 115200",
+      "",
+      "[INFO] [1776497605.170475720] [IMU_publisher]: frame_id: base_link",
+      "",
+      "[INFO] [1776497605.170496233] [IMU_publisher]: imu_topic: /IMU_data",
+      ""
+    ],
+    "odom": [],
+    "stp23l": [
+      "[INFO] [1776497609.379934764] [stp23l_range]: STP-23L connected: /dev/serial/by-id/usb-1a86_USB_Single_Serial_5A6C069316-if00 @ 230400"
+    ],
+    "stp23l_guard": [
+      "[INFO] [1776497611.499231712] [stp23l_hard_brake_guard]: STP23L hard-brake guard ready: topic=/front_range trigger=0.050m hold=10.0s port=/dev/ttyUSB0"
+    ],
+    "cartographer": [
+      "[cartographer_node-1] [WARN] [1776497651.968154053] [cartographer logger]: W0418 03:34:11.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497652.378307930] [cartographer logger]: W0418 03:34:12.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497652.543291912] [cartographer logger]: W0418 03:34:12.000000 58681 sensor_bridge.cpp:211] Ignored subdivision of a LaserScan message from sensor scan because previous subdivision time 639120944525426040 is not before current subdivision time 639120944525420906",
+      "[cartographer_node-1] [WARN] [1776497652.968118909] [cartographer logger]: W0418 03:34:12.000000 58681 range_data_collator.cc:82] Dropped 1 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497653.210946090] [cartographer logger]: W0418 03:34:13.000000 58681 sensor_bridge.cpp:211] Ignored subdivision of a LaserScan message from sensor scan because previous subdivision time 639120944532096746 is not before current subdivision time 639120944532096094",
+      "[cartographer_node-1] [WARN] [1776497653.548280191] [cartographer logger]: W0418 03:34:13.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497654.378383675] [cartographer logger]: W0418 03:34:14.000000 58681 range_data_collator.cc:82] Dropped 25 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497654.798312173] [cartographer logger]: W0418 03:34:14.000000 58681 range_data_collator.cc:82] Dropped 30 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497655.048411471] [cartographer logger]: W0418 03:34:15.000000 58681 range_data_collator.cc:82] Dropped 2 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497655.298171744] [cartographer logger]: W0418 03:34:15.000000 58681 range_data_collator.cc:82] Dropped 3 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497655.378248235] [cartographer logger]: W0418 03:34:15.000000 58681 range_data_collator.cc:82] Dropped 4 earlier points.",
+      "[cartographer_node-1] [WARN] [1776497655.548123863] [cartographer logger]: W0418 03:34:15.000000 58681 range_data_collator.cc:82] Dropped 8 earlier points."
+    ],
+    "slam_toolbox": [],
+    "pi5_client": [
+      "[INFO] [1776497637.464394657] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497638.938847290] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497640.516707926] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497641.914432215] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497643.571928610] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497644.916375955] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497646.670811552] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497647.964230041] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497649.693841221] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497650.911136928] [pi5_client]: Path received: 4 pts",
+      "[INFO] [1776497652.717833925] [pi5_client]: Path received: 3 pts",
+      "[INFO] [1776497653.941381427] [pi5_client]: Path received: 3 pts"
+    ],
+    "camera": []
+  }
+}

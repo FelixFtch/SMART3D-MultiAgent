@@ -1,0 +1,8 @@
+82444 /usr/bin/python3 /opt/ros/humble/bin/ros2 run lslidar_driver lslidar_driver_node --ros-args --params-file /home/jetson/SMART3D/jetson_runtime/m10p_uart.yaml
+82446 /home/jetson/SMART3D/ws_lidar/install/lslidar_driver/lib/lslidar_driver/lslidar_driver_node --ros-args --params-file /home/jetson/SMART3D/jetson_runtime/m10p_uart.yaml
+82458 /usr/bin/python3 /opt/ros/humble/bin/ros2 run hipnuc_imu talker --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00 -p baud_rate:=115200 -p imu_topic:=/IMU_data -p frame_id:=base_link
+82460 /home/jetson/SMART3D/ws_imu/install/hipnuc_imu/lib/hipnuc_imu/talker --ros-args -p serial_port:=/dev/serial/by-id/usb-1a86_USB_Single_Serial_5B0B030655-if00 -p baud_rate:=115200 -p imu_topic:=/IMU_data -p frame_id:=base_link
+82490 python3 /home/jetson/SMART3D/jetson_runtime/scan_metadata_normalizer.py --ros-args -p input_topic:=/scan -p output_topic:=/scan_slam -p adjust_angle_increment:=false -p prefer_stamp_delta_for_scan_time:=true -p derive_time_increment_from_scan_time:=true -p fallback_scan_hz:=12.0
+82511 /opt/ros/humble/lib/cartographer_ros/cartographer_node -configuration_directory /home/jetson/SMART3D/jetson_runtime -configuration_basename robotcar_2d.lua --ros-args -r __node:=cartographer_node --params-file /tmp/launch_params_mf_ln_n8 -r imu:=/IMU_data -r scan:=/scan_slam
+82880 python3 /home/jetson/SMART3D/jetson_runtime/cmd_vel_driver_pi5_reference.py
+82899 python3 /home/jetson/SMART3D/jetson_runtime/pi5_client.py --ros-args -p car_ns:=car1 -p robot_speed:=0.24 -p emergency_stop_dist:=0.05 -p campus_mode:=true

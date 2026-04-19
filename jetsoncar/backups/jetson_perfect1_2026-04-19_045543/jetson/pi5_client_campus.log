@@ -1,0 +1,291 @@
+[INFO] [1776588681.526269871] [pi5_client]: Pi5 client [car1] | speed=0.24 | lookahead=0.35 | waypoint=0.20 | estop=0.05 | waiting for path...
+[INFO] [1776588681.526962818] [pi5_client]: Campus mode enabled: path subscription uses BEST_EFFORT
+[INFO] [1776588728.557722469] [pi5_client]: Goal forwarded: (-2.75, 6.82)
+[INFO] [1776588728.686268930] [pi5_client]: Path received: 15 pts | age=0.00s
+[INFO] [1776588728.704297876] [pi5_client]: PathProbe age=0.02s stale=False first_idx=0 first_dist=0.00 first_bearing_deg=-49.0 first_behind=False near_idx=0 near_dist=0.00 pidx=1 la_idx=1 la_dist=1.32 la_bearing_deg=100.5
+[INFO] [1776588728.814992580] [pi5_client]: Path received: 16 pts | age=0.00s
+[INFO] [1776588729.705032068] [pi5_client]: PathProbe age=0.89s stale=False first_idx=0 first_dist=0.04 first_bearing_deg=-8.9 first_behind=False near_idx=0 near_dist=0.04 pidx=2 la_idx=2 la_dist=2.02 la_bearing_deg=87.6
+[INFO] [1776588730.664726601] [pi5_client]: Path received: 13 pts | age=0.01s
+[INFO] [1776588730.705196710] [pi5_client]: PathProbe age=0.05s stale=False first_idx=0 first_dist=0.00 first_bearing_deg=-65.0 first_behind=False near_idx=0 near_dist=0.00 pidx=1 la_idx=1 la_dist=1.34 la_bearing_deg=67.6
+[INFO] [1776588731.804982346] [pi5_client]: PathProbe age=1.15s stale=False first_idx=0 first_dist=0.01 first_bearing_deg=-39.7 first_behind=False near_idx=0 near_dist=0.01 pidx=1 la_idx=1 la_dist=1.35 la_bearing_deg=49.6
+[INFO] [1776588731.872058822] [pi5_client]: Path received: 13 pts | age=0.00s
+[INFO] [1776588732.904520488] [pi5_client]: PathProbe age=1.03s stale=False first_idx=0 first_dist=0.02 first_bearing_deg=45.0 first_behind=False near_idx=0 near_dist=0.02 pidx=1 la_idx=1 la_dist=1.43 la_bearing_deg=27.0
+[INFO] [1776588733.079903604] [pi5_client]: Path received: 11 pts | age=0.00s
+[INFO] [1776588733.904946232] [pi5_client]: PathProbe age=0.83s stale=False first_idx=0 first_dist=0.12 first_bearing_deg=158.6 first_behind=True near_idx=0 near_dist=0.12 pidx=1 la_idx=1 la_dist=1.39 la_bearing_deg=15.5
+[INFO] [1776588735.005398612] [pi5_client]: PathProbe age=1.93s stale=False first_idx=0 first_dist=0.42 first_bearing_deg=167.0 first_behind=True near_idx=0 near_dist=0.42 pidx=1 la_idx=1 la_dist=1.11 la_bearing_deg=13.2
+[INFO] [1776588735.491719118] [pi5_client]: Path received: 14 pts | age=0.00s
+[INFO] [1776588736.105249602] [pi5_client]: PathProbe age=0.62s stale=False first_idx=0 first_dist=0.21 first_bearing_deg=177.8 first_behind=True near_idx=0 near_dist=0.21 pidx=1 la_idx=1 la_dist=1.19 la_bearing_deg=7.3
+[INFO] [1776588736.708962376] [pi5_client]: Path received: 16 pts | age=0.00s
+[INFO] [1776588737.204906029] [pi5_client]: PathProbe age=0.50s stale=False first_idx=0 first_dist=0.19 first_bearing_deg=176.8 first_behind=True near_idx=0 near_dist=0.19 pidx=1 la_idx=1 la_dist=0.88 la_bearing_deg=5.5
+[INFO] [1776588738.304996166] [pi5_client]: PathProbe age=1.60s stale=False first_idx=0 first_dist=0.46 first_bearing_deg=176.0 first_behind=True near_idx=0 near_dist=0.46 pidx=1 la_idx=1 la_dist=0.61 la_bearing_deg=5.5
+[INFO] [1776588739.118049766] [pi5_client]: Path received: 11 pts | age=0.00s
+[INFO] [1776588739.306125715] [pi5_client]: PathProbe age=0.19s stale=False first_idx=0 first_dist=0.11 first_bearing_deg=178.6 first_behind=True near_idx=0 near_dist=0.11 pidx=1 la_idx=1 la_dist=0.61 la_bearing_deg=14.8
+[INFO] [1776588740.345489026] [pi5_client]: Path received: 13 pts | age=0.00s
+[INFO] [1776588740.404981582] [pi5_client]: PathProbe age=0.06s stale=False first_idx=0 first_dist=0.08 first_bearing_deg=-172.5 first_behind=True near_idx=0 near_dist=0.08 pidx=2 la_idx=2 la_dist=0.61 la_bearing_deg=16.2
+[INFO] [1776588741.505538426] [pi5_client]: PathProbe age=1.16s stale=False first_idx=0 first_dist=0.35 first_bearing_deg=174.7 first_behind=True near_idx=1 near_dist=0.11 pidx=2 la_idx=2 la_dist=0.36 la_bearing_deg=17.3
+[INFO] [1776588742.605027115] [pi5_client]: PathProbe age=2.26s stale=True first_idx=0 first_dist=0.54 first_bearing_deg=169.2 first_behind=True near_idx=2 near_dist=0.17 pidx=3 la_idx=3 la_dist=0.66 la_bearing_deg=15.4
+[INFO] [1776588742.749680841] [pi5_client]: Path received: 10 pts | age=0.00s
+[INFO] [1776588743.704811591] [pi5_client]: PathProbe age=0.96s stale=False first_idx=0 first_dist=0.31 first_bearing_deg=173.7 first_behind=True near_idx=0 near_dist=0.31 pidx=1 la_idx=1 la_dist=0.60 la_bearing_deg=15.3
+[INFO] [1776588744.803876657] [pi5_client]: PathProbe age=2.06s stale=True first_idx=0 first_dist=0.57 first_bearing_deg=167.7 first_behind=True near_idx=1 near_dist=0.36 pidx=1 la_idx=1 la_dist=0.36 la_bearing_deg=18.1
+[INFO] [1776588745.169958360] [pi5_client]: Path received: 8 pts | age=0.00s
+[INFO] [1776588745.804890534] [pi5_client]: PathProbe age=0.64s stale=False first_idx=0 first_dist=0.20 first_bearing_deg=177.1 first_behind=True near_idx=0 near_dist=0.20 pidx=1 la_idx=1 la_dist=0.38 la_bearing_deg=5.2
+[INFO] [1776588746.366191971] [pi5_client]: Path received: 4 pts | age=0.00s
+[INFO] [1776588746.905253048] [pi5_client]: PathProbe age=0.54s stale=False first_idx=0 first_dist=0.06 first_bearing_deg=-166.9 first_behind=True near_idx=0 near_dist=0.06 pidx=1 la_idx=1 la_dist=1.05 la_bearing_deg=-29.1
+[INFO] [1776588747.585289800] [pi5_client]: Path received: 6 pts | age=0.00s
+[INFO] [1776588748.005247714] [pi5_client]: PathProbe age=0.42s stale=False first_idx=0 first_dist=0.08 first_bearing_deg=163.4 first_behind=True near_idx=0 near_dist=0.08 pidx=1 la_idx=1 la_dist=1.53 la_bearing_deg=-13.1
+[INFO] [1776588748.863204203] [pi5_client]: Path received: 6 pts | age=0.00s
+[INFO] [1776588749.105042377] [pi5_client]: PathProbe age=0.24s stale=False first_idx=0 first_dist=0.13 first_bearing_deg=175.6 first_behind=True near_idx=0 near_dist=0.13 pidx=1 la_idx=1 la_dist=1.37 la_bearing_deg=-6.7
+[INFO] [1776588750.205019127] [pi5_client]: PathProbe age=1.34s stale=False first_idx=0 first_dist=0.42 first_bearing_deg=179.4 first_behind=True near_idx=0 near_dist=0.42 pidx=1 la_idx=1 la_dist=1.08 la_bearing_deg=-4.0
+[INFO] [1776588751.305623256] [pi5_client]: PathProbe age=2.44s stale=True first_idx=0 first_dist=0.71 first_bearing_deg=-179.5 first_behind=True near_idx=0 near_dist=0.71 pidx=1 la_idx=1 la_dist=0.79 la_bearing_deg=-2.7
+[INFO] [1776588752.396289641] [pi5_client]: Path received: 5 pts | age=0.00s
+[INFO] [1776588752.405287938] [pi5_client]: PathProbe age=0.01s stale=False first_idx=0 first_dist=0.08 first_bearing_deg=179.1 first_behind=True near_idx=0 near_dist=0.08 pidx=1 la_idx=1 la_dist=1.49 la_bearing_deg=-5.3
+[INFO] [1776588753.505598944] [pi5_client]: PathProbe age=1.11s stale=False first_idx=0 first_dist=0.36 first_bearing_deg=179.6 first_behind=True near_idx=0 near_dist=0.36 pidx=1 la_idx=1 la_dist=1.21 la_bearing_deg=-3.4
+[INFO] [1776588754.605163019] [pi5_client]: PathProbe age=2.21s stale=True first_idx=0 first_dist=0.64 first_bearing_deg=179.7 first_behind=True near_idx=0 near_dist=0.64 pidx=1 la_idx=1 la_dist=0.93 la_bearing_deg=-1.9
+[INFO] [1776588755.605174135] [pi5_client]: PathProbe age=3.21s stale=True first_idx=0 first_dist=0.89 first_bearing_deg=179.8 first_behind=True near_idx=1 near_dist=0.68 pidx=1 la_idx=1 la_dist=0.68 la_bearing_deg=-1.5
+[INFO] [1776588756.605191397] [pi5_client]: PathProbe age=4.21s stale=True first_idx=0 first_dist=1.15 first_bearing_deg=180.0 first_behind=True near_idx=1 near_dist=0.42 pidx=1 la_idx=1 la_dist=0.42 la_bearing_deg=-1.4
+[INFO] [1776588757.605230357] [pi5_client]: PathProbe age=5.21s stale=True first_idx=0 first_dist=1.41 first_bearing_deg=179.1 first_behind=True near_idx=1 near_dist=0.16 pidx=2 la_idx=2 la_dist=0.82 la_bearing_deg=1.3
+[INFO] [1776588758.421634798] [pi5_client]: Path received: 2 pts | age=0.00s
+[INFO] [1776588758.605625488] [pi5_client]: PathProbe age=0.18s stale=False first_idx=0 first_dist=0.12 first_bearing_deg=-175.6 first_behind=True near_idx=0 near_dist=0.12 pidx=1 la_idx=1 la_dist=1.58 la_bearing_deg=3.1
+[INFO] [1776588758.890347189] [pi5_client]: Goal forwarded: (-6.95, 11.72)
+[INFO] [1776588759.177242775] [pi5_client]: Path received: 12 pts | age=0.00s
+[INFO] [1776588759.486660200] [pi5_client]: Path received: 13 pts | age=0.00s
+[INFO] [1776588759.704526643] [pi5_client]: PathProbe age=0.22s stale=False first_idx=0 first_dist=0.22 first_bearing_deg=-175.9 first_behind=True near_idx=0 near_dist=0.22 pidx=1 la_idx=1 la_dist=1.44 la_bearing_deg=-9.5
+[INFO] [1776588760.704809008] [pi5_client]: PathProbe age=1.22s stale=False first_idx=0 first_dist=0.44 first_bearing_deg=-179.1 first_behind=True near_idx=0 near_dist=0.44 pidx=1 la_idx=1 la_dist=1.22 la_bearing_deg=-6.5
+[INFO] [1776588761.706137355] [pi5_client]: PathProbe age=2.22s stale=True first_idx=0 first_dist=0.70 first_bearing_deg=-178.3 first_behind=True near_idx=0 near_dist=0.70 pidx=1 la_idx=1 la_dist=0.96 la_bearing_deg=-4.2
+[INFO] [1776588762.804955793] [pi5_client]: PathProbe age=3.32s stale=True first_idx=0 first_dist=0.97 first_bearing_deg=-177.8 first_behind=True near_idx=1 near_dist=0.68 pidx=1 la_idx=1 la_dist=0.68 la_bearing_deg=-2.8
+[INFO] [1776588763.905026781] [pi5_client]: PathProbe age=4.42s stale=True first_idx=0 first_dist=1.26 first_bearing_deg=-177.5 first_behind=True near_idx=1 near_dist=0.40 pidx=1 la_idx=1 la_dist=0.40 la_bearing_deg=-1.4
+[INFO] [1776588765.005422067] [pi5_client]: PathProbe age=5.52s stale=True first_idx=0 first_dist=1.57 first_bearing_deg=-178.4 first_behind=True near_idx=1 near_dist=0.09 pidx=2 la_idx=2 la_dist=0.60 la_bearing_deg=2.8
+[INFO] [1776588766.105989585] [pi5_client]: PathProbe age=6.62s stale=True first_idx=0 first_dist=1.85 first_bearing_deg=179.2 first_behind=True near_idx=1 near_dist=0.20 pidx=2 la_idx=3 la_dist=0.65 la_bearing_deg=1.1
+[INFO] [1776588767.204797248] [pi5_client]: PathProbe age=7.72s stale=True first_idx=0 first_dist=2.14 first_bearing_deg=178.4 first_behind=True near_idx=2 near_dist=0.04 pidx=3 la_idx=3 la_dist=0.37 la_bearing_deg=0.5
+[INFO] [1776588768.304879476] [pi5_client]: PathProbe age=8.82s stale=True first_idx=0 first_dist=2.41 first_bearing_deg=178.8 first_behind=True near_idx=3 near_dist=0.10 pidx=4 la_idx=4 la_dist=0.71 la_bearing_deg=-2.7
+[INFO] [1776588769.236040102] [pi5_client]: Path received: 8 pts | age=0.00s
+[INFO] [1776588769.305249634] [pi5_client]: PathProbe age=0.07s stale=False first_idx=0 first_dist=0.10 first_bearing_deg=175.1 first_behind=True near_idx=0 near_dist=0.10 pidx=1 la_idx=1 la_dist=1.38 la_bearing_deg=2.9
+[INFO] [1776588770.404127929] [pi5_client]: PathProbe age=1.17s stale=False first_idx=0 first_dist=0.36 first_bearing_deg=179.1 first_behind=True near_idx=0 near_dist=0.36 pidx=1 la_idx=1 la_dist=1.12 la_bearing_deg=2.5
+[INFO] [1776588771.504525949] [pi5_client]: PathProbe age=2.27s stale=True first_idx=0 first_dist=0.66 first_bearing_deg=177.7 first_behind=True near_idx=0 near_dist=0.66 pidx=1 la_idx=1 la_dist=0.82 la_bearing_deg=1.8
+[INFO] [1776588772.605876636] [pi5_client]: PathProbe age=3.37s stale=True first_idx=0 first_dist=0.95 first_bearing_deg=176.2 first_behind=True near_idx=1 near_dist=0.53 pidx=1 la_idx=1 la_dist=0.53 la_bearing_deg=2.2
+[INFO] [1776588773.705791478] [pi5_client]: PathProbe age=4.47s stale=True first_idx=0 first_dist=1.24 first_bearing_deg=173.0 first_behind=True near_idx=1 near_dist=0.24 pidx=1 la_idx=2 la_dist=0.63 la_bearing_deg=27.6
+[INFO] [1776588774.034688938] [pi5_client]: Path received: 6 pts | age=0.00s
+[INFO] [1776588774.705774851] [pi5_client]: PathProbe age=0.67s stale=False first_idx=0 first_dist=0.02 first_bearing_deg=-159.8 first_behind=True near_idx=0 near_dist=0.02 pidx=1 la_idx=1 la_dist=1.09 la_bearing_deg=26.5
+[INFO] [1776588775.141113755] [pi5_client]: Path received: 8 pts | age=0.00s
+[INFO] [1776588775.804760167] [pi5_client]: PathProbe age=0.66s stale=False first_idx=0 first_dist=0.10 first_bearing_deg=-166.5 first_behind=True near_idx=0 near_dist=0.10 pidx=1 la_idx=1 la_dist=0.65 la_bearing_deg=-46.5
+[INFO] [1776588776.804895260] [pi5_client]: PathProbe age=1.66s stale=False first_idx=0 first_dist=0.12 first_bearing_deg=-163.0 first_behind=True near_idx=0 near_dist=0.12 pidx=1 la_idx=1 la_dist=0.60 la_bearing_deg=-19.3
+[INFO] [1776588777.646217763] [pi5_client]: Path received: 5 pts | age=0.00s
+[INFO] [1776588777.805003537] [pi5_client]: PathProbe age=0.16s stale=False first_idx=0 first_dist=0.16 first_bearing_deg=172.0 first_behind=True near_idx=0 near_dist=0.16 pidx=1 la_idx=1 la_dist=1.43 la_bearing_deg=67.9
+[INFO] [1776588778.905448132] [pi5_client]: PathProbe age=1.26s stale=False first_idx=0 first_dist=0.19 first_bearing_deg=161.4 first_behind=True near_idx=0 near_dist=0.19 pidx=1 la_idx=1 la_dist=1.42 la_bearing_deg=55.2
+[INFO] [1776588780.005552751] [pi5_client]: PathProbe age=2.36s stale=True first_idx=0 first_dist=0.19 first_bearing_deg=140.4 first_behind=True near_idx=0 near_dist=0.19 pidx=1 la_idx=1 la_dist=1.40 la_bearing_deg=29.2
+[INFO] [1776588781.104075472] [pi5_client]: PathProbe age=3.46s stale=True first_idx=0 first_dist=0.24 first_bearing_deg=130.5 first_behind=True near_idx=0 near_dist=0.24 pidx=1 la_idx=1 la_dist=1.36 la_bearing_deg=14.9
+[INFO] [1776588781.295168447] [pi5_client]: Path received: 5 pts | age=0.00s
+[INFO] [1776588782.106748308] [pi5_client]: PathProbe age=0.81s stale=False first_idx=0 first_dist=0.31 first_bearing_deg=172.5 first_behind=True near_idx=0 near_dist=0.31 pidx=1 la_idx=1 la_dist=1.09 la_bearing_deg=2.4
+[INFO] [1776588783.205117141] [pi5_client]: PathProbe age=1.91s stale=False first_idx=0 first_dist=0.62 first_bearing_deg=176.2 first_behind=True near_idx=0 near_dist=0.62 pidx=1 la_idx=1 la_dist=0.78 la_bearing_deg=1.4
+[INFO] [1776588784.205039953] [pi5_client]: PathProbe age=2.91s stale=True first_idx=0 first_dist=0.87 first_bearing_deg=176.6 first_behind=True near_idx=1 near_dist=0.53 pidx=1 la_idx=1 la_dist=0.53 la_bearing_deg=1.0
+[INFO] [1776588785.205671169] [pi5_client]: PathProbe age=3.91s stale=True first_idx=0 first_dist=1.11 first_bearing_deg=176.9 first_behind=True near_idx=1 near_dist=0.29 pidx=1 la_idx=2 la_dist=0.93 la_bearing_deg=3.8
+[INFO] [1776588786.304702683] [pi5_client]: PathProbe age=5.01s stale=True first_idx=0 first_dist=1.41 first_bearing_deg=175.8 first_behind=True near_idx=1 near_dist=0.00 pidx=2 la_idx=2 la_dist=0.64 la_bearing_deg=2.6
+[INFO] [1776588787.304965029] [pi5_client]: PathProbe age=6.01s stale=True first_idx=0 first_dist=1.67 first_bearing_deg=175.6 first_behind=True near_idx=1 near_dist=0.27 pidx=2 la_idx=2 la_dist=0.37 la_bearing_deg=1.9
+[INFO] [1776588788.404717078] [pi5_client]: PathProbe age=7.11s stale=True first_idx=0 first_dist=1.94 first_bearing_deg=176.3 first_behind=True near_idx=2 near_dist=0.10 pidx=3 la_idx=3 la_dist=1.49 la_bearing_deg=-3.4
+[INFO] [1776588789.404975779] [pi5_client]: PathProbe age=8.11s stale=True first_idx=0 first_dist=2.20 first_bearing_deg=177.6 first_behind=True near_idx=2 near_dist=0.15 pidx=3 la_idx=3 la_dist=1.24 la_bearing_deg=-2.4
+[INFO] [1776588790.504401327] [pi5_client]: PathProbe age=9.21s stale=True first_idx=0 first_dist=2.47 first_bearing_deg=179.2 first_behind=True near_idx=2 near_dist=0.43 pidx=3 la_idx=3 la_dist=0.97 la_bearing_deg=-0.7
+[INFO] [1776588791.540595364] [pi5_client]: Path received: 3 pts | age=0.00s
+[INFO] [1776588791.604968349] [pi5_client]: PathProbe age=0.06s stale=False first_idx=0 first_dist=0.03 first_bearing_deg=-175.3 first_behind=True near_idx=0 near_dist=0.03 pidx=1 la_idx=1 la_dist=1.29 la_bearing_deg=0.9
+[INFO] [1776588791.939718557] [pi5_client]: Path received: 3 pts | age=0.00s
+[INFO] [1776588792.471321295] [pi5_client]: Goal forwarded: (-26.38, 13.85)
+[INFO] [1776588792.705940920] [pi5_client]: PathProbe age=0.77s stale=False first_idx=0 first_dist=0.21 first_bearing_deg=177.8 first_behind=True near_idx=0 near_dist=0.21 pidx=1 la_idx=1 la_dist=1.01 la_bearing_deg=0.7
+[INFO] [1776588792.765734385] [pi5_client]: Path received: 27 pts | age=0.01s
+[INFO] [1776588793.088250719] [pi5_client]: Path received: 26 pts | age=0.00s
+[INFO] [1776588793.804959134] [pi5_client]: PathProbe age=0.72s stale=False first_idx=0 first_dist=0.22 first_bearing_deg=173.0 first_behind=True near_idx=0 near_dist=0.22 pidx=1 la_idx=1 la_dist=0.85 la_bearing_deg=11.1
+[INFO] [1776588794.905045893] [pi5_client]: PathProbe age=1.82s stale=False first_idx=0 first_dist=0.51 first_bearing_deg=174.3 first_behind=True near_idx=0 near_dist=0.51 pidx=1 la_idx=1 la_dist=0.56 la_bearing_deg=8.3
+[INFO] [1776588796.003802408] [pi5_client]: PathProbe age=2.92s stale=True first_idx=0 first_dist=0.81 first_bearing_deg=173.0 first_behind=True near_idx=1 near_dist=0.26 pidx=1 la_idx=2 la_dist=1.08 la_bearing_deg=3.4
+[INFO] [1776588797.005100383] [pi5_client]: PathProbe age=3.92s stale=True first_idx=0 first_dist=1.06 first_bearing_deg=172.5 first_behind=True near_idx=1 near_dist=0.04 pidx=2 la_idx=2 la_dist=0.84 la_bearing_deg=2.2
+[INFO] [1776588798.005112596] [pi5_client]: PathProbe age=4.92s stale=True first_idx=0 first_dist=1.30 first_bearing_deg=173.0 first_behind=True near_idx=1 near_dist=0.24 pidx=2 la_idx=2 la_dist=0.59 la_bearing_deg=1.4
+[INFO] [1776588799.104631250] [pi5_client]: PathProbe age=6.02s stale=True first_idx=0 first_dist=1.59 first_bearing_deg=173.2 first_behind=True near_idx=2 near_dist=0.30 pidx=2 la_idx=3 la_dist=1.08 la_bearing_deg=6.0
+[INFO] [1776588799.259952006] [pi5_client]: Path received: 24 pts | age=0.00s
+[INFO] [1776588800.104677611] [pi5_client]: PathProbe age=0.85s stale=False first_idx=0 first_dist=0.32 first_bearing_deg=179.9 first_behind=True near_idx=0 near_dist=0.32 pidx=1 la_idx=1 la_dist=1.32 la_bearing_deg=-1.8
+[INFO] [1776588801.105545661] [pi5_client]: PathProbe age=1.85s stale=False first_idx=0 first_dist=0.56 first_bearing_deg=-178.7 first_behind=True near_idx=0 near_dist=0.56 pidx=1 la_idx=1 la_dist=1.08 la_bearing_deg=-1.8
+[INFO] [1776588802.204729976] [pi5_client]: PathProbe age=2.95s stale=True first_idx=0 first_dist=0.82 first_bearing_deg=-178.4 first_behind=True near_idx=0 near_dist=0.82 pidx=1 la_idx=1 la_dist=0.82 la_bearing_deg=-1.5
+[INFO] [1776588803.304642985] [pi5_client]: PathProbe age=4.05s stale=True first_idx=0 first_dist=1.09 first_bearing_deg=-178.9 first_behind=True near_idx=1 near_dist=0.55 pidx=1 la_idx=1 la_dist=0.55 la_bearing_deg=-1.4
+[INFO] [1776588804.304939632] [pi5_client]: PathProbe age=5.05s stale=True first_idx=0 first_dist=1.40 first_bearing_deg=-178.9 first_behind=True near_idx=1 near_dist=0.24 pidx=1 la_idx=2 la_dist=0.44 la_bearing_deg=-3.2
+[INFO] [1776588805.403912426] [pi5_client]: PathProbe age=6.15s stale=True first_idx=0 first_dist=1.64 first_bearing_deg=-177.6 first_behind=True near_idx=1 near_dist=0.01 pidx=2 la_idx=3 la_dist=0.59 la_bearing_deg=-1.9
+[INFO] [1776588806.404449819] [pi5_client]: PathProbe age=7.15s stale=True first_idx=0 first_dist=1.91 first_bearing_deg=-177.1 first_behind=True near_idx=2 near_dist=0.07 pidx=3 la_idx=4 la_dist=1.27 la_bearing_deg=0.9
+[INFO] [1776588807.405054800] [pi5_client]: PathProbe age=8.15s stale=True first_idx=0 first_dist=2.12 first_bearing_deg=-177.9 first_behind=True near_idx=3 near_dist=0.10 pidx=4 la_idx=4 la_dist=1.05 la_bearing_deg=1.0
+[INFO] [1776588808.504890504] [pi5_client]: PathProbe age=9.25s stale=True first_idx=0 first_dist=2.43 first_bearing_deg=-178.6 first_behind=True near_idx=3 near_dist=0.21 pidx=4 la_idx=4 la_dist=0.75 la_bearing_deg=1.1
+[INFO] [1776588808.856673098] [pi5_client]: Path received: 22 pts | age=0.00s
+[INFO] [1776588809.506422042] [pi5_client]: PathProbe age=0.65s stale=False first_idx=0 first_dist=0.31 first_bearing_deg=179.7 first_behind=True near_idx=0 near_dist=0.31 pidx=1 la_idx=1 la_dist=1.38 la_bearing_deg=5.6
+[INFO] [1776588810.604418018] [pi5_client]: PathProbe age=1.75s stale=False first_idx=0 first_dist=0.52 first_bearing_deg=179.0 first_behind=True near_idx=0 near_dist=0.52 pidx=1 la_idx=1 la_dist=1.18 la_bearing_deg=2.7
+[INFO] [1776588811.606504647] [pi5_client]: PathProbe age=2.75s stale=True first_idx=0 first_dist=0.84 first_bearing_deg=177.4 first_behind=True near_idx=0 near_dist=0.84 pidx=1 la_idx=1 la_dist=0.85 la_bearing_deg=1.5
+[INFO] [1776588812.704651511] [pi5_client]: PathProbe age=3.85s stale=True first_idx=0 first_dist=1.07 first_bearing_deg=178.1 first_behind=True near_idx=1 near_dist=0.62 pidx=1 la_idx=1 la_dist=0.62 la_bearing_deg=0.5
+[INFO] [1776588813.704686470] [pi5_client]: PathProbe age=4.85s stale=True first_idx=0 first_dist=1.36 first_bearing_deg=177.6 first_behind=True near_idx=1 near_dist=0.34 pidx=1 la_idx=2 la_dist=0.68 la_bearing_deg=-6.8
+[INFO] [1776588814.805309951] [pi5_client]: PathProbe age=5.95s stale=True first_idx=0 first_dist=1.58 first_bearing_deg=-179.5 first_behind=True near_idx=1 near_dist=0.11 pidx=2 la_idx=2 la_dist=0.46 la_bearing_deg=-6.9
+[INFO] [1776588815.904768794] [pi5_client]: PathProbe age=7.05s stale=True first_idx=0 first_dist=1.91 first_bearing_deg=-178.9 first_behind=True near_idx=2 near_dist=0.13 pidx=3 la_idx=3 la_dist=1.02 la_bearing_deg=1.1
+[INFO] [1776588817.003203386] [pi5_client]: PathProbe age=8.15s stale=True first_idx=0 first_dist=2.18 first_bearing_deg=-179.9 first_behind=True near_idx=2 near_dist=0.15 pidx=3 la_idx=3 la_dist=0.75 la_bearing_deg=1.5
+[INFO] [1776588818.004161993] [pi5_client]: PathProbe age=9.15s stale=True first_idx=0 first_dist=2.45 first_bearing_deg=179.6 first_behind=True near_idx=2 near_dist=0.41 pidx=3 la_idx=3 la_dist=0.49 la_bearing_deg=1.4
+[INFO] [1776588818.468297121] [pi5_client]: Path received: 15 pts | age=0.00s
+[INFO] [1776588819.004958838] [pi5_client]: PathProbe age=0.54s stale=False first_idx=0 first_dist=0.19 first_bearing_deg=180.0 first_behind=True near_idx=0 near_dist=0.19 pidx=1 la_idx=1 la_dist=1.14 la_bearing_deg=-9.4
+[INFO] [1776588820.105028969] [pi5_client]: PathProbe age=1.64s stale=False first_idx=0 first_dist=0.54 first_bearing_deg=-178.1 first_behind=True near_idx=0 near_dist=0.54 pidx=1 la_idx=1 la_dist=0.79 la_bearing_deg=-7.3
+[INFO] [1776588821.205014716] [pi5_client]: PathProbe age=2.74s stale=True first_idx=0 first_dist=0.77 first_bearing_deg=-176.9 first_behind=True near_idx=1 near_dist=0.56 pidx=1 la_idx=1 la_dist=0.56 la_bearing_deg=-6.5
+[INFO] [1776588822.204985366] [pi5_client]: PathProbe age=3.74s stale=True first_idx=0 first_dist=1.06 first_bearing_deg=-176.5 first_behind=True near_idx=1 near_dist=0.27 pidx=1 la_idx=2 la_dist=1.22 la_bearing_deg=4.1
+[INFO] [1776588823.304539841] [pi5_client]: PathProbe age=4.84s stale=True first_idx=0 first_dist=1.32 first_bearing_deg=-178.6 first_behind=True near_idx=1 near_dist=0.05 pidx=2 la_idx=2 la_dist=0.96 la_bearing_deg=2.1
+[INFO] [1776588824.304740997] [pi5_client]: PathProbe age=5.84s stale=True first_idx=0 first_dist=1.60 first_bearing_deg=179.9 first_behind=True near_idx=1 near_dist=0.28 pidx=2 la_idx=2 la_dist=0.68 la_bearing_deg=1.6
+[INFO] [1776588825.305013517] [pi5_client]: PathProbe age=6.84s stale=True first_idx=0 first_dist=1.84 first_bearing_deg=179.3 first_behind=True near_idx=2 near_dist=0.45 pidx=2 la_idx=2 la_dist=0.45 la_bearing_deg=0.1
+[INFO] [1776588826.404774754] [pi5_client]: PathProbe age=7.94s stale=True first_idx=0 first_dist=2.14 first_bearing_deg=177.3 first_behind=True near_idx=2 near_dist=0.15 pidx=3 la_idx=3 la_dist=1.22 la_bearing_deg=4.3
+[INFO] [1776588827.504560730] [pi5_client]: PathProbe age=9.04s stale=True first_idx=0 first_dist=2.42 first_bearing_deg=175.5 first_behind=True near_idx=2 near_dist=0.14 pidx=3 la_idx=3 la_dist=0.94 la_bearing_deg=2.1
+[INFO] [1776588828.504938570] [pi5_client]: PathProbe age=10.04s stale=True first_idx=0 first_dist=2.69 first_bearing_deg=174.6 first_behind=True near_idx=2 near_dist=0.41 pidx=3 la_idx=3 la_dist=0.67 la_bearing_deg=1.8
+[INFO] [1776588829.504796813] [pi5_client]: PathProbe age=11.04s stale=True first_idx=0 first_dist=2.93 first_bearing_deg=174.3 first_behind=True near_idx=3 near_dist=0.43 pidx=3 la_idx=3 la_dist=0.43 la_bearing_deg=0.7
+[INFO] [1776588830.604620715] [pi5_client]: PathProbe age=12.14s stale=True first_idx=0 first_dist=3.23 first_bearing_deg=175.1 first_behind=True near_idx=3 near_dist=0.13 pidx=4 la_idx=4 la_dist=0.91 la_bearing_deg=-2.1
+[INFO] [1776588831.604780634] [pi5_client]: PathProbe age=13.14s stale=True first_idx=0 first_dist=3.48 first_bearing_deg=175.6 first_behind=True near_idx=3 near_dist=0.13 pidx=4 la_idx=4 la_dist=0.66 la_bearing_deg=-1.9
+[INFO] [1776588832.605913029] [pi5_client]: PathProbe age=14.14s stale=True first_idx=0 first_dist=3.73 first_bearing_deg=176.6 first_behind=True near_idx=3 near_dist=0.37 pidx=4 la_idx=4 la_dist=0.42 la_bearing_deg=-1.6
+[INFO] [1776588833.706034577] [pi5_client]: PathProbe age=15.24s stale=True first_idx=0 first_dist=4.01 first_bearing_deg=179.4 first_behind=True near_idx=4 near_dist=0.13 pidx=5 la_idx=5 la_dist=1.53 la_bearing_deg=-6.1
+[INFO] [1776588834.806510984] [pi5_client]: PathProbe age=16.34s stale=True first_idx=0 first_dist=4.30 first_bearing_deg=-178.1 first_behind=True near_idx=4 near_dist=0.15 pidx=5 la_idx=5 la_dist=1.25 la_bearing_deg=-4.3
+[INFO] [1776588835.806376405] [pi5_client]: PathProbe age=17.34s stale=True first_idx=0 first_dist=4.55 first_bearing_deg=-176.2 first_behind=True near_idx=4 near_dist=0.40 pidx=5 la_idx=5 la_dist=1.00 la_bearing_deg=-2.9
+[INFO] [1776588836.487596203] [pi5_client]: Path received: 9 pts | age=0.03s
+[INFO] [1776588836.905232675] [pi5_client]: PathProbe age=0.45s stale=False first_idx=0 first_dist=0.19 first_bearing_deg=178.2 first_behind=True near_idx=0 near_dist=0.19 pidx=1 la_idx=1 la_dist=1.26 la_bearing_deg=8.0
+[INFO] [1776588838.004852040] [pi5_client]: PathProbe age=1.55s stale=False first_idx=0 first_dist=0.48 first_bearing_deg=177.7 first_behind=True near_idx=0 near_dist=0.48 pidx=1 la_idx=1 la_dist=0.97 la_bearing_deg=5.1
+[INFO] [1776588839.004924127] [pi5_client]: PathProbe age=2.55s stale=True first_idx=0 first_dist=0.74 first_bearing_deg=176.6 first_behind=True near_idx=1 near_dist=0.71 pidx=1 la_idx=1 la_dist=0.71 la_bearing_deg=3.3
+[INFO] [1776588840.104786255] [pi5_client]: PathProbe age=3.65s stale=True first_idx=0 first_dist=1.03 first_bearing_deg=176.0 first_behind=True near_idx=1 near_dist=0.42 pidx=1 la_idx=1 la_dist=0.42 la_bearing_deg=2.9
+[INFO] [1776588840.999025707] [pi5_client]: Goal forwarded: (-27.92, 12.10)
+[INFO] [1776588841.104676804] [pi5_client]: PathProbe age=4.65s stale=True first_idx=0 first_dist=1.30 first_bearing_deg=177.3 first_behind=True near_idx=1 near_dist=0.16 pidx=2 la_idx=2 la_dist=1.82 la_bearing_deg=-4.9
+[INFO] [1776588841.334883141] [pi5_client]: Path received: 10 pts | age=0.00s
+[INFO] [1776588841.702998303] [pi5_client]: Path received: 13 pts | age=0.00s
+[INFO] [1776588842.204573080] [pi5_client]: PathProbe age=0.50s stale=False first_idx=0 first_dist=0.29 first_bearing_deg=-179.8 first_behind=True near_idx=0 near_dist=0.29 pidx=1 la_idx=1 la_dist=1.01 la_bearing_deg=-2.8
+[INFO] [1776588843.204775418] [pi5_client]: PathProbe age=1.50s stale=False first_idx=0 first_dist=0.57 first_bearing_deg=179.7 first_behind=True near_idx=0 near_dist=0.57 pidx=1 la_idx=1 la_dist=0.73 la_bearing_deg=-1.9
+[INFO] [1776588844.205557165] [pi5_client]: PathProbe age=2.50s stale=True first_idx=0 first_dist=0.84 first_bearing_deg=-179.7 first_behind=True near_idx=1 near_dist=0.46 pidx=1 la_idx=1 la_dist=0.46 la_bearing_deg=-1.2
+[INFO] [1776588845.304646064] [pi5_client]: PathProbe age=3.60s stale=True first_idx=0 first_dist=1.09 first_bearing_deg=180.0 first_behind=True near_idx=1 near_dist=0.21 pidx=1 la_idx=2 la_dist=1.11 la_bearing_deg=1.5
+[INFO] [1776588846.304736371] [pi5_client]: PathProbe age=4.60s stale=True first_idx=0 first_dist=1.34 first_bearing_deg=179.8 first_behind=True near_idx=1 near_dist=0.04 pidx=2 la_idx=2 la_dist=0.86 la_bearing_deg=1.2
+[INFO] [1776588847.404005310] [pi5_client]: PathProbe age=5.70s stale=True first_idx=0 first_dist=1.63 first_bearing_deg=179.4 first_behind=True near_idx=1 near_dist=0.33 pidx=2 la_idx=2 la_dist=0.58 la_bearing_deg=0.5
+[INFO] [1776588848.404636307] [pi5_client]: PathProbe age=6.70s stale=True first_idx=0 first_dist=1.89 first_bearing_deg=178.3 first_behind=True near_idx=2 near_dist=0.32 pidx=2 la_idx=3 la_dist=0.51 la_bearing_deg=-1.6
+[INFO] [1776588848.506005718] [pi5_client]: Path received: 10 pts | age=0.00s
+[INFO] [1776588849.504303852] [pi5_client]: PathProbe age=1.00s stale=False first_idx=0 first_dist=0.35 first_bearing_deg=-179.7 first_behind=True near_idx=0 near_dist=0.35 pidx=1 la_idx=1 la_dist=1.23 la_bearing_deg=-0.8
+[INFO] [1776588850.505319632] [pi5_client]: PathProbe age=2.00s stale=True first_idx=0 first_dist=0.62 first_bearing_deg=-179.5 first_behind=True near_idx=0 near_dist=0.62 pidx=1 la_idx=1 la_dist=0.96 la_bearing_deg=-0.9
+[INFO] [1776588851.603841965] [pi5_client]: PathProbe age=3.10s stale=True first_idx=0 first_dist=0.90 first_bearing_deg=-179.5 first_behind=True near_idx=1 near_dist=0.68 pidx=1 la_idx=1 la_dist=0.68 la_bearing_deg=-0.3
+[INFO] [1776588852.604523530] [pi5_client]: PathProbe age=4.10s stale=True first_idx=0 first_dist=1.17 first_bearing_deg=-179.6 first_behind=True near_idx=1 near_dist=0.41 pidx=1 la_idx=1 la_dist=0.41 la_bearing_deg=-0.8
+[INFO] [1776588853.315237093] [pi5_client]: Path received: 9 pts | age=0.00s
+[INFO] [1776588853.704626646] [pi5_client]: PathProbe age=0.39s stale=False first_idx=0 first_dist=0.20 first_bearing_deg=179.9 first_behind=True near_idx=0 near_dist=0.20 pidx=1 la_idx=1 la_dist=1.03 la_bearing_deg=6.6
+[INFO] [1776588854.804567936] [pi5_client]: PathProbe age=1.49s stale=False first_idx=0 first_dist=0.47 first_bearing_deg=178.6 first_behind=True near_idx=0 near_dist=0.47 pidx=1 la_idx=1 la_dist=0.76 la_bearing_deg=4.5
+[INFO] [1776588855.804651921] [pi5_client]: PathProbe age=2.49s stale=True first_idx=0 first_dist=0.74 first_bearing_deg=177.5 first_behind=True near_idx=1 near_dist=0.49 pidx=1 la_idx=1 la_dist=0.49 la_bearing_deg=3.7
+[INFO] [1776588856.904921479] [pi5_client]: PathProbe age=3.59s stale=True first_idx=0 first_dist=1.03 first_bearing_deg=-179.8 first_behind=True near_idx=1 near_dist=0.21 pidx=1 la_idx=2 la_dist=0.83 la_bearing_deg=-3.4
+[INFO] [1776588858.004887543] [pi5_client]: PathProbe age=4.69s stale=True first_idx=0 first_dist=1.31 first_bearing_deg=-179.7 first_behind=True near_idx=1 near_dist=0.09 pidx=2 la_idx=2 la_dist=0.55 la_bearing_deg=-3.0
+[INFO] [1776588859.103900846] [pi5_client]: PathProbe age=5.79s stale=True first_idx=0 first_dist=1.59 first_bearing_deg=-178.2 first_behind=True near_idx=2 near_dist=0.27 pidx=2 la_idx=3 la_dist=1.16 la_bearing_deg=-7.2
+[INFO] [1776588860.105072131] [pi5_client]: PathProbe age=6.79s stale=True first_idx=0 first_dist=1.86 first_bearing_deg=-175.4 first_behind=True near_idx=2 near_dist=0.01 pidx=3 la_idx=3 la_dist=0.90 la_bearing_deg=-5.7
+[INFO] [1776588860.537144700] [pi5_client]: Path received: 6 pts | age=0.00s
+[INFO] [1776588861.105104635] [pi5_client]: PathProbe age=0.57s stale=False first_idx=0 first_dist=0.28 first_bearing_deg=-179.7 first_behind=True near_idx=0 near_dist=0.28 pidx=1 la_idx=1 la_dist=1.36 la_bearing_deg=-11.3
+[INFO] [1776588862.204706183] [pi5_client]: PathProbe age=1.67s stale=False first_idx=0 first_dist=0.55 first_bearing_deg=-177.2 first_behind=True near_idx=0 near_dist=0.55 pidx=1 la_idx=1 la_dist=1.09 la_bearing_deg=-7.8
+[INFO] [1776588863.205535032] [pi5_client]: PathProbe age=2.67s stale=True first_idx=0 first_dist=0.81 first_bearing_deg=-175.9 first_behind=True near_idx=0 near_dist=0.81 pidx=1 la_idx=1 la_dist=0.83 la_bearing_deg=-5.6
+[INFO] [1776588864.304675675] [pi5_client]: PathProbe age=3.77s stale=True first_idx=0 first_dist=1.09 first_bearing_deg=-174.5 first_behind=True near_idx=1 near_dist=0.55 pidx=1 la_idx=1 la_dist=0.55 la_bearing_deg=-4.7
+[INFO] [1776588865.304986304] [pi5_client]: PathProbe age=4.77s stale=True first_idx=0 first_dist=1.34 first_bearing_deg=-174.1 first_behind=True near_idx=1 near_dist=0.29 pidx=1 la_idx=2 la_dist=1.05 la_bearing_deg=11.9
+[INFO] [1776588866.404747287] [pi5_client]: PathProbe age=5.87s stale=True first_idx=0 first_dist=1.61 first_bearing_deg=179.9 first_behind=True near_idx=1 near_dist=0.05 pidx=2 la_idx=2 la_dist=0.79 la_bearing_deg=9.2
+[INFO] [1776588867.404971357] [pi5_client]: PathProbe age=6.87s stale=True first_idx=0 first_dist=1.86 first_bearing_deg=175.9 first_behind=True near_idx=1 near_dist=0.24 pidx=2 la_idx=2 la_dist=0.53 la_bearing_deg=7.0
+[INFO] [1776588868.504943934] [pi5_client]: PathProbe age=7.97s stale=True first_idx=0 first_dist=2.14 first_bearing_deg=172.1 first_behind=True near_idx=2 near_dist=0.25 pidx=2 la_idx=3 la_dist=1.17 la_bearing_deg=9.7
+[INFO] [1776588869.603831426] [pi5_client]: PathProbe age=9.07s stale=True first_idx=0 first_dist=2.43 first_bearing_deg=168.4 first_behind=True near_idx=2 near_dist=0.04 pidx=3 la_idx=3 la_dist=0.88 la_bearing_deg=6.6
+[INFO] [1776588870.603978634] [pi5_client]: PathProbe age=10.07s stale=True first_idx=0 first_dist=2.68 first_bearing_deg=166.6 first_behind=True near_idx=2 near_dist=0.30 pidx=3 la_idx=3 la_dist=0.62 la_bearing_deg=4.8
+[INFO] [1776588871.341377824] [pi5_client]: Path received: 3 pts | age=0.00s
+[INFO] [1776588871.552471958] [pi5_client]: Goal forwarded: (-29.72, 10.18)
+[INFO] [1776588871.704712325] [pi5_client]: PathProbe age=0.36s stale=False first_idx=0 first_dist=0.25 first_bearing_deg=-178.2 first_behind=True near_idx=0 near_dist=0.25 pidx=1 la_idx=1 la_dist=1.02 la_bearing_deg=-12.8
+[INFO] [1776588871.992016966] [pi5_client]: Path received: 5 pts | age=0.00s
+[INFO] [1776588872.446593368] [pi5_client]: Path received: 6 pts | age=0.00s
+[INFO] [1776588872.707129968] [pi5_client]: PathProbe age=0.26s stale=False first_idx=0 first_dist=0.12 first_bearing_deg=166.9 first_behind=True near_idx=0 near_dist=0.12 pidx=1 la_idx=1 la_dist=1.13 la_bearing_deg=15.7
+[INFO] [1776588873.807634888] [pi5_client]: PathProbe age=1.36s stale=False first_idx=0 first_dist=0.40 first_bearing_deg=169.7 first_behind=True near_idx=0 near_dist=0.40 pidx=1 la_idx=1 la_dist=0.86 la_bearing_deg=11.6
+[INFO] [1776588874.905163630] [pi5_client]: PathProbe age=2.46s stale=True first_idx=0 first_dist=0.68 first_bearing_deg=169.6 first_behind=True near_idx=1 near_dist=0.58 pidx=1 la_idx=1 la_dist=0.58 la_bearing_deg=8.5
+[INFO] [1776588876.004344388] [pi5_client]: PathProbe age=3.56s stale=True first_idx=0 first_dist=0.94 first_bearing_deg=169.0 first_behind=True near_idx=1 near_dist=0.31 pidx=1 la_idx=2 la_dist=0.77 la_bearing_deg=-0.3
+[INFO] [1776588877.004911938] [pi5_client]: PathProbe age=4.56s stale=True first_idx=0 first_dist=1.21 first_bearing_deg=171.1 first_behind=True near_idx=1 near_dist=0.06 pidx=2 la_idx=2 la_dist=0.50 la_bearing_deg=-1.1
+[INFO] [1776588877.412207635] [pi5_client]: Path received: 4 pts | age=0.05s
+[INFO] [1776588878.105353086] [pi5_client]: PathProbe age=0.74s stale=False first_idx=0 first_dist=0.35 first_bearing_deg=-178.2 first_behind=True near_idx=0 near_dist=0.35 pidx=1 la_idx=1 la_dist=1.07 la_bearing_deg=-2.2
+[INFO] [1776588879.204592443] [pi5_client]: PathProbe age=1.84s stale=False first_idx=0 first_dist=0.64 first_bearing_deg=-179.3 first_behind=True near_idx=0 near_dist=0.64 pidx=1 la_idx=1 la_dist=0.77 la_bearing_deg=-0.9
+[INFO] [1776588880.204892822] [pi5_client]: PathProbe age=2.84s stale=True first_idx=0 first_dist=0.88 first_bearing_deg=-178.7 first_behind=True near_idx=1 near_dist=0.53 pidx=1 la_idx=1 la_dist=0.53 la_bearing_deg=-1.3
+[INFO] [1776588881.205503706] [pi5_client]: PathProbe age=3.84s stale=True first_idx=0 first_dist=1.14 first_bearing_deg=-178.8 first_behind=True near_idx=1 near_dist=0.27 pidx=1 la_idx=2 la_dist=1.14 la_bearing_deg=0.9
+[INFO] [1776588882.305093862] [pi5_client]: PathProbe age=4.94s stale=True first_idx=0 first_dist=1.42 first_bearing_deg=-179.2 first_behind=True near_idx=1 near_dist=0.01 pidx=2 la_idx=2 la_dist=0.86 la_bearing_deg=0.3
+[INFO] [1776588883.305824880] [pi5_client]: PathProbe age=5.94s stale=True first_idx=0 first_dist=1.68 first_bearing_deg=179.8 first_behind=True near_idx=1 near_dist=0.27 pidx=2 la_idx=2 la_dist=0.59 la_bearing_deg=1.6
+[INFO] [1776588884.404506630] [pi5_client]: PathProbe age=7.04s stale=True first_idx=0 first_dist=1.96 first_bearing_deg=179.1 first_behind=True near_idx=2 near_dist=0.31 pidx=2 la_idx=3 la_dist=1.45 la_bearing_deg=-10.5
+[INFO] [1776588884.592853414] [pi5_client]: Path received: 2 pts | age=0.00s
+[INFO] [1776588885.405191858] [pi5_client]: PathProbe age=0.81s stale=False first_idx=0 first_dist=0.34 first_bearing_deg=-179.5 first_behind=True near_idx=0 near_dist=0.34 pidx=1 la_idx=1 la_dist=1.21 la_bearing_deg=-7.4
+[INFO] [1776588886.504754531] [pi5_client]: PathProbe age=1.91s stale=False first_idx=0 first_dist=0.63 first_bearing_deg=-178.7 first_behind=True near_idx=0 near_dist=0.63 pidx=1 la_idx=1 la_dist=0.92 la_bearing_deg=-4.5
+[INFO] [1776588887.504971782] [pi5_client]: PathProbe age=2.91s stale=True first_idx=0 first_dist=0.88 first_bearing_deg=-177.2 first_behind=True near_idx=1 near_dist=0.67 pidx=1 la_idx=1 la_dist=0.67 la_bearing_deg=-3.9
+[INFO] [1776588888.204432683] [pi5_client]: ✓ GOAL REACHED!
+[INFO] [1776588888.224380791] [pi5_client]: Path received: 1 pts | age=0.00s
+[INFO] [1776588889.415398273] [pi5_client]: Goal forwarded: (-27.00, -3.98)
+[INFO] [1776588889.909047168] [pi5_client]: Path received: 15 pts | age=0.05s
+[INFO] [1776588890.003803889] [pi5_client]: PathProbe age=0.15s stale=False first_idx=0 first_dist=0.01 first_bearing_deg=5.2 first_behind=False near_idx=0 near_dist=0.01 pidx=1 la_idx=1 la_dist=1.52 la_bearing_deg=75.3
+[INFO] [1776588890.401512799] [pi5_client]: Path received: 13 pts | age=0.05s
+[INFO] [1776588891.004755597] [pi5_client]: PathProbe age=0.65s stale=False first_idx=0 first_dist=0.05 first_bearing_deg=-74.3 first_behind=False near_idx=0 near_dist=0.05 pidx=1 la_idx=1 la_dist=1.37 la_bearing_deg=65.2
+[INFO] [1776588892.104887702] [pi5_client]: PathProbe age=1.75s stale=False first_idx=0 first_dist=0.06 first_bearing_deg=-73.7 first_behind=False near_idx=0 near_dist=0.06 pidx=1 la_idx=1 la_dist=1.38 la_bearing_deg=47.0
+[INFO] [1776588893.205148293] [pi5_client]: PathProbe age=2.85s stale=True first_idx=0 first_dist=0.07 first_bearing_deg=-143.3 first_behind=True near_idx=0 near_dist=0.07 pidx=1 la_idx=1 la_dist=1.34 la_bearing_deg=19.9
+[INFO] [1776588893.364891754] [pi5_client]: Path received: 16 pts | age=0.00s
+[INFO] [1776588894.205197100] [pi5_client]: PathProbe age=0.84s stale=False first_idx=0 first_dist=0.17 first_bearing_deg=160.7 first_behind=True near_idx=0 near_dist=0.17 pidx=1 la_idx=1 la_dist=1.52 la_bearing_deg=5.7
+[INFO] [1776588895.305743494] [pi5_client]: PathProbe age=1.94s stale=False first_idx=0 first_dist=0.45 first_bearing_deg=172.9 first_behind=True near_idx=0 near_dist=0.45 pidx=1 la_idx=1 la_dist=1.23 la_bearing_deg=2.9
+[INFO] [1776588896.404729270] [pi5_client]: PathProbe age=3.04s stale=True first_idx=0 first_dist=0.74 first_bearing_deg=174.7 first_behind=True near_idx=0 near_dist=0.74 pidx=1 la_idx=1 la_dist=0.94 la_bearing_deg=1.5
+[INFO] [1776588897.504774309] [pi5_client]: PathProbe age=4.14s stale=True first_idx=0 first_dist=1.02 first_bearing_deg=175.3 first_behind=True near_idx=1 near_dist=0.65 pidx=1 la_idx=1 la_dist=0.65 la_bearing_deg=0.5
+[INFO] [1776588898.604814134] [pi5_client]: PathProbe age=5.24s stale=True first_idx=0 first_dist=1.29 first_bearing_deg=176.2 first_behind=True near_idx=1 near_dist=0.38 pidx=1 la_idx=1 la_dist=0.38 la_bearing_deg=-0.4
+[INFO] [1776588899.024742291] [pi5_client]: Path received: 13 pts | age=0.00s
+[INFO] [1776588899.605077578] [pi5_client]: PathProbe age=0.58s stale=False first_idx=0 first_dist=0.28 first_bearing_deg=178.3 first_behind=True near_idx=0 near_dist=0.28 pidx=1 la_idx=1 la_dist=0.87 la_bearing_deg=3.0
+[INFO] [1776588900.704621168] [pi5_client]: PathProbe age=1.68s stale=False first_idx=0 first_dist=0.58 first_bearing_deg=178.5 first_behind=True near_idx=1 near_dist=0.57 pidx=1 la_idx=1 la_dist=0.57 la_bearing_deg=1.5
+[INFO] [1776588901.704875431] [pi5_client]: PathProbe age=2.68s stale=True first_idx=0 first_dist=0.85 first_bearing_deg=178.5 first_behind=True near_idx=1 near_dist=0.31 pidx=1 la_idx=2 la_dist=1.41 la_bearing_deg=1.7
+[INFO] [1776588902.704914201] [pi5_client]: PathProbe age=3.68s stale=True first_idx=0 first_dist=1.09 first_bearing_deg=178.5 first_behind=True near_idx=1 near_dist=0.06 pidx=2 la_idx=2 la_dist=1.16 la_bearing_deg=1.0
+[INFO] [1776588903.806317111] [pi5_client]: PathProbe age=4.78s stale=True first_idx=0 first_dist=1.38 first_bearing_deg=177.9 first_behind=True near_idx=1 near_dist=0.23 pidx=2 la_idx=2 la_dist=0.87 la_bearing_deg=0.2
+[INFO] [1776588904.904280600] [pi5_client]: PathProbe age=5.88s stale=True first_idx=0 first_dist=1.66 first_bearing_deg=178.2 first_behind=True near_idx=1 near_dist=0.51 pidx=2 la_idx=2 la_dist=0.59 la_bearing_deg=-0.5
+[INFO] [1776588905.904989953] [pi5_client]: PathProbe age=6.88s stale=True first_idx=0 first_dist=1.92 first_bearing_deg=178.4 first_behind=True near_idx=2 near_dist=0.33 pidx=2 la_idx=3 la_dist=0.90 la_bearing_deg=-5.6
+[INFO] [1776588906.905086554] [pi5_client]: PathProbe age=7.88s stale=True first_idx=0 first_dist=2.17 first_bearing_deg=-179.4 first_behind=True near_idx=2 near_dist=0.09 pidx=3 la_idx=3 la_dist=0.66 la_bearing_deg=-5.3
+[INFO] [1776588907.481372646] [pi5_client]: Path received: 12 pts | age=0.01s
+[INFO] [1776588908.004732557] [pi5_client]: PathProbe age=0.53s stale=False first_idx=0 first_dist=0.30 first_bearing_deg=179.8 first_behind=True near_idx=0 near_dist=0.30 pidx=1 la_idx=1 la_dist=0.68 la_bearing_deg=3.4
+[INFO] [1776588909.104733773] [pi5_client]: PathProbe age=1.63s stale=False first_idx=0 first_dist=0.57 first_bearing_deg=178.7 first_behind=True near_idx=1 near_dist=0.41 pidx=1 la_idx=1 la_dist=0.41 la_bearing_deg=2.7
+[INFO] [1776588910.203807540] [pi5_client]: PathProbe age=2.73s stale=True first_idx=0 first_dist=0.86 first_bearing_deg=179.8 first_behind=True near_idx=1 near_dist=0.12 pidx=2 la_idx=2 la_dist=1.21 la_bearing_deg=-4.1
+[INFO] [1776588911.204780779] [pi5_client]: PathProbe age=3.73s stale=True first_idx=0 first_dist=1.12 first_bearing_deg=-178.2 first_behind=True near_idx=1 near_dist=0.15 pidx=2 la_idx=2 la_dist=0.95 la_bearing_deg=-4.0
+[INFO] [1776588912.304559145] [pi5_client]: PathProbe age=4.83s stale=True first_idx=0 first_dist=1.41 first_bearing_deg=-177.7 first_behind=True near_idx=1 near_dist=0.44 pidx=2 la_idx=2 la_dist=0.65 la_bearing_deg=-2.6
+[INFO] [1776588913.305689831] [pi5_client]: PathProbe age=5.83s stale=True first_idx=0 first_dist=1.66 first_bearing_deg=-176.8 first_behind=True near_idx=2 near_dist=0.41 pidx=2 la_idx=2 la_dist=0.41 la_bearing_deg=-3.8
+[INFO] [1776588914.404267559] [pi5_client]: PathProbe age=6.93s stale=True first_idx=0 first_dist=1.95 first_bearing_deg=-177.3 first_behind=True near_idx=2 near_dist=0.12 pidx=3 la_idx=3 la_dist=1.11 la_bearing_deg=1.6
+[INFO] [1776588915.405072863] [pi5_client]: PathProbe age=7.93s stale=True first_idx=0 first_dist=2.20 first_bearing_deg=-177.9 first_behind=True near_idx=2 near_dist=0.14 pidx=3 la_idx=3 la_dist=0.85 la_bearing_deg=1.0
+[INFO] [1776588916.504741376] [pi5_client]: PathProbe age=9.03s stale=True first_idx=0 first_dist=2.49 first_bearing_deg=-178.5 first_behind=True near_idx=2 near_dist=0.42 pidx=3 la_idx=3 la_dist=0.57 la_bearing_deg=-0.5
+[INFO] [1776588917.075835906] [pi5_client]: Path received: 7 pts | age=0.00s
+[INFO] [1776588917.504729348] [pi5_client]: PathProbe age=0.43s stale=False first_idx=0 first_dist=0.26 first_bearing_deg=179.4 first_behind=True near_idx=0 near_dist=0.26 pidx=1 la_idx=1 la_dist=1.30 la_bearing_deg=14.5
+[INFO] [1776588918.603790263] [pi5_client]: PathProbe age=1.53s stale=False first_idx=0 first_dist=0.52 first_bearing_deg=174.8 first_behind=True near_idx=0 near_dist=0.52 pidx=1 la_idx=1 la_dist=1.05 la_bearing_deg=10.2
+[INFO] [1776588919.604176105] [pi5_client]: PathProbe age=2.53s stale=True first_idx=0 first_dist=0.77 first_bearing_deg=173.1 first_behind=True near_idx=0 near_dist=0.77 pidx=1 la_idx=1 la_dist=0.80 la_bearing_deg=7.2
+[INFO] [1776588920.604850692] [pi5_client]: PathProbe age=3.53s stale=True first_idx=0 first_dist=1.04 first_bearing_deg=172.5 first_behind=True near_idx=1 near_dist=0.53 pidx=1 la_idx=1 la_dist=0.53 la_bearing_deg=5.8
+[INFO] [1776588921.703387277] [pi5_client]: PathProbe age=4.63s stale=True first_idx=0 first_dist=1.32 first_bearing_deg=172.8 first_behind=True near_idx=1 near_dist=0.24 pidx=1 la_idx=2 la_dist=1.56 la_bearing_deg=-10.9
+[INFO] [1776588922.703727553] [pi5_client]: PathProbe age=5.63s stale=True first_idx=0 first_dist=1.55 first_bearing_deg=177.7 first_behind=True near_idx=1 near_dist=0.04 pidx=2 la_idx=2 la_dist=1.34 la_bearing_deg=-8.1
+[INFO] [1776588923.704853198] [pi5_client]: PathProbe age=6.63s stale=True first_idx=0 first_dist=1.81 first_bearing_deg=-179.0 first_behind=True near_idx=1 near_dist=0.26 pidx=2 la_idx=2 la_dist=1.07 la_bearing_deg=-5.7
+[INFO] [1776588924.805615225] [pi5_client]: PathProbe age=7.73s stale=True first_idx=0 first_dist=2.11 first_bearing_deg=-176.9 first_behind=True near_idx=1 near_dist=0.55 pidx=2 la_idx=2 la_dist=0.78 la_bearing_deg=-4.6
+[INFO] [1776588925.904841146] [pi5_client]: PathProbe age=8.83s stale=True first_idx=0 first_dist=2.40 first_bearing_deg=-175.3 first_behind=True near_idx=2 near_dist=0.49 pidx=2 la_idx=2 la_dist=0.49 la_bearing_deg=-4.3
+[INFO] [1776588927.004708015] [pi5_client]: PathProbe age=9.93s stale=True first_idx=0 first_dist=2.69 first_bearing_deg=-174.2 first_behind=True near_idx=2 near_dist=0.20 pidx=3 la_idx=3 la_dist=1.37 la_bearing_deg=-1.7
+[INFO] [1776588927.945775444] [pi5_client]: Path received: 6 pts | age=0.00s
+[INFO] [1776588928.104683849] [pi5_client]: PathProbe age=0.16s stale=False first_idx=0 first_dist=0.19 first_bearing_deg=179.7 first_behind=True near_idx=0 near_dist=0.19 pidx=1 la_idx=1 la_dist=1.06 la_bearing_deg=3.3
+[INFO] [1776588929.104712030] [pi5_client]: PathProbe age=1.16s stale=False first_idx=0 first_dist=0.46 first_bearing_deg=179.7 first_behind=True near_idx=0 near_dist=0.46 pidx=1 la_idx=1 la_dist=0.79 la_bearing_deg=2.7
+[INFO] [1776588930.204796573] [pi5_client]: PathProbe age=2.26s stale=True first_idx=0 first_dist=0.74 first_bearing_deg=179.4 first_behind=True near_idx=1 near_dist=0.50 pidx=1 la_idx=1 la_dist=0.50 la_bearing_deg=0.8
+[INFO] [1776588931.304838750] [pi5_client]: PathProbe age=3.36s stale=True first_idx=0 first_dist=1.03 first_bearing_deg=178.6 first_behind=True near_idx=1 near_dist=0.22 pidx=1 la_idx=2 la_dist=1.26 la_bearing_deg=3.1
+[INFO] [1776588932.305571594] [pi5_client]: PathProbe age=4.36s stale=True first_idx=0 first_dist=1.28 first_bearing_deg=177.8 first_behind=True near_idx=1 near_dist=0.03 pidx=2 la_idx=2 la_dist=1.01 la_bearing_deg=1.8
+[INFO] [1776588933.406634505] [pi5_client]: PathProbe age=5.46s stale=True first_idx=0 first_dist=1.56 first_bearing_deg=177.4 first_behind=True near_idx=1 near_dist=0.32 pidx=2 la_idx=2 la_dist=0.72 la_bearing_deg=0.5
+[INFO] [1776588934.505220581] [pi5_client]: PathProbe age=6.56s stale=True first_idx=0 first_dist=1.85 first_bearing_deg=177.4 first_behind=True near_idx=2 near_dist=0.43 pidx=2 la_idx=2 la_dist=0.43 la_bearing_deg=-0.0
+[INFO] [1776588935.505687694] [pi5_client]: PathProbe age=7.56s stale=True first_idx=0 first_dist=2.10 first_bearing_deg=177.0 first_behind=True near_idx=2 near_dist=0.18 pidx=3 la_idx=3 la_dist=1.33 la_bearing_deg=3.6
+[INFO] [1776588936.604664280] [pi5_client]: PathProbe age=8.66s stale=True first_idx=0 first_dist=2.39 first_bearing_deg=175.9 first_behind=True near_idx=2 near_dist=0.11 pidx=3 la_idx=3 la_dist=1.04 la_bearing_deg=2.0
+[INFO] [1776588937.605008416] [pi5_client]: PathProbe age=9.66s stale=True first_idx=0 first_dist=2.65 first_bearing_deg=174.8 first_behind=True near_idx=2 near_dist=0.37 pidx=3 la_idx=3 la_dist=0.79 la_bearing_deg=1.0
+[INFO] [1776588938.604813050] [pi5_client]: PathProbe age=10.66s stale=True first_idx=0 first_dist=2.90 first_bearing_deg=174.9 first_behind=True near_idx=3 near_dist=0.53 pidx=3 la_idx=3 la_dist=0.53 la_bearing_deg=0.1
+[INFO] [1776588939.149956855] [pi5_client]: Goal forwarded: (-3.64, -3.73)
+[INFO] [1776588939.605021377] [pi5_client]: PathProbe age=11.66s stale=True first_idx=0 first_dist=3.17 first_bearing_deg=175.9 first_behind=True near_idx=3 near_dist=0.26 pidx=3 la_idx=4 la_dist=1.53 la_bearing_deg=-9.8
+[INFO] [1776588939.782376059] [pi5_client]: Path received: 23 pts | age=0.00s
+[INFO] [1776588940.403521445] [pi5_client]: Path received: 24 pts | age=0.01s
+[INFO] [1776588940.705058254] [pi5_client]: PathProbe age=0.31s stale=False first_idx=0 first_dist=0.18 first_bearing_deg=173.2 first_behind=True near_idx=0 near_dist=0.18 pidx=1 la_idx=1 la_dist=1.36 la_bearing_deg=60.3
+[INFO] [1776588941.807021010] [pi5_client]: PathProbe age=1.41s stale=False first_idx=0 first_dist=0.18 first_bearing_deg=153.9 first_behind=True near_idx=0 near_dist=0.18 pidx=1 la_idx=1 la_dist=1.36 la_bearing_deg=40.7
+[INFO] [1776588942.905231759] [pi5_client]: PathProbe age=2.51s stale=True first_idx=0 first_dist=0.23 first_bearing_deg=127.6 first_behind=True near_idx=0 near_dist=0.23 pidx=1 la_idx=1 la_dist=1.35 la_bearing_deg=19.3
+[INFO] [1776588944.003453966] [pi5_client]: PathProbe age=3.61s stale=True first_idx=0 first_dist=0.39 first_bearing_deg=152.0 first_behind=True near_idx=0 near_dist=0.39 pidx=1 la_idx=1 la_dist=1.12 la_bearing_deg=12.5
+[INFO] [1776588945.005737461] [pi5_client]: PathProbe age=4.61s stale=True first_idx=0 first_dist=0.61 first_bearing_deg=158.6 first_behind=True near_idx=0 near_dist=0.61 pidx=1 la_idx=1 la_dist=0.88 la_bearing_deg=8.6
+[INFO] [1776588946.104044505] [pi5_client]: PathProbe age=5.71s stale=True first_idx=0 first_dist=0.86 first_bearing_deg=162.0 first_behind=True near_idx=1 near_dist=0.61 pidx=1 la_idx=1 la_dist=0.61 la_bearing_deg=5.5
+[INFO] [1776588947.104842234] [pi5_client]: PathProbe age=6.71s stale=True first_idx=0 first_dist=1.09 first_bearing_deg=163.8 first_behind=True near_idx=1 near_dist=0.36 pidx=1 la_idx=1 la_dist=0.36 la_bearing_deg=4.9
+[INFO] [1776588948.204763854] [pi5_client]: PathProbe age=7.81s stale=True first_idx=0 first_dist=1.36 first_bearing_deg=167.7 first_behind=True near_idx=1 near_dist=0.08 pidx=2 la_idx=2 la_dist=0.99 la_bearing_deg=-3.1
+[INFO] [1776588949.303831148] [pi5_client]: PathProbe age=8.91s stale=True first_idx=0 first_dist=1.65 first_bearing_deg=170.6 first_behind=True near_idx=1 near_dist=0.21 pidx=2 la_idx=2 la_dist=0.70 la_bearing_deg=-2.1
+[INFO] [1776588950.405225260] [pi5_client]: PathProbe age=10.01s stale=True first_idx=0 first_dist=1.94 first_bearing_deg=173.2 first_behind=True near_idx=2 near_dist=0.41 pidx=2 la_idx=2 la_dist=0.41 la_bearing_deg=-2.7
+[INFO] [1776588951.505593009] [pi5_client]: PathProbe age=11.11s stale=True first_idx=0 first_dist=2.22 first_bearing_deg=178.3 first_behind=True near_idx=2 near_dist=0.13 pidx=3 la_idx=3 la_dist=1.53 la_bearing_deg=-9.9
+[INFO] [1776588952.604535503] [pi5_client]: PathProbe age=12.21s stale=True first_idx=0 first_dist=2.49 first_bearing_deg=-177.4 first_behind=True near_idx=2 near_dist=0.15 pidx=3 la_idx=3 la_dist=1.26 la_bearing_deg=-7.4
+[INFO] [1776588953.605367065] [pi5_client]: PathProbe age=13.21s stale=True first_idx=0 first_dist=2.74 first_bearing_deg=-174.7 first_behind=True near_idx=2 near_dist=0.40 pidx=3 la_idx=3 la_dist=1.00 la_bearing_deg=-5.4
+[INFO] [1776588954.704735206] [pi5_client]: PathProbe age=14.31s stale=True first_idx=0 first_dist=3.01 first_bearing_deg=-172.7 first_behind=True near_idx=2 near_dist=0.67 pidx=3 la_idx=3 la_dist=0.74 la_bearing_deg=-4.3
+[INFO] [1776588955.804524321] [pi5_client]: PathProbe age=15.41s stale=True first_idx=0 first_dist=3.30 first_bearing_deg=-171.5 first_behind=True near_idx=3 near_dist=0.45 pidx=3 la_idx=3 la_dist=0.45 la_bearing_deg=-3.6
+[INFO] [1776588956.807677647] [pi5_client]: PathProbe age=16.41s stale=True first_idx=0 first_dist=3.53 first_bearing_deg=-172.9 first_behind=True near_idx=3 near_dist=0.22 pidx=3 la_idx=4 la_dist=1.36 la_bearing_deg=10.8
+[INFO] [1776588957.905513654] [pi5_client]: PathProbe age=17.51s stale=True first_idx=0 first_dist=3.83 first_bearing_deg=-178.9 first_behind=True near_idx=3 near_dist=0.11 pidx=4 la_idx=4 la_dist=1.06 la_bearing_deg=8.1
+[INFO] [1776588959.005967719] [pi5_client]: PathProbe age=18.61s stale=True first_idx=0 first_dist=4.11 first_bearing_deg=177.2 first_behind=True near_idx=3 near_dist=0.38 pidx=4 la_idx=4 la_dist=0.78 la_bearing_deg=4.8
+[INFO] [1776588960.006310891] [pi5_client]: PathProbe age=19.61s stale=True first_idx=0 first_dist=4.37 first_bearing_deg=175.1 first_behind=True near_idx=4 near_dist=0.52 pidx=4 la_idx=4 la_dist=0.52 la_bearing_deg=3.9
+[INFO] [1776588960.372296357] [pi5_client]: Path received: 19 pts | age=0.00s
+[INFO] [1776588961.104885674] [pi5_client]: PathProbe age=0.73s stale=False first_idx=0 first_dist=0.37 first_bearing_deg=-179.4 first_behind=True near_idx=0 near_dist=0.37 pidx=1 la_idx=1 la_dist=1.27 la_bearing_deg=2.0
+[INFO] [1776588962.204995062] [pi5_client]: PathProbe age=1.83s stale=False first_idx=0 first_dist=0.64 first_bearing_deg=179.4 first_behind=True near_idx=0 near_dist=0.64 pidx=1 la_idx=1 la_dist=0.99 la_bearing_deg=0.9
+[INFO] [1776588963.304992513] [pi5_client]: PathProbe age=2.93s stale=True first_idx=0 first_dist=0.93 first_bearing_deg=179.7 first_behind=True near_idx=1 near_dist=0.70 pidx=1 la_idx=1 la_dist=0.70 la_bearing_deg=-0.7
+[INFO] [1776588964.404387900] [pi5_client]: PathProbe age=4.03s stale=True first_idx=0 first_dist=1.22 first_bearing_deg=179.9 first_behind=True near_idx=1 near_dist=0.41 pidx=1 la_idx=1 la_dist=0.41 la_bearing_deg=-1.5
+[INFO] [1776588965.404973772] [pi5_client]: PathProbe age=5.03s stale=True first_idx=0 first_dist=1.48 first_bearing_deg=179.4 first_behind=True near_idx=1 near_dist=0.16 pidx=2 la_idx=2 la_dist=0.38 la_bearing_deg=3.5
+[INFO] [1776588966.405978314] [pi5_client]: PathProbe age=6.04s stale=True first_idx=0 first_dist=1.73 first_bearing_deg=180.0 first_behind=True near_idx=1 near_dist=0.10 pidx=3 la_idx=3 la_dist=1.23 la_bearing_deg=-2.3
+[INFO] [1776588967.505118370] [pi5_client]: PathProbe age=7.13s stale=True first_idx=0 first_dist=2.00 first_bearing_deg=-179.0 first_behind=True near_idx=2 near_dist=0.14 pidx=3 la_idx=3 la_dist=0.96 la_bearing_deg=-1.4
+[INFO] [1776588968.603932658] [pi5_client]: PathProbe age=8.23s stale=True first_idx=0 first_dist=2.28 first_bearing_deg=-178.6 first_behind=True near_idx=2 near_dist=0.43 pidx=3 la_idx=3 la_dist=0.67 la_bearing_deg=-1.9
+[INFO] [1776588969.604955124] [pi5_client]: PathProbe age=9.23s stale=True first_idx=0 first_dist=2.54 first_bearing_deg=-177.5 first_behind=True near_idx=3 near_dist=0.42 pidx=3 la_idx=3 la_dist=0.42 la_bearing_deg=-2.0
+[INFO] [1776588970.704845829] [pi5_client]: PathProbe age=10.33s stale=True first_idx=0 first_dist=2.82 first_bearing_deg=-177.1 first_behind=True near_idx=3 near_dist=0.14 pidx=4 la_idx=4 la_dist=0.90 la_bearing_deg=-1.3
+[INFO] [1776588971.803333936] [pi5_client]: PathProbe age=11.43s stale=True first_idx=0 first_dist=3.08 first_bearing_deg=-177.1 first_behind=True near_idx=3 near_dist=0.13 pidx=4 la_idx=4 la_dist=0.64 la_bearing_deg=-2.0
