@@ -469,7 +469,9 @@ fn make_building(ws: f32) -> ScenarioDef {
     w.push(wall(8.5, 22.5 + door, 8.5 + t, ws - t));
     w.push(wall(20.0, 16.8 + t, 20.0 + t, 20.5));
     w.push(wall(20.0, 20.5 + door, 20.0 + t, ws - t));
-    w.push(wall(t, 25.0, 8.5, 25.0 + t));
+    // Doorway for the upper-left room: keeps the room connected to the hallway.
+    w.push(wall(t, 25.0, 3.8, 25.0 + t));
+    w.push(wall(3.8 + door, 25.0, 8.5, 25.0 + t));
     w.push(wall(20.0 + t, 25.0, 25.5, 25.0 + t));
     w.push(wall(25.5 + door, 25.0, ws - t, 25.0 + t));
     w.push(wall(3.0, 3.0, 6.0, 3.5));
