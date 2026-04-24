@@ -7,10 +7,6 @@ Panels:
         - /Status1
         - /StaticMarkers1
         - /DynamicMarkers1
-        - /Agent1Path1
-        - /Agent2Path1
-        - /Agent3Path1
-        - /Agent4Path1
       Splitter Ratio: 0.5
     Tree Height: 900
   - Class: rviz_common/Views
@@ -49,7 +45,7 @@ Visualization Manager:
       Buffer Length: 1
       Class: rviz_default_plugins/Path
       Color: 255; 70; 70
-      Enabled: true
+      Enabled: false
       Line Style: Lines
       Line Width: 0.080000000000000002
       Name: Agent1Path
@@ -65,12 +61,12 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /smart/path_agent1
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz_default_plugins/Path
       Color: 70; 160; 255
-      Enabled: true
+      Enabled: false
       Line Style: Lines
       Line Width: 0.080000000000000002
       Name: Agent2Path
@@ -86,7 +82,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /smart/path_agent2
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz_default_plugins/Path

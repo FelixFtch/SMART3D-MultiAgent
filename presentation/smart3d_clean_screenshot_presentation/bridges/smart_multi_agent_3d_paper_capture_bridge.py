@@ -31,8 +31,8 @@ def rgba(r, g, b, a=1.0):
     return c
 
 
-COLOR_WALL_SEEN = rgba(0.0, 0.0, 0.0, 0.20)
-COLOR_WALL_UNSEEN = rgba(0.0, 0.0, 0.0, 0.05)
+COLOR_WALL_SEEN = rgba(0.0, 0.0, 0.0, 0.30)
+COLOR_WALL_UNSEEN = rgba(0.0, 0.0, 0.0, 0.08)
 COLOR_GROUND = rgba(1.0, 1.0, 1.0, 1.0)
 COLOR_BORDER = rgba(0.0, 0.0, 0.0, 0.55)
 COLOR_OBSTACLE = rgba(1.0, 0.45, 0.10, 0.85)
@@ -206,18 +206,8 @@ class SmartMultiAgent3DBridge(Node):
                 if pub is not None:
                     self.safe_publish(pub, path_msg)
 
-                if len(path_pts) > 1:
-                    nxt = [float(v) for v in path_pts[min(max(a.get("path_index", 0), 1), len(path_pts) - 1)]]
-                    arrow = self.make_marker("arrows", base + 4, Marker.ARROW, color)
-                    arrow.scale.x = 0.08
-                    arrow.scale.y = 0.18
-                    arrow.scale.z = 0.18
-                    p1 = Point()
-                    p1.x, p1.y, p1.z = rx, ry, rz
-                    p2 = Point()
-                    p2.x, p2.y, p2.z = nxt[0], nxt[1], nxt[2]
-                    arrow.points = [p1, p2]
-                    markers.markers.append(arrow)
+                # Paper-capture mode hides the instantaneous waypoint arrow so
+                # the only visible route is the full SMART/RRT path.
 
         for oi, obs in enumerate(data.get("obstacles", [])):
             ox, oy, oz = float(obs["x"]), float(obs["y"]), float(obs["z"])
