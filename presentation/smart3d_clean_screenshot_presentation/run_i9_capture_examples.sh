@@ -44,7 +44,7 @@ case "${1:-help}" in
     cargo run --release --example smart_multi_agent_3d -- \
       --scenario forest \
       --num-agents 4 \
-      --agent-mode cross3d \
+      --agent-mode cross \
       --include-tree \
       -n 0 \
       --playback-speed "${PLAYBACK_SPEED:-0.35}" \

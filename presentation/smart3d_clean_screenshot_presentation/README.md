@@ -86,8 +86,8 @@ rviz2 -d /home/felix/smart_rviz_bridge/smart_rviz_3d_multiagent_paper_capture.rv
 
 ## 3D Screenshot Example
 
-The paper screenshot mode uses `--agent-mode cross3d`, a true volumetric diagonal
-layout. This is intentionally different from the benchmark-only
+The paper screenshot mode uses `--agent-mode cross`, which the i9 runtime maps
+to a true volumetric diagonal layout for 3D screenshots. This is intentionally different from the benchmark-only
 `shared_unknown_corners --deployment-geometry outer_quarters` protocol, whose
 start/goal points can lie on reused Z layers.
 
@@ -95,7 +95,7 @@ start/goal points can lie on reused Z layers.
 cargo run --release --example smart_multi_agent_3d -- \
   --scenario forest \
   --num-agents 4 \
-  --agent-mode cross3d \
+  --agent-mode cross \
   --include-tree \
   -n 0 \
   --playback-speed 0.35 \
