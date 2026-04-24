@@ -84,15 +84,18 @@ cargo run --release --example smart_multi_agent_shared_unknown_v2 -- \
 rviz2 -d /home/felix/smart_rviz_bridge/smart_rviz_3d_multiagent_paper_capture.rviz
 ```
 
-## 3D Final-Protocol Example
+## 3D Screenshot Example
+
+The paper screenshot mode uses `--agent-mode cross3d`, a true volumetric diagonal
+layout. This is intentionally different from the benchmark-only
+`shared_unknown_corners --deployment-geometry outer_quarters` protocol, whose
+start/goal points can lie on reused Z layers.
 
 ```bash
 cargo run --release --example smart_multi_agent_3d -- \
   --scenario forest \
   --num-agents 4 \
-  --agent-mode shared_unknown_corners \
-  --deployment-geometry outer_quarters \
-  --deployment-local-range-scale 0.45 \
+  --agent-mode cross3d \
   --include-tree \
   -n 0 \
   --playback-speed 0.35 \
