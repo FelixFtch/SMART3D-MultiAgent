@@ -31,8 +31,8 @@ def rgba(r, g, b, a=1.0):
     return c
 
 
-COLOR_WALL_SEEN = rgba(0.0, 0.0, 0.0, 0.88)
-COLOR_WALL_UNSEEN = rgba(0.0, 0.0, 0.0, 0.14)
+COLOR_WALL_SEEN = rgba(0.0, 0.0, 0.0, 0.20)
+COLOR_WALL_UNSEEN = rgba(0.0, 0.0, 0.0, 0.05)
 COLOR_GROUND = rgba(1.0, 1.0, 1.0, 1.0)
 COLOR_BORDER = rgba(0.0, 0.0, 0.0, 0.55)
 COLOR_OBSTACLE = rgba(1.0, 0.45, 0.10, 0.85)
