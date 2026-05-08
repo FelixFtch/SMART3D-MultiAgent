@@ -1431,10 +1431,10 @@ fn make_scenario(name: &str) -> ScenarioDef {
         "building" => make_building(32.0),
         "office" => make_office(32.0),
         "warehouse" => make_warehouse(32.0),
-        "megacampus" => make_megacampus(128.0),
-        "mega_hospital" => make_mega_hospital(96.0),
-        "mega_airport" => make_mega_airport(160.0),
-        "mega_university" => make_mega_university(192.0),
+        "megacampus" | "campus" => make_megacampus(128.0),
+        "mega_hospital" | "hospital" => make_mega_hospital(96.0),
+        "mega_airport" | "airport" => make_mega_airport(160.0),
+        "mega_university" | "university" => make_mega_university(192.0),
         "bottleneck" => make_bottleneck(32.0),
         _ => {
             eprintln!("Unknown scenario '{}', defaulting to 'mega_airport'", name);

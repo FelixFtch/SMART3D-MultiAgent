@@ -9,12 +9,17 @@
 ## Start Here: Repository Map
 
 This repository is the paper-facing SMART-3D / PECMAN simulation, benchmark,
-and RViz capture package. It is not the real-car deployment source of truth.
+and RViz capture package. It is now a complete Rust crate: a fresh clone should
+contain `Cargo.toml`, `Cargo.lock`, `src/`, `examples/`, benchmarks, and the
+RViz bridge files needed for paper captures.
+
+It is not the real-car deployment source of truth.
 
 Use this map first:
 
 | Goal | Where to start |
 |------|----------------|
+| Build the Rust crate from a fresh clone | `Cargo.toml`, `src/`, `examples/` |
 | Run the core 2D SMART-3D multi-agent algorithm | `examples/smart_multi_agent.rs` |
 | Run the accepted 2026-05-08 paper/RViz capture chain | `examples/smart_multi_agent_shared_unknown_v2.rs` and `presentation/smart3d_clean_screenshot_presentation/` |
 | Run benchmark scripts and inspect raw results | `benchmarks/` |
@@ -24,6 +29,21 @@ Use this map first:
 | Build paper figures / screenshots | `presentation/smart3d_clean_screenshot_presentation/` |
 | Read the paper source | `paper/main.tex` |
 | Restore physical robot code | use the separate real-car repo `smart3d-multiagent-car-code` |
+
+Status summary:
+
+- Complete Rust crate: this checkout includes `Cargo.toml`, `Cargo.lock`,
+  `src/`, and runnable `examples/`.
+- Final paper RViz capture: 2D floorplan scenes through
+  `examples/smart_multi_agent_shared_unknown_v2.rs`.
+- Numeric regressions: 2D/3D aggregate runners and JSON data live under
+  `benchmarks/` and `benchmarks/data/`.
+- 3D note: aggregate benchmark data is included; archived 3D RViz bridge files
+  are included, but the live 3D JSON producer is not part of the 2026-05-08
+  final capture lane.
+- Real-car deployment: use the separate `smart3d-multiagent-car-code` repo as
+  the current physical robot source of truth. `deploy/`, `field/`, and
+  `jetsoncar/` here are restore/provenance snapshots unless explicitly promoted.
 
 Current naming convention:
 
@@ -42,11 +62,43 @@ or old corner-deploy modes. See:
 presentation/smart3d_clean_screenshot_presentation/README.md
 ```
 
+### Fresh Clone Verification
+
+On a machine with Rust installed:
+
+```bash
+git clone https://github.com/FelixFtch/SMART3D-MultiAgent.git
+cd SMART3D-MultiAgent
+cargo check --example smart_multi_agent_shared_unknown_v2 \
+  --example run_2d_scenarios \
+  --example run_3d_scenarios
+```
+
+On the i9, install the RViz bridge files after cloning:
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/.cargo/env
+presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh install
+```
+
+Then open RViz and run a clean 2D paper scene:
+
+```bash
+presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh rviz2d
+```
+
+```bash
+PLAYBACK_SPEED=30 \
+  presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh hospital2d
+```
+
 ---
 
 ## 0. Quick Start: Available Modes and Switches
 
-The system has **two binaries** and **five operational modes** controlled by CLI flags:
+The main 2D simulation has two interactive examples and several operational
+modes controlled by CLI flags:
 
 | Mode | Binary | Flag | What it does |
 |------|--------|------|-------------|
@@ -417,27 +469,27 @@ cd ~/SMART3D && cargo run --release --example smart_rviz_json -- \
 
 ### Shared vs Independent (12,000 trials)
 ```bash
-cd ~/SMART3D && python3 bench_sharing_ablation.py --trials 1000 --jobs 0
+cd ~/SMART3D && python3 benchmarks/bench_sharing_ablation.py --trials 1000 --jobs 0
 ```
 
 ### Lazy Eager vs Swift (12,000 trials)
 ```bash
-cd ~/SMART3D && python3 bench_e3_vs_senior.py --trials 1000 --jobs 0
+cd ~/SMART3D && python3 benchmarks/bench_e3_vs_senior.py --trials 1000 --jobs 0
 ```
 
 ### Single Agent baseline (6,000 trials)
 ```bash
-cd ~/SMART3D && python3 bench_single_agent.py --trials 1000 --jobs 0
+cd ~/SMART3D && python3 benchmarks/bench_single_agent.py --trials 1000 --jobs 0
 ```
 
 ### Current vs Deferred Eager (12,000 trials)
 ```bash
-cd ~/SMART3D && python3 bench_deferred.py --trials 1000 --jobs 0
+cd ~/SMART3D && python3 benchmarks/bench_deferred.py --trials 1000 --jobs 0
 ```
 
 ### Fast test (any benchmark, 10 trials)
 ```bash
-cd ~/SMART3D && python3 bench_sharing_ablation.py --trials 10 --scenarios mega_hospital
+cd ~/SMART3D && python3 benchmarks/bench_sharing_ablation.py --trials 10 --scenarios mega_hospital
 ```
 
 ---
@@ -783,7 +835,7 @@ Cluster minimum: 8 LiDAR points. Update interval: 1.0s. Temporal persistence fil
 | 3 | Full-tree Lazy Eager repair has 4-9x fewer rebuilds than path-only Swift | mega_hospital: 34.0 vs 102.7 | 1,000 |
 | 4 | Shared wall discovery provides 1.04x–2.09x speedup | All 6 scenarios | 12,000 |
 | 5 | Shared reduces per-agent completion time spread by up to 4.2x | Megacampus: 12.3s → 2.9s | 12,000 |
-| 6 | 100% success rate on all mega maps with 4 agents | mega_hospital, mega_airport, megacampus | 3,000 |
+| 6 | Stored single-agent Lazy Eager baseline is 100% successful on the six committed 2D scenarios | building through megacampus | 6,000 |
 | 7 | Spatial index v2 reduces CPU time by 26% on 300-wall maps | Megacampus WallMed: 66.1s → 48.6s | 1,000 |
 | 8 | 8-agent bottleneck (2m corridor) 100% pass rate | bottleneck scenario | 1,000 |
 | 9 | Immediate Eager is optimal (deferred shows no improvement) | 6 scenarios, current vs deferred 30m | 12,000 |

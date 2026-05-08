@@ -49,6 +49,11 @@ Raw code names stay unchanged in JSON:
 Do not rename the raw scenario IDs inside the JSON unless every script and
 figure generator is updated together. Rename labels only at plot/table time.
 
+Note: the committed `run_3d_scenarios.rs` aggregate runner is not the archived
+multi-map 3D RViz producer. Its JSON is grouped by obstacle count and obstacle
+speed, not by `forest/building3d/mega_hive_3d/mega_parking_3d` scene IDs. The
+3D scene-ID rows above are kept for older paper artifacts and figure labels.
+
 ## Known Result Summary
 
 Single-agent Lazy Eager, 1,000 trials each:
@@ -70,7 +75,8 @@ Shared vs Independent, 1,000 trials each:
 
 2026-04-23 paper-map export:
 
-- 2D sweep: 1600 trials, 1492 successes, median travel time 11.1 s.
+- 2D sweep: 1600 trials, 1492 successes, all-trials median travel time 11.1 s
+  and successful-trials median travel time 11.2 s.
 - 3D sweep: 1600 trials, 1513 successes, median travel time 15.4 s.
 
 2026-05-08 i9 rerun copied into this repo:
@@ -82,6 +88,9 @@ Shared vs Independent, 1,000 trials each:
   - `/home/felix/SMART3D_benchmark_reruns/3d_20260508_final_20260508_162657`
 - Only aggregate JSON files are committed. The per-run `.bin` files stay on the
   i9 because they are bulky regression artifacts, not README-friendly source.
+- The per-run artifact paths inside the aggregate JSONs point to the machine and
+  output directory used during that run. Treat those paths as provenance, not as
+  guaranteed local files after cloning this repository.
 
 ## Re-run Commands
 
@@ -117,8 +126,10 @@ cargo run --release --example run_3d_scenarios -- \
 ```
 
 Validation note: `run_2d_scenarios` and `run_3d_scenarios` both accept only
-`--output-dir` and `--help`; they do not expose a trial-count flag. Use the
-Python benchmark scripts when you need custom trial counts.
+`--output-dir` and `--help` for changing where aggregate outputs go; the 2D
+runner also has `--save-tree` for bulky debug artifacts. Neither runner exposes
+a trial-count flag. Use the Python benchmark scripts when you need custom trial
+counts.
 
 ## Paper Naming Notes
 
@@ -129,3 +140,6 @@ Use paper-facing names in captions and README prose:
 - Keep an internal note that older scripts may still mention `E3` or `Senior`.
 - Use `Hospital`, `Airport`, `Campus`, `University` in charts; keep raw
   `mega_*` IDs in code and data.
+- If `paper/main.tex` in this repository still contains an older naming pass,
+  prefer the current README terminology for new handoff/deployment prose rather
+  than editing benchmark JSON or script filenames.

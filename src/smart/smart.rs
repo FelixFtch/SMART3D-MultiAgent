@@ -328,7 +328,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
         self.current_state = current_robot_state;
 
         // Replace the static validity checker
-        let _old_checker = std::mem::replace(&mut self.static_validity_checker, new_static_validity_checker);
+        let _old_checker = std::mem::replace(
+            &mut self.static_validity_checker,
+            new_static_validity_checker,
+        );
 
         // Clear CPR state from any previous dynamic obstacle update
         // During static-only updates, no dynamic obstacles are involved
@@ -349,7 +352,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
             if self.node(node_id).tree_id == Self::PRUNED_TREE_ID {
                 continue;
             }
-            if !self.static_validity_checker.is_state_valid(self.node(node_id).state()) {
+            if !self
+                .static_validity_checker
+                .is_state_valid(self.node(node_id).state())
+            {
                 // Node is inside a new wall
                 self.node_mut(node_id).tree_id = Self::PRUNED_TREE_ID;
                 let old_parent_id = self.node(node_id).parent;
@@ -388,10 +394,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
                 if self.node(parent_id).tree_id == Self::PRUNED_TREE_ID {
                     continue; // parent already pruned, child already handled above
                 }
-                if !self.static_validity_checker.is_edge_valid(
-                    self.node(parent_id).state(),
-                    self.node(node_id).state(),
-                ) {
+                if !self
+                    .static_validity_checker
+                    .is_edge_valid(self.node(parent_id).state(), self.node(node_id).state())
+                {
                     let old_parent_id = Some(parent_id);
                     self.set_node_parent(node_id, None);
                     self.tree_id_counter += 1;
@@ -490,7 +496,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
         self.current_state = current_robot_state;
 
         // Replace with full validity checker (all walls)
-        let _old = std::mem::replace(&mut self.static_validity_checker, new_static_validity_checker);
+        let _old = std::mem::replace(
+            &mut self.static_validity_checker,
+            new_static_validity_checker,
+        );
 
         // Clear CPR state
         self.cpr_obstacles.clear();
@@ -549,10 +558,9 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
                     continue;
                 }
                 // Only check against unvalidated walls
-                if !unvalidated_walls_checker.is_edge_valid(
-                    self.node(parent_id).state(),
-                    self.node(node_id).state(),
-                ) {
+                if !unvalidated_walls_checker
+                    .is_edge_valid(self.node(parent_id).state(), self.node(node_id).state())
+                {
                     let old_parent_id = Some(parent_id);
                     self.set_node_parent(node_id, None);
                     self.tree_id_counter += 1;
@@ -702,11 +710,12 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
             }
 
             // 5. Find best parent among neighbors (RRT* rewire-to-best-parent)
-            let neighbors = self.nearest_neighbors.within_radius(&new_state, rewire_radius);
+            let neighbors = self
+                .nearest_neighbors
+                .within_radius(&new_state, rewire_radius);
 
             let mut best_parent_id = nearest_id;
-            let mut best_cost =
-                self.nodes[nearest_id].cumulative_cost + steer_dist;
+            let mut best_cost = self.nodes[nearest_id].cumulative_cost + steer_dist;
             let mut best_edge_cost = steer_dist;
 
             // Only connect to main-tree nodes with finite cost
@@ -818,7 +827,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
         };
 
         // Replace checker
-        let _old = std::mem::replace(&mut self.static_validity_checker, new_static_validity_checker);
+        let _old = std::mem::replace(
+            &mut self.static_validity_checker,
+            new_static_validity_checker,
+        );
 
         // Clear CPR state
         self.cpr_obstacles.clear();
@@ -838,7 +850,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
             if self.node(node_id).tree_id == Self::PRUNED_TREE_ID {
                 continue;
             }
-            if !self.static_validity_checker.is_state_valid(self.node(node_id).state()) {
+            if !self
+                .static_validity_checker
+                .is_state_valid(self.node(node_id).state())
+            {
                 self.node_mut(node_id).tree_id = Self::PRUNED_TREE_ID;
                 let old_parent_id = self.node(node_id).parent;
                 self.set_node_parent(node_id, None);
@@ -881,10 +896,10 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
             if self.node(child_id).parent != Some(parent_id) {
                 continue;
             }
-            if !self.static_validity_checker.is_edge_valid(
-                self.node(parent_id).state(),
-                self.node(child_id).state(),
-            ) {
+            if !self
+                .static_validity_checker
+                .is_edge_valid(self.node(parent_id).state(), self.node(child_id).state())
+            {
                 let old_parent_id = Some(parent_id);
                 self.set_node_parent(child_id, None);
                 self.tree_id_counter += 1;
@@ -957,10 +972,7 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
     /// and break any that are now invalid. Creates disjoint subtrees but does NOT
     /// do hot-node repair or path rebuilding. Used in Hybrid mode when new walls
     /// don't block the current path but may invalidate some tree edges.
-    pub fn cleanup_edges_against_checker(
-        &mut self,
-        checker: &dyn ValidityChecker<F, N>,
-    ) {
+    pub fn cleanup_edges_against_checker(&mut self, checker: &dyn ValidityChecker<F, N>) {
         for node_id in 0..self.nodes.len() {
             if self.node(node_id).tree_id == Self::PRUNED_TREE_ID {
                 continue;
@@ -969,10 +981,8 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
                 if self.node(parent_id).tree_id == Self::PRUNED_TREE_ID {
                     continue;
                 }
-                if !checker.is_edge_valid(
-                    self.node(parent_id).state(),
-                    self.node(node_id).state(),
-                ) {
+                if !checker.is_edge_valid(self.node(parent_id).state(), self.node(node_id).state())
+                {
                     // Break the edge — child becomes a disconnected subtree root
                     self.set_node_parent(node_id, None);
                     // ★ FIX: mark subtree as non-MAIN so descendants can't become new parent (cycle prevention)
@@ -982,26 +992,38 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
                     self.node_mut(node_id).cumulative_cost = F::infinity();
                     self.propagate_info_to_children(node_id);
                     // Try to reconnect via KD-tree neighbors in main tree
-                    let neighbors = self
-                        .nearest_neighbors
-                        .within_radius(self.node(node_id).state(), self.hot_node_neighborhood_radius);
+                    let neighbors = self.nearest_neighbors.within_radius(
+                        self.node(node_id).state(),
+                        self.hot_node_neighborhood_radius,
+                    );
                     let mut best: Option<(usize, F)> = None;
                     for &nb_id in &neighbors {
-                        if nb_id == node_id { continue; }
-                        if self.node(nb_id).tree_id != Self::MAIN_TREE_ID { continue; }
-                        if !self.static_validity_checker.is_edge_valid(
-                            self.node(nb_id).state(),
-                            self.node(node_id).state(),
-                        ) { continue; }
+                        if nb_id == node_id {
+                            continue;
+                        }
+                        if self.node(nb_id).tree_id != Self::MAIN_TREE_ID {
+                            continue;
+                        }
+                        if !self
+                            .static_validity_checker
+                            .is_edge_valid(self.node(nb_id).state(), self.node(node_id).state())
+                        {
+                            continue;
+                        }
                         let cost = self.node(nb_id).cumulative_cost
-                            + self.node(nb_id).state().euclidean_distance(self.node(node_id).state());
+                            + self
+                                .node(nb_id)
+                                .state()
+                                .euclidean_distance(self.node(node_id).state());
                         if best.is_none() || cost < best.unwrap().1 {
                             best = Some((nb_id, cost));
                         }
                     }
                     if let Some((nb_id, _)) = best {
                         self.set_node_parent(node_id, Some(nb_id));
-                        let edge_cost = self.node(nb_id).state()
+                        let edge_cost = self
+                            .node(nb_id)
+                            .state()
                             .euclidean_distance(self.node(node_id).state());
                         self.node_mut(node_id).edge_cost = edge_cost;
                         self.node_mut(node_id).cumulative_cost =
@@ -1115,10 +1137,7 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
                     if self.node(parent_id).tree_id == Self::MAIN_TREE_ID
                         && self
                             .static_validity_checker
-                            .is_edge_valid(
-                                self.node(parent_id).state(),
-                                self.node(node_id).state(),
-                            )
+                            .is_edge_valid(self.node(parent_id).state(), self.node(node_id).state())
                     {
                         let edge_cost = self
                             .node(parent_id)
@@ -1165,12 +1184,17 @@ impl<F: Float + std::fmt::Debug, const N: usize, NN: NearestNeighbors<F, N>> SMA
         let mut rng = rand::thread_rng();
         for _ in 0..max_iterations {
             let len = path.len();
-            if len < 3 { break; }
+            if len < 3 {
+                break;
+            }
             let i = rng.gen_range(0..len - 2);
             let j = rng.gen_range(i + 2..len);
             let state_i = self.nodes[path[i]].state().clone();
             let state_j = self.nodes[path[j]].state().clone();
-            if self.static_validity_checker.is_edge_valid(&state_i, &state_j) {
+            if self
+                .static_validity_checker
+                .is_edge_valid(&state_i, &state_j)
+            {
                 path.drain(i + 1..j);
             }
         }

@@ -50,11 +50,7 @@ impl<F: Float, const N: usize> SpatialRectValidityChecker<F, N> {
         std::array::from_fn(|i| Self::coord_to_cell(state[i], inv))
     }
 
-    fn for_each_cell(
-        min_cells: &[i32; N],
-        max_cells: &[i32; N],
-        mut cb: impl FnMut([i32; N]),
-    ) {
+    fn for_each_cell(min_cells: &[i32; N], max_cells: &[i32; N], mut cb: impl FnMut([i32; N])) {
         // For N=2 (the common case), this is just a nested loop over ~1-4 cells
         let mut cur: [i32; N] = *min_cells;
         loop {

@@ -65,16 +65,16 @@ case "${1:-help}" in
     scene_cmd warehouse 50000 240 10 80 "$DETOUR_THRESHOLD"
     ;;
   hospital2d)
-    scene_cmd hospital 30000 420 10 80 "$DETOUR_THRESHOLD"
+    scene_cmd mega_hospital 30000 420 10 80 "$DETOUR_THRESHOLD"
     ;;
   airport2d)
-    scene_cmd airport 50000 520 10 80 "$DETOUR_THRESHOLD"
+    scene_cmd mega_airport 50000 520 10 80 "$DETOUR_THRESHOLD"
     ;;
   campus2d)
-    scene_cmd campus 80000 520 10 80 "$DETOUR_THRESHOLD"
+    scene_cmd megacampus 80000 520 10 80 "$DETOUR_THRESHOLD"
     ;;
   university2d)
-    scene_cmd university 160000 720 15 80 "$DETOUR_THRESHOLD"
+    scene_cmd mega_university 160000 720 15 80 "$DETOUR_THRESHOLD"
     ;;
   bottleneck2d)
     cd "$SMART3D_DIR"
@@ -91,7 +91,7 @@ case "${1:-help}" in
       --max-time 240 \
       | python3 "$BRIDGE_DIR/smart_multi_agent_shared_unknown_v2_clean_display_bridge.py"
     ;;
-  forest3d)
+  benchmark3d|forest3d)
     cd "$SMART3D_DIR"
     cargo run --release --example run_3d_scenarios -- --output-dir "${SMART3D_3D_OUTPUT_DIR:-output/3d_scenarios}"
     ;;
@@ -109,6 +109,7 @@ Usage:
   presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh campus2d
   presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh university2d
   presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh bottleneck2d
+  presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh benchmark3d
 
 Environment:
   SMART3D_DIR=/home/felix/SMART3D_capture_core_clean
@@ -119,6 +120,7 @@ Environment:
 Notes:
   Final 2D capture defaults are no people, cross goals, tree off, clean display.
   DETOUR_THRESHOLD=1.1 is strict and shortest-looking; 1.5 is looser; 0 disables it.
+  benchmark3d runs the aggregate 3D benchmark writer, not a live RViz capture.
 EOF
     ;;
 esac

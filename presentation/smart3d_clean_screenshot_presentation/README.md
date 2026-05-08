@@ -116,6 +116,24 @@ PLAYBACK_SPEED=30 presentation/smart3d_clean_screenshot_presentation/run_i9_capt
 PLAYBACK_SPEED=30 presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh university2d
 ```
 
+The helper names above are paper-friendly. The Rust binary itself uses raw
+scenario IDs:
+
+| Paper label | Helper target | Rust `--scenario` raw ID |
+|-------------|---------------|--------------------------|
+| Building | `building2d` | `building` |
+| Office | `office2d` | `office` |
+| Warehouse | `warehouse2d` | `warehouse` |
+| Hospital | `hospital2d` | `mega_hospital` |
+| Airport | `airport2d` | `mega_airport` |
+| Campus | `campus2d` | `megacampus` |
+| University | `university2d` | `mega_university` |
+
+The Rust binary now accepts both raw IDs and the short paper labels for these
+four large maps. Keep the raw IDs in scripts anyway because older checkouts did
+not have the alias table. Unknown raw IDs fall back to `mega_airport`, which can
+make a screenshot look like the wrong map.
+
 Manual command shape:
 
 ```bash
@@ -126,7 +144,7 @@ export DISPLAY=:1
 export XAUTHORITY=/run/user/1000/gdm/Xauthority
 
 cargo run --release --example smart_multi_agent_shared_unknown_v2 -- \
-  --scenario hospital \
+  --scenario mega_hospital \
   --num-agents 4 \
   --agent-mode cross \
   --num-obstacles 0 \
@@ -146,6 +164,22 @@ Use no pedestrians and detour off for the bottleneck stress display:
 ```bash
 PLAYBACK_SPEED=30 presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh bottleneck2d
 ```
+
+## 3D Status
+
+The final accepted paper RViz capture path in this package is the 2D floorplan
+path above. The repository also contains 3D benchmark/capture artifacts, but
+they are not one single complete final capture lane yet:
+
+- `examples/run_3d_scenarios.rs` is a usable aggregate benchmark runner. It
+  writes `3d_scenarios.json` for a 3D dynamic-obstacle regression sweep.
+- `bridges/smart_multi_agent_3d_paper_capture_bridge.py` and
+  `rviz/smart_rviz_3d_multiagent_paper_capture.rviz` are kept as archived 3D
+  live-RViz capture components.
+- The archived 3D bridge expects a `smart_multi_agent_3d` JSON producer. That
+  producer is not integrated into the current 2026-05-08 final paper capture
+  path, so do not present 3D RViz as equally turnkey unless that producer is
+  restored.
 
 ## Benchmark Reruns
 
