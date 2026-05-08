@@ -38,25 +38,45 @@ should say:
 
 ## Start Here
 
-Use these files first when resuming field work:
+Use these files first when resuming field work. In the GitHub checkout, the
+real-robot runbook lives under `jetsoncar/`; the root-level Rust crate is mainly
+the SMART-3D / PECMAN simulation and paper-capture package.
 
-- `SMART3D_CAMPUS_CONNECTION_GUIDE.md`
-- `SMART3D_CAMPUS_RUNTIME.md`
-- `SMART3D_NEXT_SESSION_HANDOFF_2026-04-18.md`
-- `SMART3D_JETSON_CAMPUS_RUNTIME_2026-04-18.md`
-- `SMART3D_JETSON_PI5_REFERENCE_RESTORE_2026-04-19.md`
-- `scripts/smart3d_campus.sh`
-- `scripts/smart3d_jetson_campus.sh`
-- `jetson/jetson_runtime_ctl.sh`
-- `jetson/deploy_runtime_to_jetson.sh`
+- `jetsoncar/SMART3D_CAMPUS_CONNECTION_GUIDE.md`
+- `jetsoncar/SMART3D_CAMPUS_RUNTIME.md`
+- `jetsoncar/SMART3D_NEXT_AI_MASTER_HANDOFF_2026-04-19.md`
+- `jetsoncar/SMART3D_PITFALLS_AND_FAILURE_ATLAS_2026-04-19.md`
+- `jetsoncar/SMART3D_JETSON_CAMPUS_RUNTIME_2026-04-18.md`
+- `jetsoncar/SMART3D_JETSON_PI5_REFERENCE_RESTORE_2026-04-19.md`
+- `jetsoncar/scripts/smart3d_jetson_campus.sh`
+- `jetsoncar/jetson/jetson_runtime_ctl.sh`
+- `jetsoncar/jetson/deploy_runtime_to_jetson.sh`
 
 Many old files are historical snapshots. When two docs disagree, prefer this
 README plus the newest Jetson restore/runtime notes.
 
+## Current vs Historical Code
+
+| Path | Status | Use it for |
+|------|--------|------------|
+| `jetsoncar/` | Current private real-robot runbook snapshot | Jetson/Pi/Wheeltec deployment notes, scripts, backups, and hardware research. |
+| `jetsoncar/scripts/smart3d_jetson_campus.sh` | Current Jetson orchestration entrypoint | Prepare, start passive SLAM, validate, start active driving, goal tests, stop. |
+| `jetsoncar/jetson/` | Current Jetson runtime source bundle | LiDAR/IMU/Cartographer wrappers, scan normalizer, RF2O/LSM/Kinematic-ICP experiments, deployment helper. |
+| `jetsoncar/pi/`, `jetsoncar/i9/`, `jetsoncar/rviz/` | Current support files for robot client, central desktop, and RViz | Map bridge, watchdogs, RViz config, and helper scripts. |
+| `jetsoncar/backups/jetson_no_odom_gold_2026-04-19_important/` | Important known-good Jetson no-wheel baseline backup | Restore reference if current Jetson files look confused. |
+| `jetsoncar/backups/perfect2_2026-04-19_053032/` | Accepted planner/follower/RViz display snapshot | Understand what "perfect2" meant; not full wheel-odom fusion. |
+| `examples/`, `src/`, `presentation/`, `benchmarks/` | Current paper/simulation package | SMART-3D / PECMAN simulations, benchmark data, and clean RViz captures. |
+| `deploy/` | Mixed historical/current dependency source | Some `jetsoncar` scripts still copy files from here. Treat it as dependency material, not the main runbook. |
+| `field/`, `extras/`, most of `docs/` | Historical raw snapshots and experiments | Read for provenance only unless a newer README explicitly points there. |
+
+New AI rule: for real robot work, start in `jetsoncar/`. Do not start from
+root-level `deploy/`, `field/`, or `extras/` unless a current `jetsoncar` README
+or script explicitly tells you to.
+
 ## Jetson Default Baseline
 
-The important defaults are in `scripts/smart3d_jetson_campus.sh` and
-`jetson/start_pi5_reference_passive.sh`:
+The important defaults are in `jetsoncar/scripts/smart3d_jetson_campus.sh` and
+`jetsoncar/jetson/start_pi5_reference_passive.sh`:
 
 ```bash
 START_PI5_REFERENCE_WHEEL_ODOM=0
@@ -79,9 +99,12 @@ wheel odom as a default SLAM truth source.
 
 ## Jetson Typical Flow
 
-From the Mac/private checkout:
+From the private checkout:
 
 ```bash
+cd jetsoncar
+export SMART3D_DEPLOY_DIR="$PWD/../deploy"
+
 scripts/smart3d_jetson_campus.sh prepare
 scripts/smart3d_jetson_campus.sh start-passive
 scripts/smart3d_jetson_campus.sh validate
@@ -92,11 +115,18 @@ scripts/smart3d_jetson_campus.sh goal-test
 Stop cleanly:
 
 ```bash
+cd jetsoncar
 scripts/smart3d_jetson_campus.sh stop
 ```
 
 Use `START_PI5_REFERENCE_WHEEL_ODOM=1` only for a deliberate wheel-odom fusion
 test after RS485/common-ground/feedback quality is verified.
+
+Important path note: the deployment scripts were written during field work and
+some defaults assume the original private Mac workspace. From a fresh GitHub
+clone, set `SMART3D_DEPLOY_DIR="$PWD/../deploy"` after `cd jetsoncar`. If a
+helper path is missing, do not invent a new chain; first check the named
+`jetsoncar/backups/` snapshots and the newest Jetson handoff notes.
 
 ## Pi5 Reference Meaning
 
