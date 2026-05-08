@@ -6,16 +6,54 @@
 
 ---
 
+## Start Here: Repository Map
+
+This repository is the paper-facing SMART-3D / PECMAN simulation, benchmark,
+and RViz capture package. It is not the real-car deployment source of truth.
+
+Use this map first:
+
+| Goal | Where to start |
+|------|----------------|
+| Run the core 2D SMART-3D multi-agent algorithm | `examples/smart_multi_agent.rs` |
+| Run the accepted 2026-05-08 paper/RViz capture chain | `examples/smart_multi_agent_shared_unknown_v2.rs` and `presentation/smart3d_clean_screenshot_presentation/` |
+| Run benchmark scripts and inspect raw results | `benchmarks/` |
+| Inspect 1,000-trial JSON data | `benchmarks/data/` |
+| Inspect 2026-04-23 2D/3D paper-map exports | `benchmarks/data/paper_export_2026-04-23/` |
+| Inspect 2026-05-08 i9 benchmark rerun aggregates | `benchmarks/data/rerun_2026-05-08/` |
+| Build paper figures / screenshots | `presentation/smart3d_clean_screenshot_presentation/` |
+| Read the paper source | `paper/main.tex` |
+| Restore physical robot code | use the separate real-car repo `smart3d-multiagent-car-code` |
+
+Current naming convention:
+
+- `SMART-3D`: paper-facing algorithm name.
+- `PECMAN`: the multi-agent shared-perception system built on SMART-3D.
+- `Lazy Eager` / `LE`: final recommended repair strategy in the paper.
+- `Swift`: path-local/path-only repair comparison baseline, formerly named
+  `Senior` in older code/comments.
+- `shared_unknown_v2`: paper/RViz capture variant for clean diagonal-corner
+  visualizations.
+
+For the accepted 2026-05-08 clean RViz look, do not use tree display, text HUD,
+or old corner-deploy modes. See:
+
+```text
+presentation/smart3d_clean_screenshot_presentation/README.md
+```
+
+---
+
 ## 0. Quick Start: Available Modes and Switches
 
 The system has **two binaries** and **five operational modes** controlled by CLI flags:
 
 | Mode | Binary | Flag | What it does |
 |------|--------|------|-------------|
-| **E3 (default)** | `smart_multi_agent` | (none) | Shared walls + Lazy+Eager full-tree repair. **This is the best mode.** |
-| **Senior** | `smart_multi_agent` | `--senior-mode` | Path-only repair (original SMART author's approach). For comparison only. |
+| **Lazy Eager / LE (default)** | `smart_multi_agent` | (none) | Shared walls + Lazy+Eager full-tree repair. **This is the best mode.** |
+| **Swift** | `smart_multi_agent` | `--senior-mode` | Path-only/path-local repair baseline. The CLI flag keeps the old internal name for compatibility. |
 | **No Wall Sharing** | `smart_multi_agent` | `--no-wall-sharing` | Each agent only knows its own LiDAR discoveries. Agents still avoid each other. |
-| **Deferred Eager** | `smart_multi_agent_deferred` | `--local-horizon 30` | Only trigger Eager for walls within 30m. With `--local-horizon 0` = same as E3. |
+| **Deferred Eager** | `smart_multi_agent_deferred` | `--local-horizon 30` | Only trigger Eager for walls within 30m. With `--local-horizon 0` = same as Lazy Eager. |
 | **Single Agent** | `smart_rviz_json` | (none) | One robot, no multi-agent coordination. |
 
 ### Example commands (all modes)
@@ -23,14 +61,14 @@ The system has **two binaries** and **five operational modes** controlled by CLI
 ```bash
 cd ~/SMART3D
 
-# ===== E3 DEFAULT (best mode) =====
+# ===== LAZY EAGER DEFAULT (best mode) =====
 cargo run --release --example smart_multi_agent -- \
   --scenario megacampus --num-agents 4 --agent-mode cross \
   -n 0 -o 1.5 --playback-speed 3 --sensor-range 15 \
   --rrt-iterations 80000 --lsr-max 80 \
   | python3 ~/smart_rviz_bridge/smart_multi_agent_bridge.py
 
-# ===== SENIOR MODE (comparison baseline) =====
+# ===== SWIFT MODE (comparison baseline; old flag name is --senior-mode) =====
 cargo run --release --example smart_multi_agent -- \
   --scenario megacampus --num-agents 4 --agent-mode cross \
   -n 0 -o 1.5 --playback-speed 3 --sensor-range 15 \
@@ -106,7 +144,8 @@ The decision rule executed every time a new wall is discovered:
 
 Eager repair cleans up ALL dirty edges from previous Lazy swaps (because the checker now contains all known walls). So dirty edges never accumulate indefinitely.
 
-This is the default mode (E3) of the current system.
+This is the default Lazy Eager mode of the current system. Older code and
+benchmark files may still call this `E3`.
 
 ### 1.4 Failed Optimization Attempts
 
@@ -227,7 +266,7 @@ rviz2 &
 # Add → By topic → /smart/markers → MarkerArray → OK
 ```
 
-### Multi-Agent: All scenarios, shared mode (E3 default)
+### Multi-Agent: All scenarios, shared Lazy Eager default
 
 ```bash
 # building 32m
@@ -298,10 +337,10 @@ cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
   | python3 ~/smart_rviz_bridge/smart_multi_agent_bridge.py
 ```
 
-### Multi-Agent: Senior mode (add `--senior-mode`)
+### Multi-Agent: Swift mode (add old compatibility flag `--senior-mode`)
 
 ```bash
-# Example: mega_hospital senior
+# Example: mega_hospital Swift
 cd ~/SMART3D && cargo run --release --example smart_multi_agent -- \
   --scenario mega_hospital --num-agents 4 --agent-mode cross \
   -n 0 -o 1.5 --playback-speed 3 --sensor-range 12 \
@@ -381,7 +420,7 @@ cd ~/SMART3D && cargo run --release --example smart_rviz_json -- \
 cd ~/SMART3D && python3 bench_sharing_ablation.py --trials 1000 --jobs 0
 ```
 
-### E3 vs Senior (12,000 trials)
+### Lazy Eager vs Swift (12,000 trials)
 ```bash
 cd ~/SMART3D && python3 bench_e3_vs_senior.py --trials 1000 --jobs 0
 ```
@@ -415,16 +454,16 @@ cd ~/SMART3D && python3 bench_sharing_ablation.py --trials 10 --scenarios mega_h
 | Hybrid (abandoned) | 3.42s | 22.3x | 2.3 | 98.6% |
 | **Lazy+Eager (final)** | **best** | **22.4x** | **low** | **high** |
 
-### E3 vs Senior (4 agents, 1000 trials each)
+### Lazy Eager vs Swift (4 agents, 1000 trials each)
 
-| Scenario | E3 | Senior | E3 Rebuilds | Senior Rebuilds |
+| Scenario | Lazy Eager | Swift | Lazy Eager Rebuilds | Swift Rebuilds |
 |----------|-----|--------|-------------|-----------------|
 | building | 23.2s | 27.4s | 3.0 | 15.2 |
 | mega_hospital | 91.9s | 119.3s | 34.0 | 102.7 |
 | mega_airport | 116.2s | 151.7s | 30.9 | 91.8 |
 | megacampus | 117.7s | 121.8s | 54.9 | 121.3 |
 
-**Wall-clock (CPU) time tradeoff:** E3 scans all edges per repair, so CPU cost per trial is higher. Megacampus: E3 wall_time = 66.1s vs Senior wall_time = 39.5s. E3 makes the CPU work harder but the robot finishes faster (sim_time 117.7s vs 121.8s). Spatial Index v2 closes this gap.
+**Wall-clock (CPU) time tradeoff:** Lazy Eager scans all edges per repair, so CPU cost per trial is higher. Megacampus: Lazy Eager wall_time = 66.1s vs Swift wall_time = 39.5s. Lazy Eager makes the CPU work harder but the robot finishes faster (sim_time 117.7s vs 121.8s). Spatial Index v2 closes this gap.
 
 ### Shared vs Independent (4 agents, 1000 trials each)
 
@@ -488,7 +527,7 @@ cd ~/SMART3D && python3 bench_sharing_ablation.py --trials 10 --scenarios mega_h
 ├── i9_planner.py                           ← ★ Central ROS2 planner (~750 lines)
 ├── bench_sharing_ablation.py               ← Shared vs Independent benchmark
 ├── bench_single_agent.py                   ← Single agent benchmark
-├── bench_e3_vs_senior.py                   ← E3 vs Senior benchmark
+├── bench_e3_vs_senior.py                   ← Lazy Eager vs Swift benchmark; filename keeps old names
 ├── bench_deferred.py                       ← Current vs Deferred benchmark
 ├── sharing_ablation.json                   ← 12,000 trial results
 ├── single_agent_benchmark.json             ← 6,000 trial results
@@ -570,7 +609,7 @@ https://github.com/LinksLabUConn/SMART3D.git             ← Original SMART-3D c
 | Shared wall discovery | **Novel mechanism**: cooperative map sharing via shared Vec |
 | `--no-wall-sharing` ablation mode | **Experiment infrastructure**: proves sharing value |
 | `--local-horizon` deferred Eager | **Experiment**: tested and found current system optimal |
-| `update_static_obstacles_path_only()` | **Baseline implementation**: replicates original author's path-only repair approach for fair comparison (Senior mode) |
+| `update_static_obstacles_path_only()` | **Baseline implementation**: replicates the path-only/path-local repair approach for fair comparison (Swift mode; old CLI flag still says `--senior-mode`) |
 | Spatial index v2 | **Engineering optimization**: -26% CPU on mega maps |
 | LSR = 80m tuning | **Parameter tuning**: repair success 70% → 92% |
 | Shortcut / Detour | **Standard technique**: ~0% benefit in multi-agent |
@@ -741,7 +780,7 @@ Cluster minimum: 8 LiDAR points. Update interval: 1.0s. Temporal persistence fil
 |---|-------|---------|--------|
 | 1 | Incremental repair is 8.8x faster than full rebuild | Megacampus: 8.71s vs 76.27s | 1,000 |
 | 2 | Lazy+Eager combo achieves 22.4x speedup | Megacampus: 3.40s vs 76.27s | 1,000 |
-| 3 | Full-tree repair (E3) has 4–9x fewer rebuilds than path-only (Senior) | mega_hospital: 34.0 vs 102.7 | 1,000 |
+| 3 | Full-tree Lazy Eager repair has 4-9x fewer rebuilds than path-only Swift | mega_hospital: 34.0 vs 102.7 | 1,000 |
 | 4 | Shared wall discovery provides 1.04x–2.09x speedup | All 6 scenarios | 12,000 |
 | 5 | Shared reduces per-agent completion time spread by up to 4.2x | Megacampus: 12.3s → 2.9s | 12,000 |
 | 6 | 100% success rate on all mega maps with 4 agents | mega_hospital, mega_airport, megacampus | 3,000 |

@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
 """
-SMART-3D Multi-Agent Shared Unknown v2 → RViz2 Bridge
+SMART-3D Multi-Agent Shared Unknown v2 Clean Display Bridge
 
 Visualizes:
-  - Robots: colored sphere + collision radius ring + direction arrow + name label
+  - Robots: colored sphere + collision radius ring + direction arrow
   - Sensor range: filled semi-transparent circle in agent color
   - Paths: colored lines per agent
-  - People: orange spheres + yellow OHZ rings
+  - People: orange triangles + yellow OHZ rings (avoidance remains spherical)
   - Walls: discovered (dark) / undiscovered (faint)
   - Fog-of-war occupancy grid
   - Tree edges colored by agent (optional)
-  - HUD with per-agent status
 
 Usage:
   cargo run --release --example smart_multi_agent_shared_unknown_v2 -- \
-    --scenario mega_airport --num-agents 4 --agent-mode shared_unknown_corners \
-    -n 0 --playback-speed 1 --sensor-range 12 --rrt-iterations 50000 \
-    --lsr-max 80 --include-tree \
-    | python3 ~/smart_rviz_bridge/smart_multi_agent_shared_unknown_v2_bridge.py
+    --scenario mega_airport --num-agents 4 --agent-mode cross \
+    -n 0 --playback-speed 30 --sensor-range 10 --rrt-iterations 50000 \
+    --lsr-max 80 --detour-threshold 1.1 \
+    | python3 ~/smart_rviz_bridge/smart_multi_agent_shared_unknown_v2_clean_display_bridge.py
 """
 
 import os
@@ -96,11 +95,12 @@ class MultiAgentBridge(Node):
         self.agent_colors = {}
         self.num_agents = 0
         self.current_stamp = None
+        self.prev_static_ids = {}
         try:
             os.remove(self.goal_override_path)
         except FileNotFoundError:
             pass
-        self.get_logger().info('SMART Multi-Agent Shared Unknown v2 RViz2 Bridge')
+        self.get_logger().info('SMART Multi-Agent Shared Unknown v2 Clean Display Bridge')
         self.get_logger().info(f'Goal override path: {self.goal_override_path}')
 
     def make_marker(self, ns, mid, mtype, x=0, y=0, z=0, sx=1, sy=1, sz=1, color=None):
@@ -122,6 +122,68 @@ class MultiAgentBridge(Node):
             m.color = color
         m.lifetime.sec = 0
         m.lifetime.nanosec = 0
+        return m
+
+    def make_person_triangle(self, mid, x, y, radius):
+        # Visual-only marker: SMART still receives circular people obstacles from Rust.
+        m = self.make_marker('obstacles', mid, Marker.TRIANGLE_LIST, color=COLOR_OBSTACLE)
+        m.pose.position.x = 0.0
+        m.pose.position.y = 0.0
+        m.pose.position.z = 0.0
+        m.scale.x = 1.0
+        m.scale.y = 1.0
+        m.scale.z = 1.0
+        z = 0.08
+        angles = (
+            math.pi / 2.0,
+            math.pi / 2.0 + 2.0 * math.pi / 3.0,
+            math.pi / 2.0 + 4.0 * math.pi / 3.0,
+        )
+        pts = []
+        for ang in angles:
+            pt = Point()
+            pt.x = float(x + radius * math.cos(ang))
+            pt.y = float(y + radius * math.sin(ang))
+            pt.z = z
+            pts.append(pt)
+        # Duplicate reversed winding so the filled triangle is visible from both camera sides.
+        m.points = [pts[0], pts[1], pts[2], pts[2], pts[1], pts[0]]
+        return m
+
+    def make_goal_star(self, mid, x, y, outer_radius, color):
+        star_color = rgba(color.r, color.g, color.b, 1.0)
+        m = self.make_marker('static', mid, Marker.TRIANGLE_LIST, color=star_color)
+        m.pose.position.x = 0.0
+        m.pose.position.y = 0.0
+        m.pose.position.z = 0.0
+        m.scale.x = 1.0
+        m.scale.y = 1.0
+        m.scale.z = 1.0
+
+        center = Point()
+        center.x = float(x)
+        center.y = float(y)
+        center.z = Z_GOAL
+
+        inner_radius = outer_radius * 0.42
+        vertices = []
+        for i in range(10):
+            radius = outer_radius if i % 2 == 0 else inner_radius
+            angle = math.pi / 2.0 + i * math.pi / 5.0
+            pt = Point()
+            pt.x = float(x + radius * math.cos(angle))
+            pt.y = float(y + radius * math.sin(angle))
+            pt.z = Z_GOAL
+            vertices.append(pt)
+
+        pts = []
+        for i in range(10):
+            a = vertices[i]
+            b = vertices[(i + 1) % 10]
+            pts.extend([center, a, b])
+            pts.extend([center, b, a])
+        m.points = pts
+        m.colors = [star_color for _ in pts]
         return m
 
     def _write_goal_overrides(self):
@@ -148,6 +210,62 @@ class MultiAgentBridge(Node):
         m.action = Marker.DELETEALL
         clear.markers.append(m)
         self.marker_pub.publish(clear)
+
+    def _clear_static_scene(self):
+        import time
+
+        clear = MarkerArray()
+        stamp = self.get_clock().now().to_msg()
+
+        wipe = Marker()
+        wipe.header.frame_id = 'map'
+        wipe.header.stamp = stamp
+        wipe.action = Marker.DELETEALL
+        clear.markers.append(wipe)
+
+        for ns in [
+            'static', 'walls', 'walls_context', 'agents', 'paths', 'goals',
+            'sensor', 'tree', 'status', 'obstacles', 'ohz', 'collision',
+        ]:
+            c2 = Marker()
+            c2.header.frame_id = 'map'
+            c2.header.stamp = stamp
+            c2.ns = ns
+            c2.action = Marker.DELETEALL
+            clear.markers.append(c2)
+
+            for old_id in range(self.prev_static_ids.get(ns, 0)):
+                d = Marker()
+                d.header.frame_id = 'map'
+                d.header.stamp = stamp
+                d.ns = ns
+                d.id = old_id
+                d.action = Marker.DELETE
+                clear.markers.append(d)
+
+        # A new bridge process does not know how many static ids the previous
+        # process used. Delete a generous fixed id range for the static layers
+        # that cause visible cross-map ghosts.
+        for ns, limit in [('walls_context', 1000), ('static', 200)]:
+            for old_id in range(limit):
+                d = Marker()
+                d.header.frame_id = 'map'
+                d.header.stamp = stamp
+                d.ns = ns
+                d.id = old_id
+                d.action = Marker.DELETE
+                clear.markers.append(d)
+
+        # Publish more than once because map switches create a fresh bridge
+        # process; RViz may still be matching the new transient-local publisher
+        # when the first clear goes out.
+        for _ in range(3):
+            self.static_pub.publish(clear)
+            self.marker_pub.publish(clear)
+            time.sleep(0.1)
+
+    def _remember_static_id(self, ns, marker_id):
+        self.prev_static_ids[ns] = max(self.prev_static_ids.get(ns, 0), int(marker_id) + 1)
 
     @staticmethod
     def _ray_rect_hit(ox, oy, dx, dy, x1, y1, x2, y2):
@@ -183,11 +301,34 @@ class MultiAgentBridge(Node):
         candidates = [t for t in (t1, t2) if t > 0.001]
         return min(candidates) if candidates else None
 
+    def _future_path_points(self, rx, ry, path_pts):
+        """Return the already-sliced future path emitted by Rust v2.
+
+        Rust v2 publishes path as [current robot position, remaining path...].
+        Do not slice it again by path_index in the bridge, or RViz will show a
+        different path from the one the simulator is actually following.
+        """
+        if not path_pts:
+            return []
+        pts = [[float(p[0]), float(p[1])] for p in path_pts if len(p) >= 2]
+        if not pts:
+            return []
+        if math.hypot(pts[0][0] - float(rx), pts[0][1] - float(ry)) < 0.35:
+            return [[float(rx), float(ry)]] + pts[1:]
+        return [[float(rx), float(ry)]] + pts
+
+    def _first_ahead_point(self, rx, ry, future_pts):
+        for pt in future_pts[1:]:
+            if math.hypot(pt[0] - float(rx), pt[1] - float(ry)) > 0.15:
+                return pt
+        return None
+
     def _estimate_yaw(self, name, rx, ry, path_pts, path_idx):
         last = self.agent_yaws.get(name, 0.0)
-        if path_pts:
-            target_idx = min(max(path_idx, 0), len(path_pts) - 1)
-            tx, ty = path_pts[target_idx]
+        future_pts = self._future_path_points(rx, ry, path_pts)
+        target = self._first_ahead_point(rx, ry, future_pts)
+        if target is not None:
+            tx, ty = target
             dx = float(tx) - float(rx)
             dy = float(ty) - float(ry)
             if math.hypot(dx, dy) > 0.05:
@@ -292,18 +433,10 @@ class MultiAgentBridge(Node):
             f"{scenario} | {ws}x{ws}m | {self.num_agents} agents ({mode}) | "
             f"{len(self.walls_data)} walls | {n_obs} people")
 
-        # Clear old
-        clear = MarkerArray()
-        for ns in ['static','walls','agents','paths','goals','sensor','tree',
-                    'status','obstacles','ohz','collision']:
-            c2 = Marker()
-            c2.header.frame_id = 'map'
-            c2.header.stamp = self.get_clock().now().to_msg()
-            c2.ns = ns
-            c2.action = Marker.DELETEALL
-            clear.markers.append(c2)
-        self.static_pub.publish(clear)
-        self.marker_pub.publish(clear)
+        # Clear old scene markers before publishing the new map. This matters
+        # when switching scenarios in the same RViz session: latched static
+        # markers from the previous map otherwise look like wall ghosts.
+        self._clear_static_scene()
         import time; time.sleep(0.2)
 
         self._clear_dynamic_markers()
@@ -313,6 +446,7 @@ class MultiAgentBridge(Node):
         # Ground
         markers.markers.append(self.make_marker('static', mid, Marker.CUBE,
             x=ws/2, y=ws/2, z=Z_GROUND, sx=ws, sy=ws, sz=0.01, color=COLOR_GROUND))
+        self._remember_static_id('static', mid)
         mid += 1
 
         # Border
@@ -321,6 +455,7 @@ class MultiAgentBridge(Node):
             p = Point(); p.x, p.y, p.z = float(cx), float(cy), 0.0
             border.points.append(p)
         markers.markers.append(border)
+        self._remember_static_id('static', mid)
         mid += 1
 
         # Deployment origin marker
@@ -328,8 +463,9 @@ class MultiAgentBridge(Node):
         origin = self.make_marker('static', mid, Marker.CYLINDER,
             x=dox, y=doy, z=0.08, sx=0.5, sy=0.5, sz=0.16, color=COLOR_DEPLOY_ORIGIN)
         markers.markers.append(origin)
+        self._remember_static_id('static', mid)
         mid += 1
-        # Paper-capture mode intentionally suppresses the deployment-origin
+        # Clean-display mode intentionally suppresses the deployment-origin
         # text label so screenshots stay clean.
 
         # Per-agent start + goal
@@ -338,29 +474,13 @@ class MultiAgentBridge(Node):
             c = self.agent_colors[name]
             color = rgba(c[0], c[1], c[2])
             color_dim = rgba(c[0], c[1], c[2], 1.0)
-            sx, sy = a['start']
             gx, gy = a['goal']
 
-            markers.markers.append(self.make_marker('static', mid, Marker.CYLINDER,
-                x=sx, y=sy, z=0.25, sx=0.7, sy=0.7, sz=0.5, color=color_dim))
-            mid += 1
-            st = self.make_marker('static', mid, Marker.TEXT_VIEW_FACING,
-                x=sx, y=sy-1.2, z=1.8, sx=0.55, sy=0.55, sz=0.55, color=color)
-            st.text = f"{name} START"
-            markers.markers.append(st)
+            markers.markers.append(self.make_goal_star(mid, gx, gy, 0.75, color_dim))
+            self._remember_static_id('static', mid)
             mid += 1
 
-            markers.markers.append(self.make_marker('static', mid, Marker.CYLINDER,
-                x=gx, y=gy, z=Z_GOAL, sx=1.0, sy=1.0, sz=0.8, color=color_dim))
-            mid += 1
-            gt = self.make_marker('static', mid, Marker.TEXT_VIEW_FACING,
-                x=gx, y=gy-1.2, z=1.8, sx=0.55, sy=0.55, sz=0.55, color=color)
-            gt.text = f"{name} GOAL"
-            markers.markers.append(gt)
-            mid += 1
-
-        # Paper-capture mode suppresses title/subtitle HUD text. Start/goal
-        # labels are kept because they are part of the figure semantics.
+        # Clean-display mode suppresses title/subtitle/start/goal text.
 
         # Faint full-scene wall context. The OccupancyGrid below still carries
         # the actual explored map: unknown=gray, free=white, discovered
@@ -371,6 +491,7 @@ class MultiAgentBridge(Node):
             ssx = max(abs(x2-x1), 0.05); ssy = max(abs(y2-y1), 0.05)
             markers.markers.append(self.make_marker('walls_context', i, Marker.CUBE,
                 x=cx, y=cy, z=0.005, sx=ssx, sy=ssy, sz=0.01, color=COLOR_WALL_UNSEEN))
+            self._remember_static_id('walls_context', i)
 
         self.static_pub.publish(markers)
         grid_str = data.get('grid', '')
@@ -472,7 +593,7 @@ class MultiAgentBridge(Node):
                 d3 = self.make_marker('collision', base, Marker.LINE_STRIP); d3.action = Marker.DELETE
                 markers.markers.append(d3)
 
-            # Suppress per-frame floating agent text in paper-capture mode.
+            # Suppress per-frame floating agent text in clean-display mode.
 
             if name in self.pose_pubs:
                 pose_msg = PoseStamped()
@@ -487,8 +608,11 @@ class MultiAgentBridge(Node):
 
             # ---- Arrow ----
             arrow_drawn = False
-            if not reached and path_pts and path_idx < len(path_pts):
-                target = path_pts[min(path_idx, len(path_pts)-1)]
+            future_pts = self._future_path_points(rx, ry, path_pts) if not reached else []
+            if future_pts:
+                target = self._first_ahead_point(rx, ry, future_pts)
+                if target is None:
+                    target = future_pts[-1]
                 dx, dy = target[0]-rx, target[1]-ry
                 dist = math.sqrt(dx*dx + dy*dy)
                 if dist > 0.01:
@@ -504,40 +628,44 @@ class MultiAgentBridge(Node):
                 da.action = Marker.DELETE
                 markers.markers.append(da)
 
-            # ---- Path ----
-            if path_pts and not reached:
+            # ---- Future path only ----
+            # The clean screenshot path is drawn here as a MarkerArray. RViz's
+            # native Path display is kept empty below because it was the source
+            # of the duplicated/stale path ghost in the upper-right area.
+            if len(future_pts) >= 2:
                 pm = self.make_marker('paths', base, Marker.LINE_STRIP,
                     z=Z_PATH, sx=0.20, color=color)
-                pm.colors = []
-                for j, pt in enumerate(path_pts):
+                for pt in future_pts:
                     p = Point(); p.x,p.y,p.z = float(pt[0]),float(pt[1]),Z_PATH
                     pm.points.append(p)
-                    pm.colors.append(color_faint if j < path_idx else color)
                 markers.markers.append(pm)
-                if name in self.path_pubs:
-                    path_msg = Path()
-                    path_msg.header.frame_id = 'map'
-                    path_msg.header.stamp = self.current_stamp
-                    for pt in path_pts:
-                        ps = PoseStamped(); ps.header = path_msg.header
-                        ps.pose.position.x = float(pt[0])
-                        ps.pose.position.y = float(pt[1])
-                        ps.pose.orientation.w = 1.0
-                        path_msg.poses.append(ps)
-                    self.path_pubs[name].publish(path_msg)
-                    if name in self.path_display_pubs:
-                        self.path_display_pubs[name].publish(path_msg)
             else:
-                dm = self.make_marker('paths', base, Marker.LINE_STRIP); dm.action = Marker.DELETE
+                dm = self.make_marker('paths', base, Marker.LINE_STRIP)
+                dm.action = Marker.DELETE
                 markers.markers.append(dm)
+
+            if name in self.path_pubs:
+                path_msg = Path()
+                path_msg.header.frame_id = 'map'
+                path_msg.header.stamp = self.current_stamp
+                for pt in future_pts:
+                    ps = PoseStamped(); ps.header = path_msg.header
+                    ps.pose.position.x = float(pt[0])
+                    ps.pose.position.y = float(pt[1])
+                    ps.pose.orientation.w = 1.0
+                    path_msg.poses.append(ps)
+                self.path_pubs[name].publish(path_msg)
+                if name in self.path_display_pubs:
+                    clear_display = Path()
+                    clear_display.header = path_msg.header
+                    self.path_display_pubs[name].publish(clear_display)
 
         # ---- People ----
         for i, obs in enumerate(obs_list):
             ox, oy = obs['x'], obs['y']
             orad = obs['radius']
             ohz_rad = obs.get('ohz_radius', orad*1.5)
-            markers.markers.append(self.make_marker('obstacles', i, Marker.SPHERE,
-                x=ox, y=oy, z=orad, sx=orad*2, sy=orad*2, sz=orad*2, color=COLOR_OBSTACLE))
+            markers.markers.append(self.make_person_triangle(i, ox, oy, orad))
             markers.markers.append(self.make_marker('ohz', i, Marker.CYLINDER,
                 x=ox, y=oy, z=0.01, sx=ohz_rad*2, sy=ohz_rad*2, sz=0.005, color=COLOR_OHZ))
 
@@ -561,7 +689,7 @@ class MultiAgentBridge(Node):
                 tm.colors.extend([ec, ec])
             markers.markers.append(tm)
 
-        # Suppress the floating status HUD in paper-capture mode.
+        # Suppress the floating status HUD in clean-display mode.
 
         self.marker_pub.publish(markers)
         self.frame_count += 1
