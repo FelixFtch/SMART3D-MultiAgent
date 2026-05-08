@@ -4,13 +4,15 @@ set -euo pipefail
 export DISPLAY="${DISPLAY:-:1}"
 export XAUTHORITY="${XAUTHORITY:-/run/user/1000/gdm/Xauthority}"
 
+set +u
 source /opt/ros/humble/setup.bash
+set -u
 source "${HOME}/.cargo/env"
 
 SMART3D_DIR="${SMART3D_DIR:-/home/felix/SMART3D_capture_core_clean}"
 BRIDGE_DIR="${BRIDGE_DIR:-/home/felix/smart_rviz_bridge}"
 PLAYBACK_SPEED="${PLAYBACK_SPEED:-30.0}"
-DETOUR_THRESHOLD="${DETOUR_THRESHOLD:-1.1}"
+DETOUR_THRESHOLD="${DETOUR_THRESHOLD:-1.5}"
 
 scene_cmd() {
   local scenario="$1"
@@ -115,11 +117,13 @@ Environment:
   SMART3D_DIR=/home/felix/SMART3D_capture_core_clean
   BRIDGE_DIR=/home/felix/smart_rviz_bridge
   PLAYBACK_SPEED=30.0
-  DETOUR_THRESHOLD=1.1
+  DETOUR_THRESHOLD=1.5
 
 Notes:
   Final 2D capture defaults are no people, cross goals, tree off, clean display.
-  DETOUR_THRESHOLD=1.1 is strict and shortest-looking; 1.5 is looser; 0 disables it.
+  DETOUR_THRESHOLD=1.5 is the accepted smooth paper-view default.
+  DETOUR_THRESHOLD=1.1 is stricter and can look shorter, but rebuilds heavily on large maps.
+  DETOUR_THRESHOLD=0 disables the detour guard and is useful only for special stress/debug scenes.
   benchmark3d runs the aggregate 3D benchmark writer, not a live RViz capture.
 EOF
     ;;

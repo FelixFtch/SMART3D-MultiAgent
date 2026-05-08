@@ -62,6 +62,52 @@ or old corner-deploy modes. See:
 presentation/smart3d_clean_screenshot_presentation/README.md
 ```
 
+### Accepted 2026-05-08 RViz Capture Lane
+
+The final paper-facing 2D visual lane is:
+
+```text
+shared unknown + king + cross diagonal goals + no pedestrians + detour=1.5 + clean paper RViz
+```
+
+This is the version that was visually accepted on the i9. It is intentionally
+not the old tree-heavy debug view and not the stricter `detour=1.1` lane.
+
+- Use `examples/smart_multi_agent_shared_unknown_v2.rs`.
+- Use `presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh`.
+- Keep `--agent-mode cross`; do not use `shared_unknown_corners`.
+- Keep `--num-obstacles 0` for clean paper screenshots.
+- Keep tree display off and use the clean display bridge.
+- Default `DETOUR_THRESHOLD` is now `1.5`.
+- `DETOUR_THRESHOLD=1.1` is allowed only as a strict experiment. It often
+  rebuilds too aggressively on hospital/airport/campus/university.
+- Bottleneck is a separate stress-test scene. It is useful for King/flee
+  debugging, but it is not the recommended clean screenshot lane.
+
+On the i9, use this two-terminal shape from a full clone of this repository:
+
+```bash
+cd /path/to/SMART3D-MultiAgent
+source ~/.cargo/env
+set +u; source /opt/ros/humble/setup.bash; set -u
+presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh install
+presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh rviz2d
+```
+
+Then run scenes with speed as high as RViz can tolerate:
+
+```bash
+SMART3D_DIR="$PWD" PLAYBACK_SPEED=10000 DETOUR_THRESHOLD=1.5 \
+  presentation/smart3d_clean_screenshot_presentation/run_i9_capture_examples.sh campus2d
+```
+
+`SMART3D_DIR="$PWD"` matters when running from a fresh/full clone: it makes the
+helper build the code in this checkout rather than an older slim runtime copy.
+
+The accepted `building` map has an upper-left doorway. If it appears sealed,
+the wrong geometry is being used; the v2 scenario should match the older
+`smart_multi_agent.rs` building doorway split.
+
 ### Fresh Clone Verification
 
 On a machine with Rust installed:

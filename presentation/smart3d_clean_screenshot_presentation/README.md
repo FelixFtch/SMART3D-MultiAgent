@@ -92,14 +92,18 @@ Use these defaults unless a figure needs a deliberate variant:
 - `--num-obstacles 0`
 - `--agent-mode cross`
 - no `--include-tree`
-- `--detour-threshold 1.1`
+- `--detour-threshold 1.5`
 - `--playback-speed 30.0` or higher for fast review
 - `--lsr-max 80` on large maps
 
 Detour threshold is important:
 
-- `1.1`: strict, can rebuild more often, but keeps paths closer to shortest.
-- `1.5`: fewer rebuilds, but visibly allows more detours.
+- `1.5`: accepted 2026-05-08 final paper-view default. It preserves the clean
+  shared-unknown + king + cross-diagonal behavior while avoiding the heavy
+  rebuild storm seen on large maps.
+- `1.1`: stricter and can keep paths closer to shortest, but it rebuilds very
+  aggressively on hospital/airport/campus/university and is not the default
+  screenshot lane.
 - `0`: disabled, useful for bottleneck/debug scenes, not the final paper path.
 
 ## Seven Paper Scenes
@@ -152,7 +156,7 @@ cargo run --release --example smart_multi_agent_shared_unknown_v2 -- \
   --sensor-range 10 \
   --rrt-iterations 30000 \
   --lsr-max 80 \
-  --detour-threshold 1.1 \
+  --detour-threshold 1.5 \
   --max-time 420 \
   | python3 /home/felix/smart_rviz_bridge/smart_multi_agent_shared_unknown_v2_clean_display_bridge.py
 ```
