@@ -131,6 +131,11 @@ runner also has `--save-tree` for bulky debug artifacts. Neither runner exposes
 a trial-count flag. Use the Python benchmark scripts when you need custom trial
 counts.
 
+Runtime note: these Rust aggregate runners are full fixed-size sweeps, not quick
+smoke tests. On the i9 fresh-clone verification pass, `run_3d_scenarios` needed
+a multi-minute timeout window and completed by writing `3d_scenarios.json`.
+Do not add `--trials`; that option belongs to the Python benchmark scripts.
+
 ## Paper Naming Notes
 
 Use paper-facing names in captions and README prose:

@@ -74,6 +74,18 @@ cargo check --example smart_multi_agent_shared_unknown_v2 \
   --example run_3d_scenarios
 ```
 
+Validation actually performed on the i9 from a fresh GitHub clone at
+`ba5e7191d35fe949f723aee01c6098f4e61b4b54`:
+
+- `cargo check` for the final 2D RViz example and both 2D/3D aggregate runners.
+- `cargo build --release` for `smart_multi_agent_shared_unknown_v2`,
+  `run_2d_scenarios`, and `run_3d_scenarios`.
+- Short startup smoke for `building`, `office`, `warehouse`, `hospital`,
+  `airport`, `campus`, `university`, and `bottleneck`.
+- Full `building` no-people diagonal run reached all active agents.
+- Full `run_3d_scenarios --output-dir ...` completed and wrote
+  `3d_scenarios.json`.
+
 On the i9, install the RViz bridge files after cloning:
 
 ```bash
